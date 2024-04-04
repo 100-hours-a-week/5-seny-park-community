@@ -12,7 +12,6 @@ body {
   background-color: #f4f5f7;
   font-family: "Pretendard-Regular", sans-serif;
   box-sizing: border-box;
-  background-color: pink;
 }
 
 a {
@@ -39,12 +38,10 @@ main {
   display: flex;
   width: auto;
   align-items: center;
-  background-color: yellow;
   height: calc(100vh - 104px);
 }
 
 .inner {
-  background-color: skyblue;
   width: 392px;
   margin: auto; /* 중앙정렬 */
 }
@@ -55,7 +52,6 @@ main {
   align-items: center;
   width: 83px;
   height: 38px;
-  background-color: tomato;
   font-weight: 700;
   font-size: 32px;
   margin: 0 auto 18px;
@@ -66,7 +62,6 @@ main {
 .inner .container {
   display: flex;
   align-items: flex-end;
-  background-color: lime;
   width: 392px;
   height: 221px;
 }
@@ -75,7 +70,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: orange;
   width: 100%;
   height: 198px;
   padding: 0 18px;
@@ -91,7 +85,6 @@ main {
   height: 18px;
   font-weight: 700;
   font-size: 15px;
-  background-color: pink;
 }
 
 .inner .container .inputs .input input {
@@ -111,7 +104,6 @@ main {
 
 .inner .container .inputs .red {
   padding-top: 4px;
-  background-color: aqua;
   box-sizing: border-box; /* padding, border 포함 */
   color: #ff0000;
   font-size: 12px;
@@ -142,7 +134,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: bisque;
 }
 
 .inner .signin {
