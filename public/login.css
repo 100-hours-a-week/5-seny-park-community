@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  width: 100vw;
+  height: 100%;
+  background-color: #f4f5f7;
+  font-family: "Pretendard-Regular", sans-serif;
+  box-sizing: border-box;
+  background-color: pink;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 헤더 */
+header {
+  height: 104px;
+  display: flex;
+  border-bottom: 1px solid #000;
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  margin: auto;
+}
+
+/* 로그인 */
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  background-color: yellow;
+  flex-grow: 1;
+}
+
+.inner {
+  background-color: skyblue;
+  width: 392px;
+  margin: auto; /* 중앙정렬 */
+}
+
+.inner h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 83px;
+  height: 38px;
+  background-color: tomato;
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+
+.inner .container {
+  display: flex;
+  align-items: flex-end;
+  background-color: lime;
+  width: 392px;
+  height: 221px;
+}
+
+.inner .container .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: orange;
+  width: 100%;
+  height: 198px;
+  padding: 0 18px;
+}
+
+.inner .container .inputs .input:first-child {
+  margin-bottom: 16px; /* 피그마 값 계산 */
+}
+
+.inner .container .inputs .input p {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: pink;
+}
+
+.inner .container .inputs .input input {
+  width: 355px;
+  height: 33px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+.inner .container .inputs .input input::placeholder {
+  color: #000;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.inner .container .inputs .red {
+  padding-top: 4px;
+  background-color: aqua;
+  box-sizing: border-box; /* padding, border 포함 */
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.inner .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 361px;
+  height: 37px;
+  background-color: #aca0eb;
+  border-radius: 15px;
+  margin: auto; /* 중앙정렬 */
+  margin-bottom: 5px;
+}
+
+.inner .btn .login {
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+}
+
+.inner .link .signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+}
+
+.inner .signin {
+  width: 68px;
+  height: 30px;
+  margin: auto;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+}
