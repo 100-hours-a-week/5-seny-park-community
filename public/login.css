@@ -40,7 +40,7 @@ main {
   width: auto;
   align-items: center;
   background-color: yellow;
-  flex-grow: 1;
+  height: calc(100vh - 104px);
 }
 
 .inner {
@@ -62,6 +62,7 @@ main {
   text-align: center;
 }
 
+/* 아이디, 비번 */
 .inner .container {
   display: flex;
   align-items: flex-end;
@@ -129,12 +130,14 @@ main {
   margin-bottom: 5px;
 }
 
+/* 로그인 버튼 */
 .inner .btn .login {
   font-weight: 700;
   font-size: 14px;
   color: #fff;
 }
 
+/* 회원가입 */
 .inner .link .signin {
   display: flex;
   justify-content: center;
