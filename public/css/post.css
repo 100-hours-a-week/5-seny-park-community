@@ -1,0 +1,126 @@
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.inner {
+  width: 600px;
+  height: 100%;
+  background-color: sandybrown;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner .title {
+  width: 280px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: thistle;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.inner .title h1 {
+  background-color: yellowgreen;
+}
+
+.inner .title span {
+  background-color: wheat;
+}
+
+.inner .btnContainer {
+  margin: 24px 0;
+  width: 100%;
+  height: 39px;
+  background-color: pink;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inner .btnContainer .btn {
+  background-color: var(--btn-purple);
+  color: #fff;
+  width: 138px;
+  height: 39px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .posts {
+  background-color: lightskyblue;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.inner .posts .post {
+  background-color: #fff;
+  width: 592px;
+  height: 169px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.inner .posts .post .content {
+  display: flex;
+  flex-direction: column;
+  height: 101px;
+  padding: 21px 29px 25px 27px;
+  box-sizing: border-box;
+}
+
+.inner .posts .content h2 {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.inner .posts .content .texts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inner .posts .content .texts .left {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  gap: 10px;
+}
+
+.inner .posts .content .texts .left .p,
+inner .posts .content .texts .right .date {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.inner .posts .writer {
+  height: 68px;
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.inner .posts .writer .img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+}
+
+.inner .posts .writer .profile .name {
+}

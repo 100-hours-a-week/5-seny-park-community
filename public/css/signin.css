@@ -49,6 +49,10 @@ header .arrowBtn {
   box-sizing: border-box;
 }
 
+.inner .imgContainer .red {
+  color: #ff0000;
+}
+
 .inner .imgContainer .imgBox {
   display: flex;
   justify-content: center;
