@@ -44,20 +44,17 @@ header {
 
 header .headerInner {
   width: 544px;
-  background-color: lemonchiffon;
   display: flex;
   justify-content: space-between;
 }
 
 header div {
-  background-color: var(--btn-purple);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 header div.profile {
-  background-color: pink;
   width: 40px;
   height: 40px;
 }
@@ -80,7 +77,6 @@ header h1 {
 }
 
 header div.arrow {
-  background-color: lightblue;
   width: 40px;
   height: 40px;
   cursor: pointer;
