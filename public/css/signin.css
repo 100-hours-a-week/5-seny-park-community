@@ -1,0 +1,173 @@
+/* 회원가입 */
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  height: calc(100vh - 104px);
+}
+
+.inner {
+  width: 392px;
+  margin: auto; /* 중앙정렬 */
+}
+
+.inner h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 111px;
+  height: 38px;
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+
+/* 프로필 사진 */
+.inner .imgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 378px;
+  height: 206px;
+  background-color: tomato;
+  margin: auto; /* 중앙정렬 */
+  padding: 12px 11px 0;
+  box-sizing: border-box;
+}
+
+.inner .imgContainer .left {
+}
+
+.inner .imgContainer .left .profile {
+}
+
+.inner .imgContainer .left .red {
+}
+/* 아래 red 와 같은스타일 , 로 연결하면 될듯? */
+
+.inner .imgContainer .imgBox {
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .imgContainer .mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c4c4c4;
+  width: 149px;
+  height: 149px;
+  border-radius: 50%;
+}
+
+.inner .imgContainer .mid span:first-child {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  width: 1px;
+  height: 24px;
+}
+
+.inner .imgContainer .mid span:last-child {
+  display: block;
+  background-color: black;
+  width: 1px;
+  height: 24px;
+  transform: rotate(90deg);
+}
+
+.inner .imgContainer .left .red {
+  padding-top: 4px;
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
+}
+
+/* 이메일, 비밀번호, 비밀번호 확인, 닉네임 */
+.inner .textContainer {
+  display: flex;
+  align-items: flex-end;
+  width: 392px;
+  height: 406px;
+  background-color: aquamarine;
+}
+
+.inner .textContainer .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 383px;
+  padding: 0 18px;
+  background-color: pink;
+  box-sizing: border-box;
+}
+
+.inner .textContainer .inputs .input p {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.inner .textContainer .inputs .input input {
+  width: 355px;
+  height: 33px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+.inner .textContainer .inputs .input input::placeholder {
+  color: #000;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.inner .textContainer .inputs .red {
+  padding-top: 4px;
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
+}
+
+.inner .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 361px;
+  height: 37px;
+  background-color: #aca0eb;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* 로그인하러가기 버튼 */
+.inner .btn .login {
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* 회원가입 */
+.inner .link .login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 30px;
+  margin: auto;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+}
