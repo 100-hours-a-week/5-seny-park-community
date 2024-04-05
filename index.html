@@ -2,14 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=DD, initial-scale=1.0" />
-    <meta og:title="Log in" />
-    <meta og:description="로그인할 수 있는 페이지" />
+    <!--    뷰포트 메타 태그는 다음과 같이 써야 합니다. "DD"는 올바른 값이 아닙니다. -->
+    <!--    <meta name="viewport" content="width=DD, initial-scale=1.0" />-->
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <!--  메타태그 문법은 아래와 같습니다!  -->
+    <!--    <meta og:title="Log in" />-->
+    <!--    <meta og:description="로그인할 수 있는 페이지" />-->
+    <meta property="og:title" content="Log in" />
+    <meta property="og:description" content="로그인할 수 있는 페이지" />
     <title>Log in</title>
+    <!-- 지금은 헤더에 몇줄 없지만 실배포 서비스에선 헤더만으로도 수십줄이 나오기 때문에 요소를 많이 내려쓰면 불필요하게 코드가 길어져서 눈에 잘 안띌 수 있습니다. -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
     />
+    <!--  주소값에 "."이 있을 때와 없을 떄의 차이를 이해하셔야 합니다. "/public/login.css" 같이 사용해도 됩니다. -->
+    <!--  라이브서버와 같이 서버를 통해 이 html 파일을 접근한다면 "."이 없어도되지만 이 html 파일을 서버를 통해 여는것이 아닌 파일 자체로 여는 것까지 고려한다면 "."을 포함해야 경로를 찾을 수 있는 점 참고해주세요.  -->
     <link rel="stylesheet" href="./public/css/common.css" />
     <link rel="stylesheet" href="./public/css/login.css" />
   </head>
@@ -20,22 +31,30 @@
     <main>
       <div class="inner">
         <h2>로그인</h2>
+        <!--        관례상 .container 라는 css 클래스는 페이지 레이아웃 상 최상단 (body 바로 밑 혹은 레이아웃 상 메인 컨텐츠가 포함된 div) 블럭에 적용합니다. -->
         <div class="container">
-          <div class="inputs">
-            <div class="input">
+          <!--        이 부분은 (.inputs) div가 아닌 form 태그를 써야 서버에 데이터가 전송됩니다. -->
+          <form method="post" action="서버의url" id="login-form" class="inputs">
+            <!-- 위에서 폼 태그를 사용했다면 이 부분은 label 태그로 사용하는 것을 권장합니다. 사용자 편의성이 올라 갈 수 있습니다. -->
+            <!-- 사용자 편의성이 어떻게 올라가는 지는 아래 링크를 통해 테스트해보세요 -->
+            <!-- https://www.tcpschool.com/examples/tryit/tryhtml.php?filename=html_ref_tag_label_01 -->
+            <!-- 위 링크에 나와 있는 lable 태그 하나를 `<div style="display:inline-block;">10대</div><br>` 로 정의하고 마우스를 클릭해보시면 그 차이가 나옵니다. -->
+            <!-- *(label인 경우에는 그 주변 요소를 클릭해도 선택이 되는 점)-->
+            <label class="input">
               <p class="email">이메일</p>
               <input type="email" placeholder="이메일을 입력해주세요" />
-            </div>
-            <div class="input">
+            </label>
+            <label class="input">
               <p class="pwd">비밀번호</p>
               <input type="password" placeholder="비밀번호를 입력해주세요" />
-            </div>
+            </label>
             <div class="red">* helper text</div>
-          </div>
+          </form>
         </div>
-        <div class="btn">
+        <!-- 이렇게 하면, 로그인 클릭시 메인으로 안넘어간다. 맞는지?  -->
+        <button type="submit" form="login-form" class="btn">
           <a class="login" href="./public/html/main.html">로그인</a>
-        </div>
+        </button>
         <div class="link">
           <a class="signin" href="./public/html/signin.html">회원가입</a>
         </div>

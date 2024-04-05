@@ -1,3 +1,15 @@
+/**
+아래와 같이 css 변수를 사용하면 유지보수 성을 많이 올릴 수 있습니다.
+하나의 변수를 통해 웹 페이지 전체의 스타일을 일관성있게 관리 할 수 있게 됩니다.
+*/
+:root {
+  --main-bg-color: #f4f5f7;
+  --btn-purple: #aca0eb;
+  --header-height: 104px;
+  --input-width: 355px;
+  --input-height: 33px;
+}
+
 @font-face {
   font-family: "Pretendard-Regular";
   src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
@@ -9,7 +21,8 @@
 body {
   width: 100vw;
   height: 100%;
-  background-color: #f4f5f7;
+  /* 아래와 같이 css 변수를 사용하면 유지보수 성을 많이 올릴 수 있습니다. */
+  background-color: var(--main-bg-color);
   font-family: "Pretendard-Regular", sans-serif;
   box-sizing: border-box;
 }
@@ -20,7 +33,7 @@ a {
 
 /* 헤더 */
 header {
-  height: 104px;
+  height: var(--header-height);
   display: flex;
   border-bottom: 1px solid #000;
   position: relative;
