@@ -29,14 +29,46 @@ body {
 
 a {
   text-decoration: none;
+  color: #000;
 }
 
 /* 헤더 */
+/* signin.css에는 별도 css 설정 들어가있음 */
 header {
   height: var(--header-height);
   display: flex;
   border-bottom: 1px solid #000;
   position: relative;
+  justify-content: center;
+}
+
+header .headerInner {
+  width: 544px;
+  background-color: lemonchiffon;
+  display: flex;
+  justify-content: space-between;
+}
+
+header div {
+  background-color: var(--btn-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header div.profile {
+  background-color: pink;
+  width: 40px;
+  height: 40px;
+}
+
+header div.profile div {
+  background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
 header h1 {
@@ -47,16 +79,9 @@ header h1 {
   margin: auto;
 }
 
-header .arrowBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
+header div.arrow {
+  background-color: lightblue;
   width: 40px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 35%; /* 원래 684px이지만 가로 화면 너비 비율로 적용 */
-  margin: auto 0;
+  height: 40px;
   cursor: pointer;
 }
