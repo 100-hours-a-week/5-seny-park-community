@@ -3,7 +3,7 @@ main {
   display: flex;
   width: auto;
   align-items: center;
-  height: calc(100vh - 104px);
+  height: calc(100vh - var(--header-height));
 }
 
 .inner {
@@ -53,12 +53,16 @@ main {
 }
 
 .inner .container .inputs .input input {
-  width: 355px;
-  height: 33px;
+  width: var(--input-width);
+  height: var(--input-height);
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 4px;
+}
+
+.inner .container .inputs .input input:focus {
+  outline: none;
 }
 
 .inner .container .inputs .input input::placeholder {
@@ -81,7 +85,7 @@ main {
   align-items: center;
   width: 361px;
   height: 37px;
-  background-color: #aca0eb;
+  background-color: var(--btn-purple);
   border-radius: 15px;
   margin: auto; /* 중앙정렬 */
   margin-bottom: 5px;
@@ -89,6 +93,10 @@ main {
 }
 
 /* 로그인 버튼 */
+.inner .btn {
+  border: none;
+}
+
 .inner .btn .login {
   font-weight: 700;
   font-size: 14px;

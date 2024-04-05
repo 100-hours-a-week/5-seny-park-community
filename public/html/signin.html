@@ -2,9 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=DD, initial-scale=1.0" />
-    <meta og:title="Log in" />
-    <meta og:description="회원가입 페이지" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta property="og:title" content="Log in" />
+    <meta property="og:description" content="로그인할 수 있는 페이지" />
+
     <title>Sign in</title>
     <link
       rel="stylesheet"
@@ -21,56 +25,63 @@
     <main>
       <div class="inner">
         <h2>회원가입</h2>
-        <div class="imgContainer">
-          <div class="left">
-            <p class="profile">프로필 사진</p>
-            <div class="red">* helper text</div>
-          </div>
-          <div class="imgBox">
-            <div class="mid">
-              <!-- 플러스 기호 span으로 표현 -->
-              <span></span>
-              <span></span>
+        <form method="post" action="서버의url" id="signin-form" class="inputs">
+          <div class="imgContainer">
+            <div class="left">
+              <p class="profile">프로필 사진</p>
+              <div class="red">* helper text</div>
+            </div>
+            <div class="imgBox">
+              <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
+              <label for="profileUpload" class="file-upload-label">
+                <div class="mid">
+                  <!-- 플러스 기호 span으로 표현 -->
+                  <span></span>
+                  <span></span>
+                </div>
+              </label>
+              <!-- display: none -->
+              <input type="file" id="profileUpload" name="profilePicture" />
             </div>
           </div>
-        </div>
-        <div class="textContainer">
-          <div class="inputs">
-            <div class="input">
-              <p class="email">이메일<span class="upper">*</span></p>
-              <input type="email" placeholder="이메일을 입력하세요" />
-            </div>
-            <div class="red">* helper text</div>
+          <div class="textContainer">
+            <div class="inputs">
+              <label class="input">
+                <p class="email">이메일<span class="upper">*</span></p>
+                <input type="email" placeholder="이메일을 입력하세요" />
+              </label>
+              <div class="red">* helper text</div>
 
-            <div class="input">
-              <p class="pwd">비밀번호<span class="upper">*</span></p>
-              <input type="password" placeholder="비밀번호를 입력하세요" />
-            </div>
-            <div class="red">* helper text</div>
+              <label class="input">
+                <p class="pwd">비밀번호<span class="upper">*</span></p>
+                <input type="password" placeholder="비밀번호를 입력하세요" />
+              </label>
+              <div class="red">* helper text</div>
 
-            <div class="input">
-              <p class="pwd">비밀번호 확인<span class="upper">*</span></p>
-              <input
-                type="password"
-                placeholder="비밀번호를 한번 더 입력하세요"
-              />
-            </div>
-            <div class="red">* helper text</div>
+              <label class="input">
+                <p class="pwd">비밀번호 확인<span class="upper">*</span></p>
+                <input
+                  type="password"
+                  placeholder="비밀번호를 한번 더 입력하세요"
+                />
+              </label>
+              <div class="red">* helper text</div>
 
-            <div class="input">
-              <p class="nickname">닉네임<span class="upper">*</span></p>
-              <input type="text" placeholder="닉네임을 입력하세요" />
-            </div>
-            <div class="red">* helper text</div>
-            <div class="btn">
-              <a class="login" href="../../index.html">회원가입</a>
+              <label class="input">
+                <p class="nickname">닉네임<span class="upper">*</span></p>
+                <input type="text" placeholder="닉네임을 입력하세요" />
+              </label>
+              <div class="red">* helper text</div>
+              <button type="submit" form="signin-form" class="btn">
+                <a class="login" href="../../index.html">회원가입</a>
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="link">
-          <a class="login" href="../../index.html">로그인하러 가기</a>
-        </div>
+          <div class="link">
+            <a class="login" href="../../index.html">로그인하러 가기</a>
+          </div>
+        </form>
       </div>
     </main>
   </body>
