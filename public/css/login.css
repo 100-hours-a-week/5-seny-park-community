@@ -92,6 +92,10 @@ main {
   cursor: pointer;
 }
 
+.inner .btn:hover {
+  background-color: var(--btn-hover);
+}
+
 /* 로그인 버튼 */
 .inner .btn {
   border: none;

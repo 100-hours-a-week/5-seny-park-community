@@ -170,6 +170,10 @@ header .arrowBtn {
   border: none;
 }
 
+.inner .btn:hover {
+  background-color: var(--btn-hover);
+}
+
 /* 로그인하러가기 버튼 */
 .inner .btn .login {
   font-weight: 700;
