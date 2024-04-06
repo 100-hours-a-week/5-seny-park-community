@@ -9,7 +9,6 @@ main {
 .inner {
   width: 600px;
   height: 100%;
-  background-color: sandybrown;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,26 +18,26 @@ main {
   width: 280px;
   height: 62px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: thistle;
+
   text-align: center;
   margin-top: 40px;
+  line-height: var(--line-height);
 }
 
 .inner .title h1 {
-  background-color: yellowgreen;
+  display: block;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .inner .title span {
-  background-color: wheat;
+  font-weight: 700;
 }
 
 .inner .btnContainer {
   margin: 24px 0;
   width: 100%;
   height: 39px;
-  background-color: pink;
   display: flex;
   justify-content: flex-end;
 }
@@ -55,13 +54,14 @@ main {
 }
 
 .inner .posts {
-  background-color: lightskyblue;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin-bottom: 40px;
+  line-height: var(--line-height);
 }
 
 .inner .posts .post {
