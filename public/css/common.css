@@ -10,6 +10,7 @@
   --input-width: 355px;
   --input-height: 33px;
   --line-height: 31.2px;
+  --bg-gray: #d9d9d9;
 }
 
 @font-face {
