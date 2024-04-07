@@ -5,6 +5,7 @@
 :root {
   --main-bg-color: #f4f5f7;
   --btn-purple: #aca0eb;
+  --btn-hover: #7f6aee;
   --header-height: 104px;
   --input-width: 355px;
   --input-height: 33px;
@@ -58,6 +59,7 @@ header div {
 header div.profile {
   width: 40px;
   height: 40px;
+  cursor: pointer;
 }
 
 header div.profile div {

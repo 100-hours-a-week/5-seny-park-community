@@ -40,17 +40,25 @@ main {
   height: 39px;
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
 }
 
 .inner .btnContainer .btn {
   background-color: var(--btn-purple);
-  color: #fff;
   width: 138px;
   height: 39px;
   border-radius: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.inner .btnContainer .btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.inner .btnContainer .btn a {
+  color: #fff;
 }
 
 .inner .posts {
@@ -70,6 +78,7 @@ main {
   height: 169px;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.16);
+  cursor: pointer;
 }
 
 .inner .posts .post .content {
@@ -99,7 +108,7 @@ main {
 }
 
 .inner .posts .content .texts .left .p,
-inner .posts .content .texts .right .date {
+.inner .posts .content .texts .right .date {
   font-weight: 400;
   font-size: 14px;
 }
