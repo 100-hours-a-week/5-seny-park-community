@@ -1,0 +1,261 @@
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.inner {
+  width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: palegoldenrod;
+}
+
+.inner .title {
+  width: 592px;
+  height: 127px;
+  background-color: aliceblue;
+  padding: 24px 0 24px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.inner .title h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.inner .title .control {
+  background-color: lemonchiffon;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inner .title .control .writer {
+  display: flex;
+  background-color: aquamarine;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner .title .control .writer .img {
+  width: 36px;
+  height: 36px;
+  background-color: plum;
+}
+
+.inner .title .control .writer .img div {
+  width: 36px;
+  height: 36px;
+  background-color: peachpuff;
+  border-radius: 50%;
+}
+
+.inner .title .control .writer .name {
+  font-weight: 700;
+  font-size: 15px;
+  height: 20px;
+  background-color: lightcoral;
+  padding: 8px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+}
+
+.inner .title .control .writer .date {
+  width: 133px;
+  height: 18px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner .title .control .controlBtns {
+  width: 128px;
+  height: 64px;
+  margin-right: 16px;
+  background-color: paleturquoise;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .title .control .controlBtns button {
+  width: 50px;
+  height: 27px;
+  background-color: transparent;
+  border: 1px solid var(--btn-purple);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.inner .contents {
+  width: 100%;
+  height: auto;
+  background-color: lightblue;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inner .contents .img {
+  width: 544px;
+  height: 306px;
+  background-color: lightcyan;
+}
+
+.inner .contents .texts {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 21.15px;
+}
+
+.inner .clickBtn {
+  width: 100%;
+  padding: 8px 0 31px 0;
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.inner .clickBtn .views,
+.inner .clickBtn .comments {
+  width: 116px;
+  height: 77px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--bg-gray);
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.inner .clickBtn .count {
+  width: 35px;
+  height: 26px;
+  font-size: 20px;
+  background-color: yellow;
+}
+
+.inner .clickBtn .text {
+  width: 42px;
+  height: 25px;
+  font-size: 16px;
+  background-color: lightpink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner .makeComment {
+  background-color: paleturquoise;
+  padding: 32px 0 24px;
+}
+
+.inner .makeComment .box {
+  background-color: #fff;
+  width: 592px;
+  height: 169px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  padding-top: 24px;
+  box-sizing: border-box;
+}
+
+.inner .makeComment .box textarea {
+  padding: 0 24px 0 24px;
+  height: 118px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
+}
+.inner .makeComment .box textarea::placeholder {
+  width: 544px;
+  height: 94px;
+  font-size: 15px;
+  background-color: pink;
+  box-sizing: border-box;
+}
+
+.inner .makeComment .box textarea:focus {
+  outline: none;
+}
+.inner .makeComment .btn {
+  height: 51px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.inner .makeComment .btn button {
+  height: 39px;
+  width: 138px;
+  margin-right: 8px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--btn-purple);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .comments {
+}
+
+.inner .comments .left {
+}
+
+.inner .comments .left .top {
+}
+
+.inner .comments .left .top .img {
+}
+
+.inner .comments .left .top .name {
+}
+
+.inner .comments .left .top .date {
+}
+
+.inner .comments .left .bottom {
+}
+
+.inner .comments .left .bottom .comment {
+}
+
+.inner .comments .right {
+  display: none;
+}
+
+.inner .comments .right.click {
+  display: block;
+}
+
+.inner .comments .right .controlBtns {
+}
+
+.inner .comments .right .controlBtns button {
+}
