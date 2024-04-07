@@ -6,20 +6,6 @@ main {
   height: calc(100vh - var(--header-height));
 }
 
-header .arrowBtn {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  top: 0;
-  bottom: 0;
-  left: 35%; /* 원래 684px이지만 가로 화면 너비 비율로 적용 */
-  margin: auto 0;
-  cursor: pointer;
-}
-
 .inner {
   width: 392px;
   margin: auto; /* 중앙정렬 */

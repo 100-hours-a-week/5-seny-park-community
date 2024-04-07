@@ -1,0 +1,142 @@
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background-color: yellow;
+  height: calc(100vh - var(--header-height));
+}
+.inner {
+  width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: pink;
+}
+
+.inner .h2Title {
+  width: 100%;
+  display: flex;
+  background-color: skyblue;
+  text-align: center;
+  justify-content: center;
+  padding: 24px 0 25px;
+  line-height: var(--line-height);
+  box-sizing: border-box;
+}
+
+.inner .h2Title h2 {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.inner form {
+  background-color: azure;
+  width: 592px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner form .input {
+  width: 100%;
+}
+
+.inner form .input .title,
+.inner form .inputFile .title {
+  padding: 26px 0 16px 24px;
+  background-color: lightgoldenrodyellow;
+  padding-top: 26px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 16px;
+}
+.inner form .inputFile .title {
+  padding: 11px 0 8px 24px;
+}
+
+.inner form .input .content,
+.inner form .input .content2 {
+  width: 592px;
+  height: 64px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 20px 0 20px 24px;
+}
+
+.inner form .input .content2 {
+  height: 279px;
+}
+
+.inner form .input .content::placeholder {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.inner form .input .content,
+.inner form .input .content2:focus {
+  outline: none;
+}
+
+.inner form .input .content2::placeholder {
+  font-weight: 400;
+  font-size: 15px;
+  background-color: yellowgreen;
+  box-sizing: border-box;
+}
+
+.inner form .red {
+  padding-top: 4px;
+  box-sizing: border-box; /* padding, border 포함 */
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.inner form .inputFile .fileLabel {
+  display: flex;
+  padding: 0 0 0 24px;
+  gap: 12px;
+}
+
+.inner form .inputFile .btn {
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #d9d9d9;
+  font-size: 14px;
+}
+
+.inner form .inputFile .content3 {
+  display: flex;
+  align-items: center;
+  background-color: orange;
+  font-size: 14px;
+}
+
+.inner form .hidden {
+  display: none;
+}
+
+.inner button {
+  margin-top: 27px;
+  background-color: var(--btn-purple);
+  border: none;
+  border-radius: 4px;
+  width: var(--input-width);
+  height: var(--input-height);
+  cursor: pointer;
+}
+
+.inner button:hover {
+}
+
+.inner button .makepost {
+  color: #fff;
+}
