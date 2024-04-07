@@ -4,7 +4,6 @@ main {
   align-items: center;
   justify-content: center;
   height: auto;
-  background-color: yellow;
   height: calc(100vh - var(--header-height));
 }
 .inner {
@@ -13,13 +12,11 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: pink;
 }
 
 .inner .h2Title {
   width: 100%;
   display: flex;
-  background-color: skyblue;
   text-align: center;
   justify-content: center;
   padding: 24px 0 25px;
@@ -34,7 +31,6 @@ main {
 }
 
 .inner form {
-  background-color: azure;
   width: 592px;
   display: flex;
   flex-direction: column;
@@ -47,7 +43,6 @@ main {
 .inner form .input .title,
 .inner form .inputFile .title {
   padding: 26px 0 16px 24px;
-  background-color: lightgoldenrodyellow;
   padding-top: 26px;
   box-sizing: border-box;
   font-weight: 700;
@@ -86,7 +81,6 @@ main {
 .inner form .input .content2::placeholder {
   font-weight: 400;
   font-size: 15px;
-  background-color: yellowgreen;
   box-sizing: border-box;
 }
 
@@ -109,14 +103,13 @@ main {
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 4px;
-  background-color: #d9d9d9;
+  background-color: var(--bg-gray);
   font-size: 14px;
 }
 
 .inner form .inputFile .content3 {
   display: flex;
   align-items: center;
-  background-color: orange;
   font-size: 14px;
 }
 
