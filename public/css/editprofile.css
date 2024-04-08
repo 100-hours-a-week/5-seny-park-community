@@ -36,7 +36,6 @@ main {
 .inner {
   width: 392px;
   margin: auto; /* 중앙정렬 */
-  background-color: turquoise;
 }
 
 .inner h2 {
@@ -49,7 +48,6 @@ main {
   font-size: 32px;
   margin: 0 auto 18px;
   text-align: center;
-  background-color: yellow;
   box-sizing: border-box;
 }
 
@@ -73,7 +71,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: palegoldenrod;
 }
 
 .inner .imgContainer .mid {
@@ -138,7 +135,6 @@ main {
   width: 392px;
   height: auto;
   padding-top: 33px;
-  background-color: paleturquoise;
   box-sizing: border-box;
 }
 
@@ -159,14 +155,12 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: peachpuff;
 }
 
 .inner .textContainer .inputs .input .email {
   width: var(--input-width);
   height: 17px;
   box-sizing: border-box;
-  background-color: pink;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -228,12 +222,10 @@ main {
   font-weight: 400;
   font-size: 14px;
   color: #000;
-  background-color: bisque;
 }
 
 .inner .completeBtn {
   margin-top: 65px;
-  background-color: yellowgreen;
   display: flex;
   justify-content: center;
   align-items: center;
