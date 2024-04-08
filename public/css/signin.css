@@ -107,13 +107,13 @@ main {
   padding: 0 18px;
   box-sizing: border-box;
 }
-
-.inner .textContainer .inputs .input p {
-  display: flex;
-  align-items: center;
-  height: 18px;
+.inner .textContainer .inputs .input {
+  align-items: flex-start;
   font-weight: 700;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .inner .textContainer .inputs .input input {

@@ -40,14 +40,25 @@
             <!-- https://www.tcpschool.com/examples/tryit/tryhtml.php?filename=html_ref_tag_label_01 -->
             <!-- 위 링크에 나와 있는 lable 태그 하나를 `<div style="display:inline-block;">10대</div><br>` 로 정의하고 마우스를 클릭해보시면 그 차이가 나옵니다. -->
             <!-- *(label인 경우에는 그 주변 요소를 클릭해도 선택이 되는 점)-->
-            <label class="input">
-              <p class="email">이메일</p>
-              <input type="email" placeholder="이메일을 입력해주세요" />
+            <label for="email" class="input">
+              이메일
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="이메일을 입력해주세요"
+              />
             </label>
-            <label class="input">
-              <p class="pwd">비밀번호</p>
-              <input type="password" placeholder="비밀번호를 입력해주세요" />
+            <label for="password" class="input">
+              비밀번호
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
             </label>
+
             <div class="red">* helper text</div>
           </form>
         </div>
