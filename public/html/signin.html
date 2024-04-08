@@ -51,34 +51,51 @@
           </div>
           <div class="textContainer">
             <div class="inputs">
-              <label class="input">
-                <p class="email">이메일<span class="upper">*</span></p>
-                <input type="email" placeholder="이메일을 입력하세요" />
+              <label for="email" class="input">
+                이메일*
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="이메일을 입력하세요"
+                />
               </label>
               <div class="red">* helper text</div>
 
-              <label class="input">
-                <p class="pwd">비밀번호<span class="upper">*</span></p>
-                <input type="password" placeholder="비밀번호를 입력하세요" />
-              </label>
-              <div class="red">* helper text</div>
-
-              <label class="input">
-                <p class="pwd">비밀번호 확인<span class="upper">*</span></p>
+              <label for="password" class="input">
+                비밀번호*
                 <input
                   type="password"
+                  id="password"
+                  name="password"
+                  placeholder="비밀번호를 입력해주세요"
+                />
+              </label>
+              <div class="red">* helper text</div>
+
+              <label for="checkPassword" class="input">
+                비밀번호 확인*
+                <input
+                  type="password"
+                  id="checkPassword"
+                  name="checkPassword"
                   placeholder="비밀번호를 한번 더 입력하세요"
                 />
               </label>
               <div class="red">* helper text</div>
 
-              <label class="input">
-                <p class="nickname">닉네임<span class="upper">*</span></p>
-                <input type="text" placeholder="닉네임을 입력하세요" />
+              <label for="nickname" class="input">
+                닉네임*
+                <input
+                  type="text"
+                  id="nickname"
+                  name="nickname"
+                  placeholder="닉네임을 입력하세요"
+                />
               </label>
               <div class="red">* helper text</div>
               <button type="submit" form="signin-form" class="btn">
-                <a class="login" href="../../index.html">회원가입</a>
+                회원가입
               </button>
             </div>
           </div>

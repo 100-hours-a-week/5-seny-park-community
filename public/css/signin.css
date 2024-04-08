@@ -107,13 +107,13 @@ main {
   padding: 0 18px;
   box-sizing: border-box;
 }
-
-.inner .textContainer .inputs .input p {
-  display: flex;
-  align-items: center;
-  height: 18px;
+.inner .textContainer .inputs .input {
+  align-items: flex-start;
   font-weight: 700;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .inner .textContainer .inputs .input input {
@@ -143,6 +143,7 @@ main {
   margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
 }
 
+/* 회원가입 버튼 */
 .inner .btn {
   display: flex;
   justify-content: center;
@@ -154,20 +155,16 @@ main {
   cursor: pointer;
   margin-top: 4px;
   border: none;
+  font-weight: 00;
+  font-size: 14px;
+  color: #fff;
 }
 
 .inner .btn:hover {
   background-color: var(--btn-hover);
 }
 
-/* 로그인하러가기 버튼 */
-.inner .btn .login {
-  font-weight: 700;
-  font-size: 14px;
-  color: #fff;
-}
-
-/* 회원가입 */
+/* 로그인하러가기 */
 .inner .link .login {
   display: flex;
   justify-content: center;

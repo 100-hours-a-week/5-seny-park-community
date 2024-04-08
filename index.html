@@ -40,21 +40,35 @@
             <!-- https://www.tcpschool.com/examples/tryit/tryhtml.php?filename=html_ref_tag_label_01 -->
             <!-- 위 링크에 나와 있는 lable 태그 하나를 `<div style="display:inline-block;">10대</div><br>` 로 정의하고 마우스를 클릭해보시면 그 차이가 나옵니다. -->
             <!-- *(label인 경우에는 그 주변 요소를 클릭해도 선택이 되는 점)-->
-            <label class="input">
-              <p class="email">이메일</p>
-              <input type="email" placeholder="이메일을 입력해주세요" />
+            <label for="email" class="input">
+              이메일
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="이메일을 입력해주세요"
+              />
             </label>
-            <label class="input">
-              <p class="pwd">비밀번호</p>
-              <input type="password" placeholder="비밀번호를 입력해주세요" />
+            <label for="password" class="input">
+              비밀번호
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
             </label>
+
             <div class="red">* helper text</div>
           </form>
         </div>
         <!-- 이렇게 하면, 로그인 클릭시 메인으로 안넘어간다. 맞는지?  -->
-        <button type="submit" form="login-form" class="btn">
-          <a class="login" href="./public/html/main.html">로그인</a>
-        </button>
+        <!-- form 태그에 써있는 주소로 넘어가는게 정상입니다.
+                로그인 처리하고 메인 페이지로 넘기시려는것 같은데요, 이 경우에는 서버에서 적절한 작업을 하고 난 후에 
+                클라이언트에게 302 Redirect status code 와 함께 이동시킬 url을 전달합니다. 
+             클라이언트는 이러한 상태코드를 받으면 서버로 부터 전달 받은 URL로 브라우저 페이지를 이동 시키게 됩니다.
+             더 많은 내용은 구글에 http status 301 302와 비슷한 내용으로 검색해보세요  -->
+        <button type="submit" form="login-form" class="btn">로그인</button>
         <div class="link">
           <a class="signin" href="./public/html/signin.html">회원가입</a>
         </div>
