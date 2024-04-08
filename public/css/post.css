@@ -27,9 +27,13 @@ main {
   border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
-.inner .title h1 {
+.inner .title h2 {
+  display: inline-block;
   font-weight: 700;
   font-size: 24px;
+  width: 59px;
+  height: 31px;
+  background-color: pink;
 }
 
 .inner .title .control {
