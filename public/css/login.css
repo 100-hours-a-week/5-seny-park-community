@@ -99,9 +99,6 @@ main {
 /* 로그인 버튼 */
 .inner .btn {
   border: none;
-}
-
-.inner .btn .login {
   font-weight: 700;
   font-size: 14px;
   color: #fff;
