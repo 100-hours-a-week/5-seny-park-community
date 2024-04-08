@@ -35,14 +35,17 @@ main {
 
 .inner {
   width: 392px;
+  height: 613px;
   margin: auto; /* 중앙정렬 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .inner h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 166px;
   height: 38px;
   font-weight: 700;
   font-size: 32px;

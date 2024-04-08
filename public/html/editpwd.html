@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta property="og:title" content="Edit Password" />
+    <meta property="og:description" content="비밀번호 수정" />
+
+    <title>Edit Password</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/editprofile.css" />
+  </head>
+  <body>
+    <header>
+      <div class="headerInner">
+        <div class="arrow">
+          <div><a href=""></a></div>
+        </div>
+        <div><h1>아무 말 대잔치</h1></div>
+        <div class="profile">
+          <a href="./editprofile.html"><div></div></a>
+        </div>
+        <div class="menu">
+          <div class="profile">회원정보수정</div>
+          <div class="pwd"><a href="./editpwd.html">비밀번호수정</a></div>
+          <div class="logout"><a href="../../index.html">로그아웃</a></div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="inner">
+        <h2>비밀번호 수정</h2>
+        <form method="post" action="서버의url" id="signin-form" class="inputs">
+          <div class="textContainer">
+            <div class="inputs">
+              <label for="password" class="input">
+                비밀번호*
+                <div>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="비밀번호를 입력해주세요"
+                />
+              </label>
+              <div class="red">* helper text</div></div>
+
+              <label for="checkPassword" class="input">
+                비밀번호 확인*
+                <div>
+                <input
+                  type="password"
+                  id="checkPassword"
+                  name="checkPassword"
+                  placeholder="비밀번호를 한번 더 입력하세요"
+                />
+              </label>
+              <div class="red">* helper text</div>
+            </div>    
+              <div class="input">
+                <button type="submit" form="edit-form" class="btn">
+                  수정하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
