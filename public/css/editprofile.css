@@ -1,0 +1,242 @@
+.headerInner {
+  position: relative;
+}
+
+.menu {
+  display: none;
+}
+
+.menu.click {
+  display: block;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 115px;
+  background-color: var(--bg-gray);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu.click div {
+  width: 115px;
+  height: 35px;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+/* 회원정보 수정 */
+main {
+  display: flex;
+  width: auto;
+  align-items: center;
+  height: calc(100vh - var(--header-height));
+}
+
+.inner {
+  width: 392px;
+  height: 613px;
+  margin: auto; /* 중앙정렬 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.inner h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 auto 18px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 프로필 사진 */
+.inner .imgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 378px;
+  height: 206px;
+  margin: auto; /* 중앙정렬 */
+  padding: 12px 11px 0;
+  box-sizing: border-box;
+}
+
+.inner .imgContainer .imgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .imgContainer .mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c4c4c4;
+  width: 149px;
+  height: 149px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512");
+  background-size: cover;
+  position: relative; /* 가상 요소를 위한 포지셔닝 기준 추가 */
+}
+
+.inner .imgContainer .mid::before {
+  content: ""; /* 가상 요소를 생성하기 위한 필수 속성 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 검은색 오버레이 */
+  border-radius: 50%; /* 부모와 동일한 모양을 유지 */
+}
+
+.inner .imgContainer .mid .editbtn {
+  background-color: rgba(0, 0, 0, 0.35);
+  width: 52px;
+  height: 27px;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: relative; /* 오버레이 위에 위치하기 위해 z-index 적용을 위한 설정 */
+  z-index: 1; /* 가상 요소(오버레이) 위에 버튼이 오도록 함 */
+}
+
+.inner .imgContainer .mid .editbtn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 이미지 인풋 숨기기 */
+.inner .imgContainer #profileUpload {
+  display: none;
+}
+
+/* 이메일, 비밀번호, 비밀번호 확인, 닉네임 */
+.inner .textContainer {
+  display: flex;
+  align-items: center;
+  width: 392px;
+  height: auto;
+  padding-top: 33px;
+  box-sizing: border-box;
+}
+
+.inner .textContainer .inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 0 18px;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.inner .textContainer .inputs .input {
+  align-items: flex-start;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inner .textContainer .inputs .input .email {
+  width: var(--input-width);
+  height: 17px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.inner .textContainer .inputs .input input {
+  width: var(--input-width);
+  height: var(--input-height);
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+.inner .textContainer .inputs .input input:focus {
+  outline: none;
+}
+
+.inner .textContainer .inputs .input input::placeholder {
+  color: #000;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.inner .textContainer .inputs .red {
+  box-sizing: border-box; /* padding, border 포함 */
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+  height: 17px;
+  display: flex;
+  align-items: center;
+}
+
+/* 수정하기 버튼 */
+.inner .btn {
+  width: var(--input-width);
+  height: 37px;
+  background-color: var(--btn-purple);
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+}
+
+.inner .btn:hover {
+  background-color: var(--btn-hover);
+}
+
+/* 회원탈퇴 */
+.inner .link .delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 17px;
+  margin: 12px auto;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+}
+
+.inner .completeBtn {
+  margin-top: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner .completeBtn .btn {
+  background-color: var(--btn-purple);
+  width: 102px;
+  height: 46px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.inner .completeBtn .btn:hover {
+  background-color: var(--btn-hover);
+}

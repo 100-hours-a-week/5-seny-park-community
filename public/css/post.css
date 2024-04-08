@@ -123,6 +123,7 @@ main {
 }
 
 .inner .contents .texts {
+  width: 544px;
   font-weight: 400;
   font-size: 15px;
   line-height: 21.15px;
