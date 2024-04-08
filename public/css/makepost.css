@@ -52,6 +52,11 @@ main {
   padding: 11px 0 8px 24px;
 }
 
+.inner form .input .content {
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .inner form .input .content,
 .inner form .input .content2 {
   width: 592px;
@@ -61,11 +66,14 @@ main {
   border-top: 1px solid rgba(0, 0, 0, 0.16);
   box-sizing: border-box;
   background-color: transparent;
-  padding: 20px 0 20px 24px;
+  padding: 24px;
+
+  line-height: 21.15px;
 }
 
 .inner form .input .content2 {
   height: 279px;
+  font-size: 15px;
 }
 
 .inner form .input .content::placeholder {
