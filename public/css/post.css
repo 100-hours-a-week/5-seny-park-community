@@ -56,6 +56,8 @@ main {
   height: 36px;
   background-color: peachpuff;
   border-radius: 50%;
+  background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512");
+  background-size: cover;
 }
 
 .inner .title .control .writer .name {
@@ -168,7 +170,7 @@ main {
 
 .inner .makeComment {
   background-color: paleturquoise;
-  padding: 32px 0 24px;
+  padding: 32px 0 0;
 }
 
 .inner .makeComment .box {
@@ -191,7 +193,7 @@ main {
 }
 .inner .makeComment .box textarea::placeholder {
   width: 544px;
-  height: 94px;
+  height: 100%;
   font-size: 15px;
   background-color: pink;
   box-sizing: border-box;
@@ -221,29 +223,67 @@ main {
   justify-content: center;
   align-items: center;
 }
+.inner .commentsList {
+  padding: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: mediumspringgreen;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 .inner .comments {
+  background-color: lightcyan;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inner .comments .left {
+  background-color: greenyellow;
+  flex-grow: 1;
 }
 
 .inner .comments .left .top {
+  display: flex;
+  background-color: violet;
+  align-items: center;
+  gap: 10px;
 }
 
 .inner .comments .left .top .img {
+  width: 36px;
+  height: 36px;
+  background-color: lightcoral;
+}
+
+.inner .comments .left .top .img div {
+  width: 36px;
+  height: 36px;
+  background-color: lightgoldenrodyellow;
+  border-radius: 50%;
 }
 
 .inner .comments .left .top .name {
+  font-weight: 700;
+  font-size: 15px;
 }
 
 .inner .comments .left .top .date {
+  margin-left: 14px;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .inner .comments .left .bottom {
+  height: 29px;
 }
 
 .inner .comments .left .bottom .comment {
+  font-size: 15px;
+  font-weight: 400;
+  padding: 8px 0 0 46px;
 }
 
 .inner .comments .right {
@@ -258,4 +298,9 @@ main {
 }
 
 .inner .comments .right .controlBtns button {
+  background-color: transparent;
+  border: 1px solid var(--btn-purple);
+  border-radius: 8px;
+  width: 50px;
+  height: 27px;
 }
