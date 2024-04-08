@@ -63,10 +63,6 @@ main {
   box-sizing: border-box;
 }
 
-.inner .imgContainer .red {
-  color: #ff0000;
-}
-
 .inner .imgContainer .imgBox {
   display: flex;
   justify-content: center;
@@ -119,13 +115,6 @@ main {
 /* 이미지 인풋 숨기기 */
 .inner .imgContainer #profileUpload {
   display: none;
-}
-
-.inner .imgContainer .left .red {
-  padding-top: 4px;
-  font-size: 12px;
-  font-weight: 400;
-  margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
 }
 
 /* 이메일, 비밀번호, 비밀번호 확인, 닉네임 */
@@ -192,6 +181,9 @@ main {
   color: #ff0000;
   font-size: 12px;
   font-weight: 400;
+  height: 17px;
+  display: flex;
+  align-items: center;
 }
 
 /* 수정하기 버튼 */
