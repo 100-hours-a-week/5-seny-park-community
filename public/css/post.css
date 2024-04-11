@@ -359,7 +359,7 @@ main {
   align-items: center;
   width: 127px;
   height: 44px;
-  background-color: #c4a5fa;
+  background-color: var(--btn-purple);
   color: #000;
   font-size: 20px;
   font-weight: 400;
@@ -368,7 +368,11 @@ main {
   cursor: pointer;
 }
 
+/*
+common.css 에 있는 변수를 이 파일에서도 사용 할 수 있습니다.
+단, HTML 에서 common.css 를 먼저 불러와야 합니다.
+*/
 .inner .shadow.popClick .modal .btns .cancel {
-  background-color: #242424;
-  color: #fff;
+  background-color: var(--bg-gray-black);
+  color: var(--bg-white);
 }

@@ -38,7 +38,9 @@
     <main>
       <div class="inner">
         <h2>회원가입</h2>
-        <form method="post" action="서버의url" id="signin-form" class="inputs">
+        <!--  서버 URL은 이제  "/submit-form" 로 사용해서 요청을 expressjs로 넘길 수 있습니다.  -->
+<!--        <form method="post" action="서버의url" id="signin-form" class="inputs">-->
+        <form method="post" action="/submit-form" id="signin-form" class="inputs">
           <div class="imgContainer">
             <div class="left">
               <p class="profile">프로필 사진</p>
@@ -109,6 +111,7 @@
           </div>
 
           <div class="link">
+            <!--  주소 다시 한번 확인해보세요! -->
             <a class="login" href="//index.html">로그인하러 가기</a>
           </div>
         </form>

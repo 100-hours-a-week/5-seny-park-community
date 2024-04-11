@@ -21,6 +21,11 @@ app.get("/", (req, res) => {
 app.post("/submit-form", (req, res) => {
   // 요청 본문에서 이메일과 비밀번호 추출
   const { email, password } = req.body;
+  /**
+   * console log 에 비밀번호를 찍는건 위험합니다.
+   * 만약 실제 배포 나갈 때 콘솔로그에 비밀번호를 찍는 상태로 배포가 나가게 된다면 보안상 위험하므로 이러한 부분은
+   * 디버깅 도구를 통해서 확인하시는게 좋습니다.
+   */
   console.log(`Email: ${email}, Password: ${password}`);
 
   // 여기서 응답을 보내고 끝내려면 `res.send` 또는 `res.redirect` 중 하나만 사용해야 합니다.
@@ -35,6 +40,13 @@ app.listen(port, () => {
   console.log(`앱이 포트 ${port}에서 실행 중입니다.`);
 });
 
+
+/**
+ *
+ * 개발 과정에서 안쓰는 코드는 지우시는게 좋습니다.
+ * 나중에 참고해야 할 경우가 있다하시면 깃 커밋 남기시고 날리세요
+ * 새로운 로직 짤때 방해 됩니다. 커밋이 귀찮으시면 code_grave.js 같은 이름으로 파일을 만들어서 옮기셔도 됩니다.
+ */
 // // Load the express module.
 // import express from "express";
 // import path from "path";

@@ -11,6 +11,8 @@
   --input-height: 33px;
   --line-height: 31.2px;
   --bg-gray: #d9d9d9;
+  --bg-gray-black: #242424;
+  --bg-white: #fff;
 }
 
 @font-face {
