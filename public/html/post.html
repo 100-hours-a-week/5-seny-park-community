@@ -85,13 +85,17 @@
         </div>
 
         <div class="makeComment">
-          <div class="box">
-            <textarea
-              class="comment"
-              placeholder="댓글을 남겨주세요!"
-            ></textarea>
-            <div class="btn"><button>댓글 등록</button></div>
-          </div>
+          <form action="/path/to/submit/comment" method="post">
+            <div class="box">
+              <textarea
+                class="comment"
+                name="comment"
+                placeholder="댓글을 남겨주세요!"
+                required
+              ></textarea>
+              <div class="btn"><button>댓글 등록</button></div>
+            </div>
+          </form>
         </div>
         <div class="commentsList">
           <div class="comments">
