@@ -43,6 +43,15 @@ setupModalToggle(cancelCoBtn, modalCommentEl);
 setupModalToggle(confirmBtn, modalPostEl, true);
 setupModalToggle(confirmCoBtn, modalCommentEl);
 
+// 댓글 입력 시 버튼 색 변경
+commentEl.addEventListener("input", () => {
+  if (commentEl.value.length > 0) {
+    commentBtn.classList.add("active");
+  } else {
+    commentBtn.classList.remove("active");
+  }
+});
+
 // delBtn.addEventListener("click", (event) => {
 //   event.preventDefault();
 //   bodyEl.classList.add("popClick");
@@ -78,13 +87,4 @@ setupModalToggle(confirmCoBtn, modalCommentEl);
 //   event.preventDefault();
 //   bodyEl.classList.remove("popClick");
 //   modalCommentEl.classList.remove("popClick");
-// });
-
-// // 댓글 입력 시 버튼 색 변경
-// commentEl.addEventListener("input", () => {
-//   if (commentEl.value.length > 0) {
-//     commentBtn.classList.add("active");
-//   } else {
-//     commentBtn.classList.remove("active");
-//   }
 // });
