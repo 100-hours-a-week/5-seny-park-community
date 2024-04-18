@@ -40,9 +40,6 @@ main {
   padding: 0 18px;
 }
 
-.inner .container .inputs .input:first-child {
-  margin-bottom: 16px; /* 피그마 값 계산 */
-}
 .inner .container .inputs .input {
   align-items: flex-start;
   font-weight: 700;
@@ -50,6 +47,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 16px;
+}
+
+.inner .container .inputs .input:first-child {
+  margin-top: 0px;
 }
 
 .inner .container .inputs .input input {
@@ -72,6 +74,11 @@ main {
 }
 
 .inner .container .inputs .red {
+  display: none;
+}
+
+.inner .container .inputs .red.helper-text {
+  display: block;
   padding-top: 4px;
   box-sizing: border-box; /* padding, border 포함 */
   color: #ff0000;
