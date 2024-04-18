@@ -54,6 +54,10 @@ main {
   height: 149px;
   border-radius: 50%;
   cursor: pointer;
+  background-image: url();
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .inner .imgContainer .mid:hover {
