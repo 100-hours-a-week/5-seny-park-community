@@ -89,6 +89,7 @@ header div.arrow {
   cursor: pointer;
 }
 
+/* 헤더 메뉴 팝업 */
 .menu {
   visibility: hidden;
   opacity: 0;
@@ -114,4 +115,95 @@ header div.arrow {
   padding: 10px 24px;
   box-sizing: border-box;
   font-size: 12px;
+}
+
+/* 모달창 */
+.inner .shadow {
+  visibility: hidden; /* 초기 숨김 상태 */
+  opacity: 0; /* 초기 투명 상태 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
+}
+
+.inner .shadow.popClick {
+  visibility: visible; /* 보이게 변경 */
+  opacity: 1; /* 완전 불투명 */
+  transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
+  z-index: 2;
+}
+
+.inner .shadow.popClick .modal {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 408px;
+  height: 242px;
+  background-color: #fff;
+  z-index: 2;
+  padding: 48px 69px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.inner .shadow.popClick .modal h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 268px;
+  height: 29px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.inner .shadow.popClick .modal p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 24px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.inner .shadow.popClick .modal .btns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.inner .shadow.popClick .modal .btns .cancel,
+.inner .shadow.popClick .modal .btns .delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 127px;
+  height: 44px;
+  background-color: var(--btn-purple);
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* 팝업 모달 창  */
+body.popClick {
+  overflow: hidden;
+}
+.inner .shadow.popClick .modal .btns .cancel {
+  background-color: var(--bg-gray-black);
+  color: var(--bg-white);
 }

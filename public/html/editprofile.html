@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/editprofile.css" />
     <script defer src="/js/commonheader.js"></script>
+    <script defer type="module" src="/js/editprofile.js"></script>
   </head>
   <body>
     <header>
@@ -49,6 +50,16 @@
     </header>
     <main>
       <div class="inner">
+        <div class="shadow shadow-profile">
+          <div class="modal">
+            <h3>회원탈퇴 하시겠습니까?</h3>
+            <p>작성된 게시글과 댓글은 삭제됩니다.</p>
+            <div class="btns">
+              <div class="cancel">취소</div>
+              <div class="delete">확인</div>
+            </div>
+          </div>
+        </div>
         <h2>회원정보 수정</h2>
         <form method="post" action="서버의url" id="signin-form" class="inputs">
           <div class="imgContainer">
@@ -81,7 +92,7 @@
                     placeholder="닉네임을 입력하세요"
                     value="센이"
                   />
-                  <div class="red">* helper text</div>
+                  <div class="red nickname"></div>
                 </div>
               </label>
               <div class="input">

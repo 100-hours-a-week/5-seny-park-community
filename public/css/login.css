@@ -75,10 +75,6 @@ main {
 }
 
 .inner .container .inputs .red {
-  display: none;
-}
-
-.inner .container .inputs .red.helper-text {
   display: block;
   /* padding-top: 4px; */
   box-sizing: border-box; /* padding, border 포함 */

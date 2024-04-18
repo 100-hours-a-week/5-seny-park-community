@@ -1,3 +1,4 @@
+import { emailCheck, pwdCheck } from "/js/utils.js";
 const formEl = document.querySelector("#login-form");
 const emailEl = document.querySelector("#email");
 const pwdEl = document.querySelector("#password");
@@ -15,10 +16,10 @@ let check = {
 
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
-    check.email = emailCheck(event.target.value);
+    check.email = emailCheck(event.target.value, redEmailEl);
   }
   if (event.target.id === "password") {
-    check.password = pwdCheck(event.target.value);
+    check.password = pwdCheck(event.target.value, redPwdEl);
   }
 
   if (check.email && check.password) {
@@ -28,41 +29,3 @@ formEl.addEventListener("input", (event) => {
     loginBtn.classList.remove("active");
   }
 });
-
-const emailCheck = (email) => {
-  redEmailEl.classList.add("helper-text");
-  const regex = /\w+@\w+\.\w+/;
-  if (email.length === 0) {
-    redEmailEl.textContent = "이메일을 입력해주세요";
-    return false;
-  } else if (!regex.test(email)) {
-    redEmailEl.textContent = "올바른 이메일 주소 형식을 입력해주세요.";
-    return false;
-  } else {
-    redEmailEl.textContent = "";
-    redEmailEl.classList.remove("helper-text");
-    return true;
-  }
-};
-
-const pwdCheck = (pwd) => {
-  redPwdEl.classList.add("helper-text");
-  if (pwd.length === 0) {
-    redPwdEl.textContent = "비밀번호를 입력해주세요";
-    return false;
-  } else if (pwd.length < 8 || pwd.length > 20) {
-    redPwdEl.textContent = "비밀번호는 8자 이상 20자 이하여야 합니다.";
-    return false;
-  }
-  const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-  if (!regex.test(pwd)) {
-    redPwdEl.textContent =
-      "비밀번호는 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.";
-    return false;
-  } else {
-    redPwdEl.textContent = "";
-    redPwdEl.classList.remove("helper-text");
-    return true;
-  }
-};
