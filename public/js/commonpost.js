@@ -1,9 +1,9 @@
 import {
   handleSelected,
   handleTitleInput,
-  titleEl,
   imgPrevEl,
   fileInput,
+  titleEl,
 } from "/js/utils.js";
 
 // 제목 26글자 이내
