@@ -91,7 +91,7 @@ main {
   padding-top: 4px;
   font-size: 12px;
   font-weight: 400;
-  margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
+  margin-bottom: 8px;
 }
 
 /* 이메일, 비밀번호, 비밀번호 확인, 닉네임 */
@@ -117,7 +117,8 @@ main {
   font-size: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  margin-bottom: 4px;
+  height: 72px;
 }
 
 .inner .textContainer .inputs .input input {
@@ -127,6 +128,7 @@ main {
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 4px;
+  margin: 8px 0 4px 0;
 }
 
 .inner .textContainer .inputs .input input:focus {
@@ -140,11 +142,11 @@ main {
 }
 
 .inner .textContainer .inputs .red {
-  padding-top: 4px;
+  /* padding-top: 4px; */
   color: #ff0000;
   font-size: 12px;
   font-weight: 400;
-  margin-bottom: 8px; /* 피그마 4px이지만 시각적으로 이게 나아서 변경 */
+  /* margin-bottom: 8px;  */
 }
 
 /* 회원가입 버튼 */
@@ -164,7 +166,7 @@ main {
   color: #fff;
 }
 
-.inner .btn:hover {
+.inner .btn.active {
   background-color: var(--btn-hover);
 }
 

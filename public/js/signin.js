@@ -12,12 +12,15 @@ const redEmailEl = document.querySelector(".red.email");
 const redPwdEl = document.querySelector(".red.pwd");
 const redPwdCheckEl = document.querySelector(".red.pwd-check");
 const redNicknameEl = document.querySelector(".red.nickname");
+// 회원가입 버튼
+const signinBtn = document.querySelector(".inner .btn");
 
 // 이미지 업로드
 function handleEvent(event) {
   if (event.type === "load") {
-    imgPrevEl.style.backgroundImage = `url(${reader.result})`;
-    console.log(reader.result);
+    imgPrevEl.style.backgroundImage = `url(${reader.result})`; // .mid 태그에 이미지 삽입
+    console.log("url:", reader.result);
+    // https://developer.mozilla.org/en-US/play 코드 참고
   }
 }
 
@@ -31,6 +34,12 @@ function addListeners(reader) {
 }
 
 function handleSelected(e) {
+  if (fileInput.files.length === 0) {
+    console.log("No file selected or file was deselected.");
+    imgPrevEl.style.backgroundImage = ""; // 이미 선택된 이미지 제거
+    return; // 파일 선택이 없는 경우 early return
+  }
+
   const selectedFile = fileInput.files[0];
   if (selectedFile) {
     addListeners(reader);
@@ -41,25 +50,36 @@ function handleSelected(e) {
 fileInput.addEventListener("change", handleSelected);
 
 // 회원가입 텍스트 폼 유효성 검사
+let check = {
+  email: false,
+  password: false,
+  checkPassword: false,
+  nickname: false,
+};
+
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
-    console.log("email", event.target.value);
-    console.log("Email check:", emailCheck(event.target.value));
+    check.email = emailCheck(event.target.value);
   }
   if (event.target.id === "password") {
-    console.log("password", event.target.value);
-    console.log("Password check:", pwdCheck(event.target.value));
+    check.password = pwdCheck(event.target.value);
   }
   if (event.target.id === "checkPassword") {
-    console.log("checkPassword", event.target.value);
-    console.log(
-      "Password match check:",
-      pwdCheckSame(pwdEl.value, event.target.value)
-    );
+    check.checkPassword = pwdCheckSame(pwdEl.value, event.target.value);
   }
   if (event.target.id === "nickname") {
-    console.log("nickname", event.target.value);
-    console.log("Nickname check:", nicknameCheck(event.target.value));
+    check.nickname = nicknameCheck(event.target.value);
+  }
+  if (check.email && check.password && check.checkPassword && check.nickname) {
+    // formEl.submit();
+    console.log(
+      formEl.elements.email.value,
+      formEl.elements.password.value,
+      formEl.elements.nickname.value
+    );
+    signinBtn.classList.add("active");
+  } else {
+    signinBtn.classList.remove("active");
   }
 });
 
@@ -115,8 +135,14 @@ const pwdCheckSame = (pwd, pwdCheck) => {
 
 const nicknameCheck = (nickname) => {
   redNicknameEl.classList.add("helper-text");
+  // 닉네임 정규 표현식: 띄어쓰기 없이 모든 문자 허용, 최대 10자
+  const regex = /^[^\s]{1,10}$/;
+
   if (nickname.length === 0) {
     redNicknameEl.innerHTML = "닉네임을 입력해주세요";
+    return false;
+  } else if (!regex.test(nickname)) {
+    redNicknameEl.innerHTML = "닉네임은 띄어쓰기 없이 최대 10자까지 가능합니다";
     return false;
   } else {
     redNicknameEl.innerHTML = "";

@@ -46,8 +46,8 @@ main {
   font-size: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+  margin-bottom: 4px;
+  height: 72px;
 }
 
 .inner .container .inputs .input:first-child {
@@ -61,6 +61,7 @@ main {
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 4px;
+  margin: 8px 0 4px 0;
 }
 
 .inner .container .inputs .input input:focus {
@@ -79,7 +80,7 @@ main {
 
 .inner .container .inputs .red.helper-text {
   display: block;
-  padding-top: 4px;
+  /* padding-top: 4px; */
   box-sizing: border-box; /* padding, border 포함 */
   color: #ff0000;
   font-size: 12px;
@@ -99,7 +100,7 @@ main {
   cursor: pointer;
 }
 
-.inner .btn:hover {
+.inner .btn.active {
   background-color: var(--btn-hover);
 }
 
