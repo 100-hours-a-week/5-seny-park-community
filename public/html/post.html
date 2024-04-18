@@ -24,19 +24,52 @@
     />
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/post.css" />
+    <script defer src="/js/commonheader.js"></script>
+    <script defer type="module" src="/js/post.js"></script>
   </head>
   <body>
     <header>
       <div class="headerInner">
         <div class="arrow">
-          <div><a href="./main.html"><</a></div>
+          <div><a href=""><</a></div>
         </div>
-        <div><h1>아무 말 대잔치</h1></div>
-        <div class="profile"><div></div></div>
+        <div>
+          <h1><a href="/html/main.html">아무 말 대잔치</a></h1>
+        </div>
+        <div class="profile">
+          <div></div>
+        </div>
+        <div class="menu">
+          <div class="profile">
+            <a href="./editprofile.html">회원정보 수정</a>
+          </div>
+          <div class="pwd"><a href="./editpwd.html">비밀번호 수정</a></div>
+          <div class="logout"><a href="/">로그아웃</a></div>
+        </div>
       </div>
     </header>
     <main>
       <div class="inner">
+        <div class="shadow shadow-post">
+          <div class="modal">
+            <h3>게시글을 삭제하시겠습니까?</h3>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="btns">
+              <div class="cancel">취소</div>
+              <div class="delete"><a href="./main.html">확인</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="shadow shadow-comment">
+          <div class="modal">
+            <h3>댓글 삭제하시겠습니까?</h3>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="btns">
+              <div class="cancel">취소</div>
+              <div class="delete"><a href="./main.html">확인</a></div>
+            </div>
+          </div>
+        </div>
         <div class="title">
           <h2>제목 1</h2>
           <div class="control">
@@ -47,8 +80,8 @@
             </div>
 
             <div class="controlBtns">
-              <button><a href="./editpost.html">수정</a></button>
-              <button><a href="">삭제</a></button>
+              <button class="modi"><a href="./editpost.html">수정</a></button>
+              <button class="del"><a href="">삭제</a></button>
             </div>
           </div>
         </div>
@@ -85,13 +118,17 @@
         </div>
 
         <div class="makeComment">
-          <div class="box">
-            <textarea
-              class="comment"
-              placeholder="댓글을 남겨주세요!"
-            ></textarea>
-            <div class="btn"><button>댓글 등록</button></div>
-          </div>
+          <form action="/path/to/submit/comment" method="post">
+            <div class="box">
+              <textarea
+                class="write-comment"
+                name="comment"
+                placeholder="댓글을 남겨주세요!"
+                required
+              ></textarea>
+              <div class="btn"><button>댓글 등록</button></div>
+            </div>
+          </form>
         </div>
         <div class="commentsList">
           <div class="comments">
@@ -107,8 +144,8 @@
             </div>
             <div class="right click">
               <div class="controlBtns">
-                <button><a href="">수정</a></button>
-                <button><a href="">삭제</a></button>
+                <button class="modi"><a href="">수정</a></button>
+                <button class="del"><a href="">삭제</a></button>
               </div>
             </div>
           </div>

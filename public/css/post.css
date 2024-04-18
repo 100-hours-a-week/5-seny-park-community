@@ -1,7 +1,3 @@
-body.popClick {
-  overflow: hidden;
-}
-
 main {
   display: flex;
   width: auto;
@@ -226,6 +222,10 @@ main {
   justify-content: center;
   align-items: center;
 }
+.inner .makeComment .btn button.active {
+  background-color: var(--btn-hover);
+}
+
 .inner .commentsList {
   padding: 24px 0 24px 24px;
   box-sizing: border-box;
@@ -290,85 +290,4 @@ main {
 
 .inner .comments .right.click {
   display: block;
-}
-
-.inner .shadow {
-  display: none;
-}
-
-.inner .shadow.popClick {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.inner .shadow.popClick .modal {
-  display: block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  width: 408px;
-  height: 242px;
-  background-color: #fff;
-  z-index: 2;
-  padding: 48px 69px;
-  border-radius: 12px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.inner .shadow.popClick .modal h3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 268px;
-  height: 29px;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.inner .shadow.popClick .modal p {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 273px;
-  height: 24px;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.inner .shadow.popClick .modal .btns {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.inner .shadow.popClick .modal .btns .cancel,
-.inner .shadow.popClick .modal .btns .delete {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 127px;
-  height: 44px;
-  background-color: #c4a5fa;
-  color: #000;
-  font-size: 20px;
-  font-weight: 400;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.inner .shadow.popClick .modal .btns .cancel {
-  background-color: #242424;
-  color: #fff;
 }

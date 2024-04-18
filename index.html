@@ -2,15 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!--    뷰포트 메타 태그는 다음과 같이 써야 합니다. "DD"는 올바른 값이 아닙니다. -->
-    <!--    <meta name="viewport" content="width=DD, initial-scale=1.0" />-->
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <!--  메타태그 문법은 아래와 같습니다!  -->
-    <!--    <meta og:title="Log in" />-->
-    <!--    <meta og:description="로그인할 수 있는 페이지" />-->
     <meta property="og:title" content="Log in" />
     <meta property="og:description" content="로그인할 수 있는 페이지" />
     <title>Log in</title>
@@ -32,6 +27,7 @@
     <!--  라이브서버와 같이 서버를 통해 이 html 파일을 접근한다면 "."이 없어도되지만 이 html 파일을 서버를 통해 여는것이 아닌 파일 자체로 여는 것까지 고려한다면 "."을 포함해야 경로를 찾을 수 있는 점 참고해주세요.  -->
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/login.css" />
+    <script defer type="module" src="/js/index.js"></script>
   </head>
   <body>
     <header>
@@ -52,7 +48,7 @@
             <!-- 위에서 폼 태그를 사용했다면 이 부분은 label 태그로 사용하는 것을 권장합니다. 사용자 편의성이 올라 갈 수 있습니다. -->
             <!-- 사용자 편의성이 어떻게 올라가는 지는 아래 링크를 통해 테스트해보세요 -->
             <!-- https://www.tcpschool.com/examples/tryit/tryhtml.php?filename=html_ref_tag_label_01 -->
-            <!-- 위 링크에 나와 있는 lable 태그 하나를 `<div style="display:inline-block;">10대</div><br>` 로 정의하고 마우스를 클릭해보시면 그 차이가 나옵니다. -->
+            <!-- 위 링크에 나와 있는 label 태그 하나를 `<div style="display:inline-block;">10대</div><br>` 로 정의하고 마우스를 클릭해보시면 그 차이가 나옵니다. -->
             <!-- *(label인 경우에는 그 주변 요소를 클릭해도 선택이 되는 점)-->
             <label for="email" class="input">
               이메일
@@ -62,7 +58,9 @@
                 name="email"
                 placeholder="이메일을 입력해주세요"
               />
+              <div class="red email"></div>
             </label>
+
             <label for="password" class="input">
               비밀번호
               <input
@@ -71,9 +69,8 @@
                 name="password"
                 placeholder="비밀번호를 입력해주세요"
               />
+              <div class="red pwd"></div>
             </label>
-
-            <div class="red">* helper text</div>
           </form>
         </div>
         <!-- 이렇게 하면, 로그인 클릭시 메인으로 안넘어간다. 맞는지?  -->
