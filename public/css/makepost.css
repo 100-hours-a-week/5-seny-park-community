@@ -4,7 +4,7 @@ main {
   align-items: center;
   justify-content: center;
   height: auto;
-  height: calc(100vh - var(--header-height));
+  /* height: calc(100vh - var(--header-height)); */
 }
 .inner {
   width: 600px;
@@ -12,6 +12,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 }
 
 .inner .h2Title {
@@ -119,6 +121,17 @@ main {
   display: flex;
   align-items: center;
   font-size: 14px;
+  width: auto;
+}
+
+.inner form .inputFile .upload-img {
+  display: none;
+}
+
+.inner form .inputFile .upload-img.active {
+  padding: 8px;
+  display: flex;
+  height: 200px;
 }
 
 .inner form .hidden {

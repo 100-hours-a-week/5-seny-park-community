@@ -20,7 +20,7 @@ function handleEvent(event) {
   if (event.type === "load") {
     imgPrevEl.style.backgroundImage = `url(${reader.result})`; // .mid 태그에 이미지 삽입
     console.log("url:", reader.result);
-    // https://developer.mozilla.org/en-US/play 코드 참고
+    // https://developer.mozilla.org/en-US/zdocs/Web/API/FileReader/load_event 코드 참고
   }
 }
 

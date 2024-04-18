@@ -24,6 +24,7 @@
     />
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/makepost.css" />
+    <script defer src="/js/makepost.js"></script>
   </head>
   <body>
     <header>
@@ -73,18 +74,18 @@
               <div class="btn">파일 선택</div>
               <div class="content3">파일을 선택해주세요.</div>
             </div>
+
+            <img class="upload-img" src="" alt="이미지 삽입" />
           </label>
           <input
             type="file"
             id="postUpload"
             name="postPicture"
-            class="hidden"
+            class="fileinput hidden"
           />
         </form>
 
-        <button type="submit" form="makepost-form" class="btn">
-          <a class="makepost" href="./main.html">완료</a>
-        </button>
+        <button type="submit" form="makepost-form" class="btn">완료</button>
       </div>
     </main>
   </body>
