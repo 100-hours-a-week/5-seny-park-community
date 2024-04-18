@@ -21,9 +21,9 @@ const redNicknameEl = document.querySelector(".red.nickname");
 const signinBtn = document.querySelector(".inner .btn");
 
 // 이미지 업로드
-fileInput.addEventListener("change", () =>
-  handleSelected(fileInput, imgPrevEl)
-);
+fileInput.addEventListener("change", () => {
+  handleSelected(fileInput, imgPrevEl);
+});
 
 // 회원가입 텍스트 폼 유효성 검사
 let check = {

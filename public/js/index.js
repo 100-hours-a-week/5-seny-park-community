@@ -2,7 +2,6 @@ import { emailCheck, pwdCheck } from "/js/utils.js";
 const formEl = document.querySelector("#login-form");
 const emailEl = document.querySelector("#email");
 const pwdEl = document.querySelector("#password");
-const inputEl = document.querySelectorAll("input");
 const redEmailEl = document.querySelector(".red.email");
 const redPwdEl = document.querySelector(".red.pwd");
 // 로그인 버튼
