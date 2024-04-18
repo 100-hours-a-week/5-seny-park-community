@@ -14,8 +14,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
     />
-      <!-- Pretendard-Regular 폰트를 페이지 속도 개선 등의 이유로 preload로 불러오기 -->
-      <link
+    <!-- Pretendard-Regular 폰트를 페이지 속도 개선 등의 이유로 preload로 불러오기 -->
+    <link
       rel="preload"
       href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
       as="font"
@@ -43,23 +43,25 @@
         <!-- 이제 expressjs의 라우터로 요청을 넘길 수 있으므로 "서버의url" 부분을 수정 할 수 있습니다!  -->
         <form
           method="post"
-          action="서버의url"
+          action="/submit-post-form"
           id="makepost-form"
           class="inputs"
         >
           <label class="input">
             <div class="title">제목*</div>
             <!--   input 태그는 내용을 포함할 수 없기 때문에 닫는 태그가 없습니다. ("</input>" -> "<input />" 으로 변경 -->
-            <input type="text"
+            <input
+              type="text"
               class="content"
-              name="postTitle" 
+              name="postTitle"
               placeholder="제목을 입력해주세요. (최대 26글자)"
             />
           </label>
           <label class="input">
             <div class="title">내용*</div>
             <textarea
-            name="postContent"
+              form="makepost-form"
+              name="postContent"
               class="content2"
               placeholder="내용을 입력해주세요."
             ></textarea>
@@ -68,8 +70,9 @@
           <label for="postUpload" class="inputFile">
             <div class="title">이미지</div>
             <div class="fileLabel">
-            <div class="btn">파일 선택</div>
-            <div class="content3">파일을 선택해주세요.</div></div>
+              <div class="btn">파일 선택</div>
+              <div class="content3">파일을 선택해주세요.</div>
+            </div>
           </label>
           <input
             type="file"
@@ -81,7 +84,7 @@
 
         <button type="submit" form="makepost-form" class="btn">
           <a class="makepost" href="./main.html">완료</a>
-
+        </button>
       </div>
     </main>
   </body>
