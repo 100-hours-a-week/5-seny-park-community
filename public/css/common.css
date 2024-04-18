@@ -51,6 +51,7 @@ header .headerInner {
   width: 544px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 header div {
@@ -86,4 +87,31 @@ header div.arrow {
   width: 40px;
   height: 40px;
   cursor: pointer;
+}
+
+.menu {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 115px;
+  background-color: var(--bg-gray);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu.click {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.menu.click div {
+  width: 115px;
+  height: 35px;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  font-size: 12px;
 }

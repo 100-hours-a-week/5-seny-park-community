@@ -1,30 +1,3 @@
-.headerInner {
-  position: relative;
-}
-
-.menu {
-  display: none;
-}
-
-.menu.click {
-  display: block;
-  position: absolute;
-  top: 80px;
-  right: 0;
-  width: 115px;
-  background-color: var(--bg-gray);
-  display: flex;
-  flex-direction: column;
-}
-
-.menu.click div {
-  width: 115px;
-  height: 35px;
-  padding: 10px 24px;
-  box-sizing: border-box;
-  font-size: 12px;
-}
-
 /* 회원정보 수정 */
 main {
   display: flex;
