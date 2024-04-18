@@ -293,11 +293,8 @@ main {
 }
 
 .inner .shadow {
-  display: none;
-}
-
-.inner .shadow.popClick {
-  display: block;
+  visibility: hidden; /* 초기 숨김 상태 */
+  opacity: 0; /* 초기 투명 상태 */
   position: fixed;
   top: 0;
   left: 0;
@@ -305,6 +302,13 @@ main {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
+  transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
+}
+
+.inner .shadow.popClick {
+  visibility: visible; /* 보이게 변경 */
+  opacity: 1; /* 완전 불투명 */
+  transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
 }
 
 .inner .shadow.popClick .modal {
