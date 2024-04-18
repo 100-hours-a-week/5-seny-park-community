@@ -67,14 +67,6 @@ export const handleTitleInput = () => {
   }
 };
 
-// 이미지 업로드 src 변경
-export const handleEventSrc = (event) => {
-  if (event.type === "load") {
-    imgPrevEl.src = event.target.result;
-    console.log("Image URL:", event.target.result);
-  }
-};
-
 ///////////////////////////////////////////////////////////////
 // 유효성 검사 함수
 export const emailCheck = (email, redEmailEl) => {
