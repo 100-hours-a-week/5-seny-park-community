@@ -87,13 +87,13 @@ const emailCheck = (email) => {
   redEmailEl.classList.add("helper-text");
   const regex = /\w+@\w+\.\w+/;
   if (email.length === 0) {
-    redEmailEl.innerHTML = "이메일을 입력해주세요";
+    redEmailEl.textContent = "이메일을 입력해주세요";
     return false;
   } else if (!regex.test(email)) {
-    redEmailEl.innerHTML = "올바른 이메일 주소 형식을 입력해주세요.";
+    redEmailEl.textContent = "올바른 이메일 주소 형식을 입력해주세요.";
     return false;
   } else {
-    redEmailEl.innerHTML = "";
+    redEmailEl.textContent = "";
     redEmailEl.classList.remove("helper-text");
     return true;
   }
@@ -102,20 +102,20 @@ const emailCheck = (email) => {
 const pwdCheck = (pwd) => {
   redPwdEl.classList.add("helper-text");
   if (pwd.length === 0) {
-    redPwdEl.innerHTML = "비밀번호를 입력해주세요";
+    redPwdEl.textContent = "비밀번호를 입력해주세요";
     return false;
   } else if (pwd.length < 8 || pwd.length > 20) {
-    redPwdEl.innerHTML = "비밀번호는 8자 이상 20자 이하여야 합니다.";
+    redPwdEl.textContent = "비밀번호는 8자 이상 20자 이하여야 합니다.";
     return false;
   }
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
   if (!regex.test(pwd)) {
-    redPwdEl.innerHTML =
+    redPwdEl.textContent =
       "비밀번호는 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.";
     return false;
   } else {
-    redPwdEl.innerHTML = "";
+    redPwdEl.textContent = "";
     redPwdEl.classList.remove("helper-text");
     return true;
   }
@@ -124,10 +124,10 @@ const pwdCheck = (pwd) => {
 const pwdCheckSame = (pwd, pwdCheck) => {
   redPwdCheckEl.classList.add("helper-text");
   if (pwd !== pwdCheck) {
-    redPwdCheckEl.innerHTML = "비밀번호가 일치하지 않습니다.";
+    redPwdCheckEl.textContent = "비밀번호가 일치하지 않습니다.";
     return false;
   } else {
-    redPwdCheckEl.innerHTML = "";
+    redPwdCheckEl.textContent = "";
     redPwdCheckEl.classList.remove("helper-text");
     return true;
   }
@@ -139,13 +139,14 @@ const nicknameCheck = (nickname) => {
   const regex = /^[^\s]{1,10}$/;
 
   if (nickname.length === 0) {
-    redNicknameEl.innerHTML = "닉네임을 입력해주세요";
+    redNicknameEl.textContent = "닉네임을 입력해주세요";
     return false;
   } else if (!regex.test(nickname)) {
-    redNicknameEl.innerHTML = "닉네임은 띄어쓰기 없이 최대 10자까지 가능합니다";
+    redNicknameEl.textContent =
+      "닉네임은 띄어쓰기 없이 최대 10자까지 가능합니다";
     return false;
   } else {
-    redNicknameEl.innerHTML = "";
+    redNicknameEl.textContent = "";
     redNicknameEl.classList.remove("helper-text");
     return true;
   }

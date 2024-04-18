@@ -24,6 +24,7 @@
     />
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/post.css" />
+    <script defer src="/js/post.js"></script>
   </head>
   <body>
     <header>
@@ -37,6 +38,26 @@
     </header>
     <main>
       <div class="inner">
+        <div class="shadow shadow-post">
+          <div class="modal">
+            <h3>게시글을 삭제하시겠습니까?</h3>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="btns">
+              <div class="cancel">취소</div>
+              <div class="delete"><a href="./main.html">확인</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="shadow shadow-comment">
+          <div class="modal">
+            <h3>댓글 삭제하시겠습니까?</h3>
+            <p>삭제한 내용은 복구 할 수 없습니다.</p>
+            <div class="btns">
+              <div class="cancel">취소</div>
+              <div class="delete"><a href="./main.html">확인</a></div>
+            </div>
+          </div>
+        </div>
         <div class="title">
           <h2>제목 1</h2>
           <div class="control">
@@ -47,8 +68,8 @@
             </div>
 
             <div class="controlBtns">
-              <button><a href="./editpost.html">수정</a></button>
-              <button><a href="">삭제</a></button>
+              <button class="modi"><a href="./editpost.html">수정</a></button>
+              <button class="del"><a href="">삭제</a></button>
             </div>
           </div>
         </div>
@@ -88,7 +109,7 @@
           <form action="/path/to/submit/comment" method="post">
             <div class="box">
               <textarea
-                class="comment"
+                class="write-comment"
                 name="comment"
                 placeholder="댓글을 남겨주세요!"
                 required
@@ -111,8 +132,8 @@
             </div>
             <div class="right click">
               <div class="controlBtns">
-                <button><a href="">수정</a></button>
-                <button><a href="">삭제</a></button>
+                <button class="modi"><a href="">수정</a></button>
+                <button class="del"><a href="">삭제</a></button>
               </div>
             </div>
           </div>
