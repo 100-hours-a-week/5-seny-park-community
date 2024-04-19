@@ -104,9 +104,6 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   display: flex;
   align-items: center;
   width: 392px;
-  height: auto;
-  padding-top: 33px;
-  box-sizing: border-box;
 }
 
 .inner .textContainer .inputs {
@@ -114,18 +111,27 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 0 18px;
+  padding: 36px 18px 12px;
   box-sizing: border-box;
-  gap: 12px;
 }
-
 .inner .textContainer .inputs .input {
   align-items: flex-start;
   font-weight: 700;
   font-size: 15px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  margin-bottom: 4px;
+  height: 72px;
+}
+
+.inner .textContainer .inputs .input input {
+  width: var(--input-width);
+  height: var(--input-height);
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 4px;
+  margin: 8px 0 4px 0;
 }
 
 .inner .textContainer .inputs .input .email {
@@ -136,16 +142,7 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   align-items: center;
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 4px;
-}
-
-.inner .textContainer .inputs .input input {
-  width: var(--input-width);
-  height: var(--input-height);
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #000;
-  border-radius: 4px;
+  margin: 16px 0 4px 0;
 }
 
 .inner .textContainer .inputs .input input:focus {
@@ -166,10 +163,12 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   height: 17px;
   display: flex;
   align-items: center;
+  margin-bottom: 4px;
 }
 
 /* 수정하기 버튼 */
-.inner .btn {
+.inner .btn,
+.inner .btn.profile {
   width: var(--input-width);
   height: 37px;
   background-color: var(--btn-purple);
@@ -180,11 +179,14 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   font-size: 14px;
   color: #fff;
 }
-
-.inner .btn:hover {
-  background-color: var(--btn-hover);
+.inner .btn.profile {
+  margin-top: 12px;
 }
 
+.inner .btn.active {
+  background-color: var(--btn-hover);
+}
+/* 수정시작 */
 /* 회원탈퇴 */
 .inner .link .delete {
   display: flex;
@@ -192,7 +194,7 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   align-items: center;
   width: auto;
   height: 17px;
-  margin: 12px auto;
+  margin: auto;
   font-weight: 400;
   font-size: 14px;
   color: #000;
@@ -205,7 +207,18 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   align-items: center;
 }
 
-.inner .completeBtn .btn {
+/* 토스트 메시지 */
+.inner .toast {
+  opacity: 0;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  /* padding: 10px 50px; */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100px;
+  color: #fff;
+  transition: all 0.5s;
   background-color: var(--btn-purple);
   width: 102px;
   height: 46px;
@@ -213,9 +226,21 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+}
+/*토스트 메시지 활성화 되었을 때*/
+.inner .toast.active {
+  opacity: 1;
+  bottom: 100px;
 }
 
-.inner .completeBtn .btn:hover {
-  background-color: var(--btn-hover);
+.inner .completeBtn .btn-pwd-toast {
+  bottom: 300px;
+}
+
+.inner .completeBtn .btn-pwd-toast.active {
+  bottom: 350px;
+}
+
+.inner .completeBtn .btn-toast a {
+  color: #fff;
 }

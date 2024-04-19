@@ -28,3 +28,13 @@ formEl.addEventListener("input", (event) => {
     loginBtn.classList.remove("active");
   }
 });
+
+formEl.addEventListener("submit", (event) => {
+  event.preventDefault();
+  check.email = emailCheck(emailEl.value, redEmailEl);
+  check.password = pwdCheck(pwdEl.value, redPwdEl);
+  if (check.email && check.password) {
+    console.log(emailEl.value, pwdEl.value);
+    formEl.submit();
+  }
+});

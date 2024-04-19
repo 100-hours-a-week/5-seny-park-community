@@ -61,7 +61,12 @@
           </div>
         </div>
         <h2>회원정보 수정</h2>
-        <form method="post" action="서버의url" id="signin-form" class="inputs">
+        <form
+          method="post"
+          action="/submit-profile-form"
+          id="edit-form"
+          class="inputs"
+        >
           <div class="imgContainer">
             <div class="left">
               <p class="profile">프로필 사진*</p>
@@ -95,8 +100,8 @@
                   <div class="red nickname"></div>
                 </div>
               </label>
-              <div class="input">
-                <button type="submit" form="edit-form" class="btn">
+              <div class="input-btn">
+                <button type="submit" form="edit-form" class="btn profile">
                   수정하기
                 </button>
               </div>
@@ -107,7 +112,7 @@
           <a class="delete" href=" ">회원 탈퇴</a>
         </div>
         <div class="completeBtn">
-          <div class="btn"><a href="./main.html">수정완료</a></div>
+          <div class="btn-toast toast">수정완료</div>
         </div>
       </div>
     </main>
