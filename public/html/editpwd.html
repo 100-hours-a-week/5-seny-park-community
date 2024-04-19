@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/editprofile.css" />
     <script defer src="/js/commonheader.js"></script>
+    <script defer type="module" src="/js/editpwd.js"></script>
   </head>
   <body>
     <header>
@@ -37,8 +38,8 @@
           <div></div>
         </div>
         <div class="menu">
-          <div class="profile">회원정보수정</div>
-          <div class="pwd"><a href="./editpwd.html">비밀번호수정</a></div>
+          <div class="profile"><a href="./editprofile.html">회원정보 수정</a></div>
+          <div class="pwd"><a href="./editpwd.html">비밀번호 수정</a></div>
           <div class="logout"><a href="/">로그아웃</a></div>
         </div>
       </div>
@@ -46,7 +47,7 @@
     <main>
       <div class="inner">
         <h2>비밀번호 수정</h2>
-        <form method="post" action="서버의url" id="edit-form" class="inputs">
+        <form method="post" action="/submit-pw-form" id="edit-pw-form" class="inputs">
           <div class="textContainer">
             <div class="inputs">
               <label for="password" class="input">
@@ -58,8 +59,9 @@
                   name="password"
                   placeholder="비밀번호를 입력해주세요"
                 />
+                <div class="red pwd"> </div>
               </label>
-              <div class="red">* helper text</div></div>
+              
 
               <label for="checkPassword" class="input">
                 비밀번호 확인*
@@ -70,14 +72,19 @@
                   name="checkPassword"
                   placeholder="비밀번호를 한번 더 입력하세요"
                 />
+                <div class="red pwd-check"> </div>
               </label>
-              <div class="red">* helper text</div>
+            
             </div>    
               <div class="input">
-                <button type="submit" form="edit-form" class="btn">
+                <button type="submit" form="edit-pw-form" class="btn">
                   수정하기
                 </button>
               </div>
+            </div>
+
+            <div class="completeBtn">
+              <div class="btn-pwd-toast toast">수정완료</div>
             </div>
           </div>
         </form>
