@@ -2,7 +2,7 @@
 export const reader = new FileReader(); // 파일 읽기 객체
 export const handleEvent = (event, imgPrev) => {
   if (event.type === "load") {
-    console.log(imgPrev);
+    console.log(imgPrev.tagName);
     setImageContent(imgPrev, event.target.result);
     console.log("Image URL:", event.target.result);
   }
@@ -18,9 +18,10 @@ export const addListeners = (reader, imgPrev) => {
 
 export const handleSelected = (fileInput, imgPrev) => {
   const files = fileInput.files;
+  console.log(imgPrev.tagName);
   if (files.length === 0) {
     console.log("No file selected or file was deselected.");
-    clearImageContent(imgPrevEl); // 이미 선택된 이미지 제거
+    clearImageContent(imgPrev); // 이미 선택된 이미지 제거
     return; // 파일 선택이 없는 경우 early return
   }
 
@@ -45,6 +46,7 @@ export const setImageContent = (imgPrev, imageData) => {
 
 export const clearImageContent = (imgPrev) => {
   // 이미지 파일을 img 태그에 삽입
+  console.log(imgPrev);
   if (imgPrev.tagName === "IMG") {
     imgPrev.src = "";
     imgPrev.classList.remove("active");
@@ -70,7 +72,6 @@ export const handleTitleInput = () => {
 ///////////////////////////////////////////////////////////////
 // 유효성 검사 함수
 export const emailCheck = (email, redEmailEl) => {
-  console.log(email);
   const regex = /\w+@\w+\.\w+/;
   if (email.length === 0) {
     redEmailEl.textContent = "이메일을 입력해주세요";
@@ -85,7 +86,6 @@ export const emailCheck = (email, redEmailEl) => {
 };
 
 export const pwdCheck = (pwd, redPwdEl) => {
-  console.log(pwd, redPwdEl);
   if (pwd.length === 0) {
     redPwdEl.textContent = "비밀번호를 입력해주세요";
     return false;

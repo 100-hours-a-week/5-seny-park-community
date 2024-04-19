@@ -219,3 +219,26 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
 .inner .completeBtn .btn:hover {
   background-color: var(--btn-hover);
 }
+
+.inner .completeBtn .btn a {
+  color: #fff;
+}
+
+/* 토스트 메시지 */
+.inner .toast {
+  opacity: 0;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  /* padding: 10px 50px; */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100px;
+  color: #fff;
+  transition: all 0.5s;
+}
+/*토스트 메시지 활성화 되었을 때*/
+.inner .toast.active {
+  opacity: 1;
+  bottom: 150px;
+}
