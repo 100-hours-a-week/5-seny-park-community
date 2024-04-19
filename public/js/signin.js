@@ -62,3 +62,19 @@ formEl.addEventListener("input", (event) => {
     signinBtn.classList.remove("active");
   }
 });
+
+formEl.addEventListener("submit", (event) => {
+  event.preventDefault();
+  check.email = emailCheck(formEl.elements.email.value, redEmailEl);
+  check.password = pwdCheck(pwdEl.value, redPwdEl);
+  check.checkPassword = pwdCheckSame(
+    pwdEl.value,
+    formEl.elements.checkPassword.value,
+    redPwdCheckEl
+  );
+  check.nickname = nicknameCheck(formEl.elements.nickname.value, redNicknameEl);
+
+  if (check.email && check.password && check.checkPassword && check.nickname) {
+    formEl.submit();
+  }
+});
