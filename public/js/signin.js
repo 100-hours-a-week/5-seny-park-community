@@ -1,5 +1,6 @@
 import {
   handleSelected,
+  ProfileImgCheck,
   emailCheck,
   pwdCheck,
   pwdCheckSame,
@@ -28,6 +29,7 @@ fileInput.addEventListener("change", () => {
 
 // 회원가입 텍스트 폼 유효성 검사
 let check = {
+  profileImagePath: false,
   email: false,
   password: false,
   checkPassword: false,
@@ -63,7 +65,13 @@ formEl.addEventListener("input", (event) => {
   if (event.target.id === "nickname") {
     check.nickname = nicknameCheck(event.target.value, redNicknameEl);
   }
-  if (check.email && check.password && check.checkPassword && check.nickname) {
+  if (
+    check.profileImagePath &&
+    check.email &&
+    check.password &&
+    check.checkPassword &&
+    check.nickname
+  ) {
     // formEl.submit();
     console.log(
       formEl.elements.email.value,
@@ -78,6 +86,7 @@ formEl.addEventListener("input", (event) => {
 
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
+  check.profileImagePath = ProfileImgCheck(imgPrevEl, redImgEl);
   check.email = emailCheck(formEl.elements.email.value, redEmailEl);
   check.password = pwdCheck(pwdEl.value, redPwdEl);
   check.checkPassword = pwdCheckSame(
@@ -87,7 +96,28 @@ formEl.addEventListener("submit", (event) => {
   );
   check.nickname = nicknameCheck(formEl.elements.nickname.value, redNicknameEl);
 
-  if (check.email && check.password && check.checkPassword && check.nickname) {
-    formEl.submit();
+  if (
+    check.profileImagePath &&
+    check.email &&
+    check.password &&
+    check.checkPassword &&
+    check.nickname
+  ) {
+    let emailExist = users.find(
+      (user) => user.email == formEl.elements.email.value
+    );
+    let nicknameExist = users.find(
+      (user) => user.nickname == formEl.elements.nickname.value
+    );
+    if (emailExist || nicknameExist) {
+      if (emailExist) {
+        redEmailEl.textContent = "중복된 이메일입니다.";
+      }
+      if (nicknameExist) {
+        redNicknameEl.textContent = "중복된 닉네임입니다.";
+      }
+    } else {
+      formEl.submit();
+    }
   }
 });

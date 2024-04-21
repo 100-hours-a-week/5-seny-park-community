@@ -76,6 +76,16 @@ export const handleTitleInput = () => {
 
 ///////////////////////////////////////////////////////////////
 // 유효성 검사 함수
+
+export const ProfileImgCheck = (imgPrev, redImgEl) => {
+  if (imgPrev.style.backgroundImage === "") {
+    redImgEl.textContent = "프로필 사진을 추가해주세요.";
+    return false;
+  } else {
+    return true;
+  }
+};
+
 export const emailCheck = (email, redEmailEl) => {
   const regex = /\w+@\w+\.\w+/;
   if (email.length === 0) {
