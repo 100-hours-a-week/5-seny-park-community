@@ -10,6 +10,7 @@ const formEl = document.querySelector("#signin-form");
 // 회원가입 이미지 업로드
 const fileInput = document.querySelector("#profileUpload"); // input[type="file"] - display:none
 const imgPrevEl = document.querySelector(".mid"); // img 보이는 태그
+const redImgEl = document.querySelector(".red.img"); // 이미지 업로드 경고문
 // const reader = new FileReader(); // 파일 읽기 객체
 // 회원가입 텍스트 폼 유효성 검사
 const pwdEl = document.querySelector("#password");
@@ -22,7 +23,7 @@ const signinBtn = document.querySelector(".inner .btn");
 
 // 이미지 업로드
 fileInput.addEventListener("change", () => {
-  handleSelected(fileInput, imgPrevEl);
+  handleSelected(fileInput, imgPrevEl, redImgEl);
 });
 
 // 회원가입 텍스트 폼 유효성 검사
@@ -32,6 +33,18 @@ let check = {
   checkPassword: false,
   nickname: false,
 };
+
+// fetch로 json 파일 불러오기
+const users = [];
+fetch("/json/users.json")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    data.forEach((user) => {
+      users.push({ email: user.email, nickname: user.nickname });
+    });
+    console.log(users);
+  });
 
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {

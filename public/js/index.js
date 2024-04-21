@@ -41,6 +41,7 @@ formEl.addEventListener("input", (event) => {
   }
 });
 
+// json 내 유저정보와 일치하는 경우에만 submit
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
   check.email = emailCheck(emailEl.value, redEmailEl);
