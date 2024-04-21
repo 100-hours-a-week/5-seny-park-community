@@ -1,40 +1,44 @@
 // 사진 파일 업로드 합수
 export const reader = new FileReader(); // 파일 읽기 객체
-export const handleEvent = (event, imgPrev) => {
+export const handleEvent = (event, imgPrev, redImgEl) => {
   if (event.type === "load") {
     console.log(imgPrev.tagName);
-    setImageContent(imgPrev, event.target.result);
+    setImageContent(imgPrev, event.target.result, redImgEl);
     console.log("Image URL:", event.target.result);
   }
 };
 
-export const addListeners = (reader, imgPrev) => {
+export const addListeners = (reader, imgPrev, redImgEl) => {
   const events = ["loadstart", "load", "loadend", "progress", "error", "abort"];
   events.forEach((eventType) => {
-    reader.addEventListener(eventType, (event) => handleEvent(event, imgPrev));
+    reader.addEventListener(eventType, (event) =>
+      handleEvent(event, imgPrev, redImgEl)
+    );
   });
   console.log("Listeners added");
 };
 
-export const handleSelected = (fileInput, imgPrev) => {
+export const handleSelected = (fileInput, imgPrev, redImgEl = null) => {
   const files = fileInput.files;
   console.log(imgPrev.tagName);
   if (files.length === 0) {
     console.log("No file selected or file was deselected.");
-    clearImageContent(imgPrev); // 이미 선택된 이미지 제거
+    clearImageContent(imgPrev, redImgEl); // 이미 선택된 이미지 제거
     return; // 파일 선택이 없는 경우 early return
   }
 
   const selectedFile = fileInput.files[0];
   if (selectedFile) {
     console.log(imgPrev);
-    addListeners(reader, imgPrev);
+    addListeners(reader, imgPrev, redImgEl);
     reader.readAsDataURL(selectedFile);
   }
 };
 
-export const setImageContent = (imgPrev, imageData) => {
+export const setImageContent = (imgPrev, imageData, redImgEl) => {
   // 이미지 파일을 img 태그에 삽입
+  if (redImgEl) redImgEl.textContent = ""; // 경고문 제거
+
   if (imgPrev.tagName === "IMG") {
     console.log(imgPrev.src);
     imgPrev.src = imageData;
@@ -44,8 +48,9 @@ export const setImageContent = (imgPrev, imageData) => {
   }
 };
 
-export const clearImageContent = (imgPrev) => {
-  // 이미지 파일을 img 태그에 삽입
+export const clearImageContent = (imgPrev, redImgEl) => {
+  // 이미지 파일을 img 태그에서 제거
+  if (redImgEl) redImgEl.textContent = "프로필 사진을 추가해주세요.";
   console.log(imgPrev);
   if (imgPrev.tagName === "IMG") {
     imgPrev.src = "";
@@ -71,6 +76,16 @@ export const handleTitleInput = () => {
 
 ///////////////////////////////////////////////////////////////
 // 유효성 검사 함수
+
+export const ProfileImgCheck = (imgPrev, redImgEl) => {
+  if (imgPrev.style.backgroundImage === "") {
+    redImgEl.textContent = "프로필 사진을 추가해주세요.";
+    return false;
+  } else {
+    return true;
+  }
+};
+
 export const emailCheck = (email, redEmailEl) => {
   const regex = /\w+@\w+\.\w+/;
   if (email.length === 0) {

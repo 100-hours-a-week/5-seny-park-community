@@ -54,7 +54,7 @@ main {
   height: 149px;
   border-radius: 50%;
   cursor: pointer;
-  background-image: url();
+  background-image: url("");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -118,7 +118,7 @@ main {
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
-  height: 72px;
+  height: 76px;
 }
 
 .inner .textContainer .inputs .input input {
