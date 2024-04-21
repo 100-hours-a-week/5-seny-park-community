@@ -118,7 +118,7 @@ header div.arrow {
 }
 
 /* 모달창 */
-.inner .shadow {
+.shadow {
   visibility: hidden; /* 초기 숨김 상태 */
   opacity: 0; /* 초기 투명 상태 */
   position: fixed;
@@ -131,14 +131,14 @@ header div.arrow {
   transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
 }
 
-.inner .shadow.popClick {
+.shadow.popClick {
   visibility: visible; /* 보이게 변경 */
   opacity: 1; /* 완전 불투명 */
   transition: opacity 0.5s; /* opacity에 대한 애니메이션 적용 */
   z-index: 2;
 }
 
-.inner .shadow.popClick .modal {
+.shadow.popClick .modal {
   display: block;
   position: fixed;
   top: 0;
@@ -157,7 +157,7 @@ header div.arrow {
   flex-direction: column;
   gap: 24px;
 }
-.inner .shadow.popClick .modal h3 {
+.shadow.popClick .modal h3 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,7 +167,7 @@ header div.arrow {
   font-weight: 700;
 }
 
-.inner .shadow.popClick .modal p {
+.shadow.popClick .modal p {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,14 +177,14 @@ header div.arrow {
   font-weight: 400;
 }
 
-.inner .shadow.popClick .modal .btns {
+.shadow.popClick .modal .btns {
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
-.inner .shadow.popClick .modal .btns .cancel,
-.inner .shadow.popClick .modal .btns .delete {
+.shadow.popClick .modal .btns .cancel,
+.shadow.popClick .modal .btns .delete {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,7 +203,7 @@ header div.arrow {
 body.popClick {
   overflow: hidden;
 }
-.inner .shadow.popClick .modal .btns .cancel {
+.shadow.popClick .modal .btns .cancel {
   background-color: var(--bg-gray-black);
   color: var(--bg-white);
 }
