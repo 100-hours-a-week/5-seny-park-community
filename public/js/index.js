@@ -13,6 +13,18 @@ let check = {
   password: false,
 };
 
+// fetch로 json 파일 불러오기
+const users = [];
+fetch("/json/users.json")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    data.forEach((user) => {
+      users.push({ email: user.email, password: user.password });
+    });
+    console.log(users);
+  });
+
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
     check.email = emailCheck(event.target.value, redEmailEl);
@@ -33,8 +45,17 @@ formEl.addEventListener("submit", (event) => {
   event.preventDefault();
   check.email = emailCheck(emailEl.value, redEmailEl);
   check.password = pwdCheck(pwdEl.value, redPwdEl);
-  if (check.email && check.password) {
-    console.log(emailEl.value, pwdEl.value);
-    formEl.submit();
+  if (users.length && check.email && check.password) {
+    let next = users.find((user) => user.email == emailEl.value);
+    if (next) {
+      next = users.find((user) => user.password == pwdEl.value);
+      if (next) {
+        formEl.submit();
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    } else {
+      alert("아이디가 존재하지 않습니다.");
+    }
   }
 });
