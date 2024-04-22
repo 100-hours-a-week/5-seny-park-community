@@ -12,6 +12,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .inner .title {
@@ -52,8 +53,9 @@ main {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512");
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .inner .title .control .writer .name {
@@ -69,7 +71,7 @@ main {
 }
 
 .inner .title .control .writer .date {
-  width: 133px;
+  width: auto;
   height: 18px;
   font-size: 14px;
   display: flex;
@@ -114,8 +116,6 @@ main {
 
 .inner .contents .img {
   width: 544px;
-  height: 306px;
-  background-color: var(--bg-gray);
 }
 
 .inner .contents .texts {
@@ -156,6 +156,7 @@ main {
   font-weight: 700;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .inner .clickBtn .text {

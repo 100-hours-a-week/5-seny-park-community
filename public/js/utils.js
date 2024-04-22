@@ -170,3 +170,25 @@ export const setupModalToggle = (
     }
   });
 };
+
+///////////////////////////////////////////////////////////////
+// 시간 포맷 함수 (yyyy-mm-dd hh:mm:ss)
+export const formatDate = (strDate) => {
+  const date = new Date(strDate); // Convert string to Date object
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+
+  // 한 자리 수일 때 앞에 0을 붙여주기
+  month = month < 10 ? `0${month}` : month;
+  day = day < 10 ? `0${day}` : day;
+  hour = hour < 10 ? `0${hour}` : hour;
+  minute = minute < 10 ? `0${minute}` : minute;
+  second = second < 10 ? `0${second}` : second;
+
+  // 포맷된 문자열을 구성
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+};
