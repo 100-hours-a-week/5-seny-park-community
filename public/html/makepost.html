@@ -25,8 +25,7 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/makepost.css" />
     <script defer src="/js/commonheader.js"></script>
-    <script defer type="module" src="/js/commonpost.js"></script>
-    <script defer src="/js/makepost.js"></script>
+    <script defer type="module" src="/js/makepost.js"></script>
   </head>
   <body>
     <header>
@@ -65,12 +64,7 @@
           <h2>게시글 작성</h2>
         </div>
         <!-- 이제 expressjs의 라우터로 요청을 넘길 수 있으므로 "서버의url" 부분을 수정 할 수 있습니다!  -->
-        <form
-          method="post"
-          action="/submit-post-form"
-          id="makepost-form"
-          class="inputs"
-        >
+        <form method="post" action="/posts" id="makepost-form" class="inputs">
           <label class="input">
             <div class="title">제목*</div>
             <!--   input 태그는 내용을 포함할 수 없기 때문에 닫는 태그가 없습니다. ("</input>" -> "<input />" 으로 변경 -->
@@ -78,6 +72,7 @@
               type="text"
               class="content"
               name="postTitle"
+              id="title"
               placeholder="제목을 입력해주세요. (최대 26글자)"
             />
           </label>
@@ -87,10 +82,11 @@
               form="makepost-form"
               name="postContent"
               class="content2"
+              id="content"
               placeholder="내용을 입력해주세요."
             ></textarea>
           </label>
-          <div class="red">* helper text</div>
+          <div class="red"></div>
           <label for="postUpload" class="inputFile">
             <div class="title">이미지</div>
             <div class="fileLabel">
@@ -108,7 +104,9 @@
           />
         </form>
 
-        <button type="submit" form="makepost-form" class="btn">완료</button>
+        <button type="submit" form="makepost-form" class="btn purple-btn">
+          완료
+        </button>
       </div>
     </main>
   </body>
