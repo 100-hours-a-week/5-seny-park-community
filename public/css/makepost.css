@@ -148,7 +148,7 @@ main {
   cursor: pointer;
 }
 
-.inner button:hover {
+.inner button.active {
   background-color: var(--btn-hover);
 }
 

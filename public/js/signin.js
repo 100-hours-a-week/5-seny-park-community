@@ -117,6 +117,7 @@ formEl.addEventListener("submit", (event) => {
         redNicknameEl.textContent = "중복된 닉네임입니다.";
       }
     } else {
+      // 여기에 json 업데이트 코드 작성 맞나요??
       formEl.submit();
     }
   }

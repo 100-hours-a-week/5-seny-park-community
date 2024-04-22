@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
+import fs from "fs";
 
 const app = express();
 const port = 3000;
@@ -14,11 +15,14 @@ app.use(express.static("public"));
 // 요청 본문을 파싱하기 위한 미들웨어
 app.use(express.urlencoded({ extended: true }));
 
+const fileUsersPath = path.join(__dirname, "public/json/users.json");
+const filePostsPath = path.join(__dirname, "public/json/posts.json");
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/submit-form", (req, res) => {
+app.post("/users/login", (req, res) => {
   // 요청 본문에서 이메일과 비밀번호 추출
   const { email, password } = req.body;
   /**
@@ -36,13 +40,105 @@ app.post("/submit-form", (req, res) => {
   res.redirect("/html/main.html");
 });
 
-app.post("/submit-post-form", (req, res) => {
-  const { postTitle, postContent, postPicture } = req.body;
-  console.log(
-    `Title: ${postTitle}, Content: ${postContent}, Picture: ${postPicture}`
-  );
+app.post("/users/signin", (req, res) => {
+  const { email, password, nickname } = req.body;
+  console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
+  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
+    }
+    const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
+    console.log(users);
+    users.push({
+      user_id: users.length + 1,
+      email: email,
+      password: password,
+      nickname: nickname,
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted_at: null,
+      auth_token: null,
+    });
 
-  res.redirect("/html/main.html");
+    fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      res.redirect("/");
+    });
+  });
+});
+
+// 게시글 작성
+app.post("/posts", (req, res) => {
+  const { postTitle, postContent, postPicture } = req.body;
+  console.log(`Received new post: ${postTitle}`);
+
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      console.error("Error reading posts file:", err);
+      return res.status(500).send("Failed to load posts data.");
+    }
+
+    let posts;
+    posts = JSON.parse(data);
+
+    posts.push({
+      post_id: posts.length + 1,
+      post_title: postTitle,
+      post_content: postContent,
+      attach_file_path: postPicture,
+      user_id: "5840b9c4da0529cd293d7700",
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted_at: null,
+      nickname: "배고픈강아지",
+      profileImagePath:
+        "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
+      like: 0,
+      comment_count: 0,
+      comment: [],
+    });
+
+    fs.writeFile(filePostsPath, JSON.stringify(posts), (writeErr) => {
+      if (writeErr) {
+        console.error("Failed to write to posts file:", writeErr);
+        return res.status(500).send("Failed to save post.");
+      }
+      console.log("Post added successfully.");
+      res.redirect("/html/main.html");
+    });
+  });
+});
+
+// 게시글 수정
+app.post("/posts/edit", (req, res) => {
+  const { postTitle, postContent, postPicture } = req.body;
+
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+
+    let posts;
+
+    posts = JSON.parse(data);
+    const postId = 7;
+    console.log(posts[postId - 1]);
+    posts[postId - 1].post_title = postTitle;
+    posts[postId - 1].post_content = postContent;
+    // posts[postId - 1].attach_file_path = postPicture;
+    posts[postId - 1].updated_at = new Date();
+
+    fs.writeFile(filePostsPath, JSON.stringify(posts), (writeErr) => {
+      if (writeErr) {
+        return res.status(500).send("게시글 수정에 실패했습니다.");
+      }
+      res.redirect("/html/post.html");
+    });
+  });
 });
 
 app.listen(port, () => {

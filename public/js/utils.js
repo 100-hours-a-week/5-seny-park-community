@@ -61,14 +61,14 @@ export const clearImageContent = (imgPrev, redImgEl) => {
 };
 ///////////////////////////////////////////////////////////////
 // 게시글 작성/편집 게시글 내용
-export const titleEl = document.querySelector(".input input.content");
-// 이미지 업로드
-export const imgPrevEl = document.querySelector(".upload-img");
-export const fileInput = document.querySelector(".fileinput");
-// 파일 읽기 객체 reader 는 위에서 선언
+// export const titleEl = document.querySelector(".input input.content");
+// // 이미지 업로드
+// export const imgPrevEl = document.querySelector(".upload-img");
+// export const fileInput = document.querySelector(".fileinput");
+// // 파일 읽기 객체 reader 는 위에서 선언
 
 // 제목 26글자 이내
-export const handleTitleInput = () => {
+export const handleTitleInput = (titleEl) => {
   if (titleEl.value.length > 26) {
     titleEl.value = titleEl.value.slice(0, 26);
   }
@@ -191,4 +191,14 @@ export const formatDate = (strDate) => {
 
   // 포맷된 문자열을 구성
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+};
+
+///////////////////////////////////////////////////////////////
+export const postRules = (titleEl, imgPrev, fileInput) => {
+  // 제목 26글자 이내
+  titleEl.addEventListener("input", handleTitleInput(titleEl));
+  // 이미지 업로드
+  fileInput.addEventListener("change", () => {
+    handleSelected(fileInput, imgPrev);
+  });
 };
