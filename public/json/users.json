@@ -1,5 +1,16 @@
 [
   {
+    "user_id": "583c3a7ff38e84297c002545",
+    "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
+    "email": "000@test.com",
+    "password": "qlalfqjsgh000A!",
+    "nickname": "닉네임수정",
+    "created_at": "2023-11-28T14:09:11.338Z",
+    "updated_at": "2024-04-23T16:33:08.485Z",
+    "deleted_at": null,
+    "auth_token ": "aGGXsa6vaKs615CYO0GpJjcDpN6WUjQa"
+  },
+  {
     "user_id": "583c3ac3f38e84297c002546",
     "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
     "email": "123@test.com",

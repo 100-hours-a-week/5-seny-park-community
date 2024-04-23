@@ -195,10 +195,20 @@ export const formatDate = (strDate) => {
 
 ///////////////////////////////////////////////////////////////
 export const postRules = (titleEl, imgPrev, fileInput) => {
+  console.log(postRules);
   // 제목 26글자 이내
-  titleEl.addEventListener("input", handleTitleInput(titleEl));
+  titleEl.addEventListener("input", () => handleTitleInput(titleEl));
+
   // 이미지 업로드
   fileInput.addEventListener("change", () => {
     handleSelected(fileInput, imgPrev);
   });
+};
+
+///////////////////////////////////////////////////////////////
+// 1000이상 숫자 k로 변환
+export const changeNum = (num) => {
+  if (num >= 1000) {
+    return (num / 1000).toFixed(0) + "k"; // 소수점 이하 버림
+  } else return num;
 };

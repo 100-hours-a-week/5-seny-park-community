@@ -1,4 +1,4 @@
-import { formatDate } from "/js/utils.js";
+import { formatDate, changeNum } from "/js/utils.js";
 const postsContainer = document.querySelector(".posts");
 
 // fetch로 json 파일 불러오기
@@ -37,9 +37,9 @@ const render = () => {
       <h2>${post.title.substring(0, 26)}</h2>
         <div class="texts">
           <div class="left">
-            <p>좋아요 ${post.like}</p>
-            <p>댓글 ${post.comment_cnt}</p>
-            <p>조회수 ${post.hit}</p>
+            <p>좋아요 ${changeNum(post.like)}</p>
+            <p>댓글 ${changeNum(post.comment_cnt)}</p>
+            <p>조회수 ${changeNum(post.hit)}</p>
           </div>
           <div class="right">
             <p>${post.date}</p>
