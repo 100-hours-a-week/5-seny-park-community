@@ -98,6 +98,7 @@ app.post("/posts", (req, res) => {
       profileImagePath:
         "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
       like: 0,
+      hits: 0,
       comment_count: 0,
       comment: [],
     });
@@ -162,7 +163,7 @@ app.post("/posts/comment", (req, res) => {
       user_id: "583c3a7ff38e84297c002545",
       nickname: "행복한댕댕이",
       profileImagePath:
-        "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
+        "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
       comment: comment,
       created_at: new Date(),
     });

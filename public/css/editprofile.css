@@ -234,11 +234,11 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다.
 }
 
 .inner .completeBtn .btn-pwd-toast {
-  bottom: 300px;
+  bottom: 200px;
 }
 
 .inner .completeBtn .btn-pwd-toast.active {
-  bottom: 350px;
+  bottom: 250px;
 }
 
 .inner .completeBtn .btn-toast a {

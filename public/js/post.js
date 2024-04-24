@@ -45,7 +45,7 @@ function renderPost(postData, container) {
       </button>
       <button class="comments">
         <p class="count">${changeNum(postData.like)}</p>
-        <p class="text">댓글</p>
+        <p class="text">좋아요</p>
       </button>
     </div>
     <div class="makeComment">

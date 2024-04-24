@@ -121,7 +121,9 @@ export const pwdCheck = (pwd, redPwdEl) => {
 };
 
 export const pwdCheckSame = (pwd, pwdCheck, redPwdCheckEl) => {
-  if (pwd !== pwdCheck) {
+  if (pwdCheck.length === 0) {
+    return false;
+  } else if (pwd !== pwdCheck) {
     redPwdCheckEl.textContent = "비밀번호가 일치하지 않습니다.";
     return false;
   } else {
@@ -195,7 +197,6 @@ export const formatDate = (strDate) => {
 
 ///////////////////////////////////////////////////////////////
 export const postRules = (titleEl, imgPrev, fileInput) => {
-  console.log(postRules);
   // 제목 26글자 이내
   titleEl.addEventListener("input", () => handleTitleInput(titleEl));
 
