@@ -98,6 +98,7 @@ app.post("/posts", (req, res) => {
       profileImagePath:
         "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
       like: 0,
+      hits: 0,
       comment_count: 0,
       comment: [],
     });
@@ -143,6 +144,63 @@ app.post("/posts/edit", (req, res) => {
 
 app.listen(port, () => {
   console.log(`앱이 포트 ${port}에서 실행 중입니다.`);
+});
+
+// 댓글 추가
+app.post("/posts/comment", (req, res) => {
+  const { comment } = req.body;
+  const postId = 7;
+
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+
+    let posts;
+    posts = JSON.parse(data);
+    posts[postId - 1].comments.push({
+      comment_id: posts[postId - 1].comments.length + 1,
+      user_id: "583c3a7ff38e84297c002545",
+      nickname: "행복한댕댕이",
+      profileImagePath:
+        "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
+      comment: comment,
+      created_at: new Date(),
+    });
+
+    fs.writeFile(filePostsPath, JSON.stringify(posts), (writeErr) => {
+      if (writeErr) {
+        return res.status(500).send("댓글 추가에 실패했습니다.");
+      }
+      res.redirect("/html/post.html");
+    });
+  });
+});
+
+// 프로필 수정
+app.post("/users/edit", (req, res) => {
+  const { nickname } = req.body;
+  console.log(`Nickname: ${nickname}`);
+
+  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
+    }
+    const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
+    const userId = 1;
+    console.log(users[userId - 1]);
+    users[userId - 1].nickname = nickname;
+    users[userId - 1].updated_at = new Date();
+
+    fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      // res.redirect("/");
+    });
+  });
 });
 
 /**

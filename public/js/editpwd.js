@@ -27,6 +27,7 @@ formEl.addEventListener("input", (event) => {
     );
   }
   if (check.password && check.checkPassword) {
+    console.log(check.password, check.checkPassword);
     // formEl.submit();
     console.log(formEl.elements.password.value);
     editBtn.classList.add("active");
@@ -34,7 +35,7 @@ formEl.addEventListener("input", (event) => {
     editBtn.classList.remove("active");
   }
 });
-
+console.log(check.password, check.checkPassword);
 formEl.addEventListener("submit", (event) => {
   event.preventDefault();
   check.password = pwdCheck(pwdEl.value, redPwdEl);

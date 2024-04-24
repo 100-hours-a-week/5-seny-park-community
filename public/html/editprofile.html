@@ -49,70 +49,15 @@
       </div>
     </header>
     <main>
-      <div class="inner">
-        <div class="shadow shadow-profile">
-          <div class="modal">
-            <h3>회원탈퇴 하시겠습니까?</h3>
-            <p>작성된 게시글과 댓글은 삭제됩니다.</p>
-            <div class="btns">
-              <div class="cancel">취소</div>
-              <div class="delete">확인</div>
-            </div>
+      <div class="inner"></div>
+      <div class="shadow shadow-profile">
+        <div class="modal">
+          <h3>회원탈퇴 하시겠습니까?</h3>
+          <p>작성된 게시글과 댓글은 삭제됩니다.</p>
+          <div class="btns">
+            <div class="cancel">취소</div>
+            <div class="delete">확인</div>
           </div>
-        </div>
-        <h2>회원정보 수정</h2>
-        <form
-          method="post"
-          action="/submit-profile-form"
-          id="edit-form"
-          class="inputs"
-        >
-          <div class="imgContainer">
-            <div class="left">
-              <p class="profile">프로필 사진*</p>
-            </div>
-            <div class="imgBox">
-              <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
-              <label for="profileUpload" class="file-upload-label">
-                <div class="mid"><div class="editbtn">변경</div></div>
-              </label>
-              <!-- display: none -->
-              <input type="file" id="profileUpload" name="profilePicture" />
-            </div>
-          </div>
-          <div class="textContainer">
-            <div class="inputs">
-              <div class="input">
-                이메일
-                <div class="email">test@google.com</div>
-              </div>
-
-              <label for="nickname" class="input">
-                닉네임
-                <div>
-                  <input
-                    type="text"
-                    id="nickname"
-                    name="nickname"
-                    placeholder="닉네임을 입력하세요"
-                    value="센이"
-                  />
-                  <div class="red nickname"></div>
-                </div>
-              </label>
-              <div class="input-btn">
-                <button type="submit" form="edit-form" class="btn profile">
-                  수정하기
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-        <div class="link">
-          <a class="delete" href=" ">회원 탈퇴</a>
-        </div>
-        <div class="completeBtn">
-          <div class="btn-toast toast">수정완료</div>
         </div>
       </div>
     </main>

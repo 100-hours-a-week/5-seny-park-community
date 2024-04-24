@@ -121,7 +121,9 @@ export const pwdCheck = (pwd, redPwdEl) => {
 };
 
 export const pwdCheckSame = (pwd, pwdCheck, redPwdCheckEl) => {
-  if (pwd !== pwdCheck) {
+  if (pwdCheck.length === 0) {
+    return false;
+  } else if (pwd !== pwdCheck) {
     redPwdCheckEl.textContent = "비밀번호가 일치하지 않습니다.";
     return false;
   } else {
@@ -196,9 +198,18 @@ export const formatDate = (strDate) => {
 ///////////////////////////////////////////////////////////////
 export const postRules = (titleEl, imgPrev, fileInput) => {
   // 제목 26글자 이내
-  titleEl.addEventListener("input", handleTitleInput(titleEl));
+  titleEl.addEventListener("input", () => handleTitleInput(titleEl));
+
   // 이미지 업로드
   fileInput.addEventListener("change", () => {
     handleSelected(fileInput, imgPrev);
   });
+};
+
+///////////////////////////////////////////////////////////////
+// 1000이상 숫자 k로 변환
+export const changeNum = (num) => {
+  if (num >= 1000) {
+    return (num / 1000).toFixed(0) + "k"; // 소수점 이하 버림
+  } else return num;
 };
