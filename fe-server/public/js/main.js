@@ -5,7 +5,7 @@ const postsContainer = document.querySelector(".posts");
 const posts = [];
 // fetch('http://localhost:4000/json/posts.json')
 // 얘는 미리받아와도 된다
-fetch("/json/posts.json")
+fetch("http://localhost:4000/posts")
   .then((response) => response.json())
   .then((data) => {
     console.log(data);

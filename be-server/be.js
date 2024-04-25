@@ -31,6 +31,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const fileUsersPath = path.join(__dirname, "./models/users.model.json");
+const filePostsPath = path.join(__dirname, "./models/posts.model.json");
 
 app.post("/users/login", (req, res) => {
   const { email, password } = req.body;
@@ -108,6 +109,17 @@ app.post("/users/signin", (req, res) => {
       }
       res.status(201).json({ message: "회원가입성공" });
     });
+  });
+});
+
+// 게시글 목록
+app.get("/posts", (req, res) => {
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    res.json(posts);
   });
 });
 
