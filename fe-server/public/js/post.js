@@ -120,7 +120,7 @@ const afterRender = () => {
   });
   setupModalToggle(cancelBtn, modalPostEl, bodyEl);
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
-  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/html/main.html");
+  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
 
   // 댓글 입력 시 버튼 색 변경

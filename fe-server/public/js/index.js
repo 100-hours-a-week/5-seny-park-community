@@ -57,6 +57,6 @@ formEl.addEventListener("submit", async (event) => {
   }
   if (data.emailExists && data.pwdExists) {
     alert("로그인 성공");
-    location.href = "/html/main.html";
+    location.href = "/main";
   }
 });
