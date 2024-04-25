@@ -24,53 +24,22 @@ app.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, '/html/signin.html'));
 // });
 
-app.post("/users/login", (req, res) => {
-  // 요청 본문에서 이메일과 비밀번호 추출
-  const { email, password } = req.body;
-  /**
-   * console log 에 비밀번호를 찍는건 위험합니다.
-   * 만약 실제 배포 나갈 때 콘솔로그에 비밀번호를 찍는 상태로 배포가 나가게 된다면 보안상 위험하므로 이러한 부분은
-   * 디버깅 도구를 통해서 확인하시는게 좋습니다.
-   */
-  console.log(`Email: ${email}, Password: ${password}`);
+// app.post("/users/login", (req, res) => {
+//   // 요청 본문에서 이메일과 비밀번호 추출
+//   const { email, password } = req.body;
+//   /**
+//    * console log 에 비밀번호를 찍는건 위험합니다.
+//    * 만약 실제 배포 나갈 때 콘솔로그에 비밀번호를 찍는 상태로 배포가 나가게 된다면 보안상 위험하므로 이러한 부분은
+//    * 디버깅 도구를 통해서 확인하시는게 좋습니다.
+//    */
+//   console.log(`Email: ${email}, Password: ${password}`);
 
-  // 여기서 응답을 보내고 끝내려면 `res.send` 또는 `res.redirect` 중 하나만 사용해야 합니다.
-  // 먼저 데이터를 클라이언트에게 보내고 싶다면 `res.send`를, 바로 페이지를 리디렉션하려면 `res.redirect`를 사용하세요.
-  // res.send(`로그인 정보가 성공적으로 제출되었습니다! Email: ${email}, Password: ${password}`);
+//   // 여기서 응답을 보내고 끝내려면 `res.send` 또는 `res.redirect` 중 하나만 사용해야 합니다.
+//   // 먼저 데이터를 클라이언트에게 보내고 싶다면 `res.send`를, 바로 페이지를 리디렉션하려면 `res.redirect`를 사용하세요.
+//   // res.send(`로그인 정보가 성공적으로 제출되었습니다! Email: ${email}, Password: ${password}`);
 
-  // 인증 성공 후 메인 페이지로 리디렉션
-  res.redirect("/html/main.html");
-});
-
-// app.post("/users/signin", (req, res) => {
-//   const { email, password, nickname } = req.body;
-//   console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
-//   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
-//     }
-//     const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
-//     console.log(users);
-//     users.push({
-//       user_id: users.length + 1,
-//       email: email,
-//       password: password,
-//       nickname: nickname,
-//       created_at: new Date(),
-//       updated_at: new Date(),
-//       deleted_at: null,
-//       auth_token: null,
-//     });
-
-//     fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
-//       if (err) {
-//         console.error(err);
-//         return;
-//       }
-//       res.redirect("/");
-//     });
-//   });
+//   // 인증 성공 후 메인 페이지로 리디렉션
+//   res.redirect("/html/main.html");
 // });
 
 // 게시글 작성

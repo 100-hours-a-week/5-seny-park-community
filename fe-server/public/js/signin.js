@@ -36,18 +36,6 @@ let check = {
   nickname: false,
 };
 
-// // fetch로 json 파일 불러오기
-// const users = [];
-// fetch("/json/users.json")
-//   .then((response) => response.json())
-//   .then((data) => {
-//     console.log(data);
-//     data.forEach((user) => {
-//       users.push({ email: user.email, nickname: user.nickname });
-//     });
-//     console.log(users);
-//   });
-
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
     check.email = emailCheck(event.target.value, redEmailEl);
@@ -122,30 +110,10 @@ formEl.addEventListener("submit", async (event) => {
     if (data.nicknameExists) {
       redNicknameEl.textContent = "중복된 닉네임입니다.";
     }
-    // if (!data.emailExists && !data.nicknameExists) {
     if (response.status === 201) {
       alert("회원가입이 완료되었습니다.");
       // formEl.submit();
       window.location.href = "/";
     }
-    // }
-
-    // let emailExist = users.find(
-    //   (user) => user.email == formEl.elements.email.value
-    // );
-    // let nicknameExist = users.find(
-    //   (user) => user.nickname == formEl.elements.nickname.value
-    // );
-    // if (emailExist || nicknameExist) {
-    //   if (emailExist) {
-    //     redEmailEl.textContent = "중복된 이메일입니다.";
-    //   }
-    //   if (nicknameExist) {
-    //     redNicknameEl.textContent = "중복된 닉네임입니다.";
-    //   }
-    // } else {
-    //   // 여기에 json 업데이트 코드 작성 맞나요??
-    //   formEl.submit();
-    // }
   }
 });
