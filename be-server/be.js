@@ -125,17 +125,23 @@ app.get("/posts", (req, res) => {
 
 // 게시글 상세 페이지
 app.get("/posts/:postId", (req, res) => {
-  console.log(1222);
   const postId = req.params.postId;
-  console.log(postId, typeof postId);
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
     }
     const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
     const post = posts.find((post) => post.post_id === Number(postId));
+    post.hits += 1; // 조회수 증가
     console.log(post);
-    res.json(post);
+    // 업데이트된 게시글 정보를 파일에 저장
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("조회수 업데이트에 실패했습니다.");
+      }
+
+      res.json(post);
+    });
   });
 });
 

@@ -10,7 +10,7 @@ console.log(postId);
 fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data, data.length);
+    console.log(data);
     renderPost(data, postContainer);
     afterRender();
   });
