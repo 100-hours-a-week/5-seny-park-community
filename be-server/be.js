@@ -132,7 +132,8 @@ app.get("/posts/:postId", (req, res) => {
     }
     const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
     const post = posts.find((post) => post.post_id === Number(postId));
-    post.hits += 1; // 조회수 증가
+    post.hits = Number(post.hits) + 1; // 조회수 증가
+
     console.log(post);
     // 업데이트된 게시글 정보를 파일에 저장
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
