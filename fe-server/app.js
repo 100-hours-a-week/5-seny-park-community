@@ -29,7 +29,12 @@ app.get("/signin", (req, res) => {
   res.sendFile(path.join(__dirname, "public/html/signin.html"));
 });
 
+// 게시글 상세페이지
 app.get("/main/post", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/html/post.html"));
+});
+
+app.get("/main/createpost", (req, res) => {
   // 게시글 작성
   res.sendFile(path.join(__dirname, "public/html/makepost.html"));
 });
@@ -39,12 +44,12 @@ app.get("/main/editpost", (req, res) => {
   res.sendFile(path.join(__dirname, "public/html/editpost.html"));
 });
 
-app.get("/main/editprofile", (req, res) => {
+app.get("/users/editprofile", (req, res) => {
   // 프로필 수정
   res.sendFile(path.join(__dirname, "public/html/editprofile.html"));
 });
 
-app.get("/main/editpwd", (req, res) => {
+app.get("/users/editpwd", (req, res) => {
   // 비밀번호 수정
   res.sendFile(path.join(__dirname, "public/html/editpwd.html"));
 });

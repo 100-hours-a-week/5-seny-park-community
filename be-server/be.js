@@ -123,6 +123,22 @@ app.get("/posts", (req, res) => {
   });
 });
 
+// 게시글 상세 페이지
+app.get("/posts/:postId", (req, res) => {
+  console.log(1222);
+  const postId = req.params.postId;
+  console.log(postId, typeof postId);
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
+    const post = posts.find((post) => post.post_id === Number(postId));
+    console.log(post);
+    res.json(post);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`앱이 포트 ${PORT}에서 실행 중입니다.`);
 });
