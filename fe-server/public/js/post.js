@@ -5,7 +5,6 @@ const postContainer = document.querySelector(".inner");
 // main.js에서 클릭한 게시글의 post_id를 url에서 가져온다.
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
-
 //  fetch로 json 파일 불러오기
 fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
@@ -50,7 +49,7 @@ function renderPost(postData, container) {
       </button>
     </div>
     <div class="makeComment">
-    <form action="/posts/comment" method="post">
+    <form method="post" class="comment-form">
       <div class="box">
         <textarea
           class="write-comment"
@@ -127,6 +126,31 @@ const afterRender = () => {
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
   setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
+
+  const commentForm = document.querySelector(".comment-form");
+
+  commentForm.addEventListener("submit", async (event) => {
+    fetch(`http://localhost:4000/posts/${postId}/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        comment: commentEl.value,
+        user_id: "583c5484cb79a5fe593425a9",
+        nickname: "조용한낙타",
+        profileImagePath:
+          "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        created_at: new Date(),
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    if (response.status === 201) {
+      alert("댓글이 등록되었습니다.");
+      location.reload();
+    }
+  });
 
   // 댓글 입력 시 버튼 색 변경
   commentEl.addEventListener("input", () => {

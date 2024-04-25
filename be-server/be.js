@@ -149,3 +149,29 @@ app.get("/posts/:postId", (req, res) => {
 app.listen(PORT, () => {
   console.log(`앱이 포트 ${PORT}에서 실행 중입니다.`);
 });
+
+app.post("/posts/:postId/comment", (req, res) => {
+  const postId = req.params.postId;
+  const { comment, user_id, nickname, profileImagePath, created_at } = req.body;
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("댓글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const post = posts.find((post) => post.post_id === Number(postId));
+    post.comments.push({
+      comment_id: post.comments[post.comments.length - 1].comment_id + 1, // 마지막 댓글 id + 1
+      user_id: user_id,
+      nickname: nickname,
+      profileImagePath: profileImagePath,
+      comment: comment,
+      created_at: created_at,
+    });
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("댓글 추가에 실패했습니다.");
+      }
+      return res.status(201).send("댓글 추가 성공");
+    });
+  });
+});
