@@ -15,12 +15,14 @@ app.use(express.static("public"));
 // 요청 본문을 파싱하기 위한 미들웨어
 app.use(express.urlencoded({ extended: true }));
 
-const fileUsersPath = path.join(__dirname, "public/json/users.json");
-const filePostsPath = path.join(__dirname, "public/json/posts.json");
-
 app.get("/", (req, res) => {
+  // 로그인
   res.sendFile(path.join(__dirname, "index.html"));
 });
+
+// app.get('/users/signin', (req, res) => { // 회원가입
+//   res.sendFile(path.join(__dirname, '/html/signin.html'));
+// });
 
 app.post("/users/login", (req, res) => {
   // 요청 본문에서 이메일과 비밀번호 추출
@@ -40,36 +42,36 @@ app.post("/users/login", (req, res) => {
   res.redirect("/html/main.html");
 });
 
-app.post("/users/signin", (req, res) => {
-  const { email, password, nickname } = req.body;
-  console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
-  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
-    }
-    const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
-    console.log(users);
-    users.push({
-      user_id: users.length + 1,
-      email: email,
-      password: password,
-      nickname: nickname,
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
-      auth_token: null,
-    });
+// app.post("/users/signin", (req, res) => {
+//   const { email, password, nickname } = req.body;
+//   console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
+//   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
+//     }
+//     const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
+//     console.log(users);
+//     users.push({
+//       user_id: users.length + 1,
+//       email: email,
+//       password: password,
+//       nickname: nickname,
+//       created_at: new Date(),
+//       updated_at: new Date(),
+//       deleted_at: null,
+//       auth_token: null,
+//     });
 
-    fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      res.redirect("/");
-    });
-  });
-});
+//     fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
+//       if (err) {
+//         console.error(err);
+//         return;
+//       }
+//       res.redirect("/");
+//     });
+//   });
+// });
 
 // 게시글 작성
 app.post("/posts", (req, res) => {

@@ -14,6 +14,7 @@ let check = {
 };
 
 // fetch로 json 파일 불러오기
+// 미리 받아오면 안된다.
 const users = [];
 fetch("/json/users.json")
   .then((response) => response.json())
@@ -27,6 +28,7 @@ fetch("/json/users.json")
 
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
+    console.log(event.target.value, redEmailEl.textContent);
     check.email = emailCheck(event.target.value, redEmailEl);
   }
   if (event.target.id === "password") {

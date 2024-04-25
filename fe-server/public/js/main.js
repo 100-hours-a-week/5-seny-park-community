@@ -3,6 +3,8 @@ const postsContainer = document.querySelector(".posts");
 
 // fetch로 json 파일 불러오기
 const posts = [];
+// fetch('http://localhost:4000/json/posts.json')
+// 얘는 미리받아와도 된다
 fetch("/json/posts.json")
   .then((response) => response.json())
   .then((data) => {
