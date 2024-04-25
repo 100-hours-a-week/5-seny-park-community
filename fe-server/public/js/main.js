@@ -3,14 +3,14 @@ const postsContainer = document.querySelector(".posts");
 
 // fetch로 json 파일 불러오기
 const posts = [];
-// fetch('http://localhost:4000/json/posts.json')
 // 얘는 미리받아와도 된다
-fetch("/json/posts.json")
+fetch("http://localhost:4000/posts")
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
     data.forEach((post) => {
       posts.push({
+        post_id: post.post_id,
         title: post.post_title,
         content: post.post_content,
         like: post.like,
@@ -33,8 +33,9 @@ const render = () => {
       // 게시글 제목 26글자 이내
       const postDiv = document.createElement("div");
       postDiv.className = "post";
+      const url = `/main/post?post_id=${post.post_id}`;
       postDiv.innerHTML = `
-    <a href="./post.html">
+    <a href="${url}">
       <div class="content one">
       <h2>${post.title.substring(0, 26)}</h2>
         <div class="texts">

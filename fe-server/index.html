@@ -31,20 +31,14 @@
   </head>
   <body>
     <header>
-      <h1><a href="/html/main.html">아무 말 대잔치</a></h1>
+      <h1><a href="">아무 말 대잔치</a></h1>
     </header>
     <main>
       <div class="inner">
         <h2>로그인</h2>
-        <!--        관례상 .container 라는 css 클래스는 페이지 레이아웃 상 최상단 (body 바로 밑 혹은 레이아웃 상 메인 컨텐츠가 포함된 div) 블럭에 적용합니다. -->
         <div class="container">
           <!--        이 부분은 (.inputs) div가 아닌 form 태그를 써야 서버에 데이터가 전송됩니다. -->
-          <form
-            method="post"
-            action="/users/login"
-            id="login-form"
-            class="inputs"
-          >
+          <form method="post" id="login-form" class="inputs">
             <!-- 위에서 폼 태그를 사용했다면 이 부분은 label 태그로 사용하는 것을 권장합니다. 사용자 편의성이 올라 갈 수 있습니다  -->
             <!-- 사용자 편의성이 어떻게 올라가는 지는 아래 링크를 통해 테스트해보세요 -->
             <!-- https://www.tcpschool.com/examples/tryit/tryhtml.php?filename=html_ref_tag_label_01 -->
@@ -81,7 +75,7 @@
              더 많은 내용은 구글에 http status 301 302와 비슷한 내용으로 검색해보세요  -->
         <button type="submit" form="login-form" class="btn">로그인</button>
         <div class="link">
-          <a class="signin" href="/html/signin.html">회원가입</a>
+          <a class="signin" href="/signin">회원가입</a>
         </div>
       </div>
     </main>

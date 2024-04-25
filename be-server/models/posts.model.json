@@ -12,7 +12,7 @@
     "deleted_at": null,
     "like": "2509",
     "comment_count": "15",
-    "hits": "2004",
+    "hits": 2005,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -216,7 +216,7 @@
     "deleted_at": null,
     "like": "4500",
     "comment_count": "30",
-    "hits": "250",
+    "hits": "2501",
     "profileImagePath": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
     "comments": [
       {
@@ -258,7 +258,7 @@
     "deleted_at": null,
     "like": "30",
     "comment_count": "18",
-    "hits": "150",
+    "hits": "1501",
     "profileImagePath": "https://i.pinimg.com/564x/86/ed/45/86ed45e7100efb62b02e04f3a9d0f4ba.jpg",
     "comments": [
       {
@@ -324,7 +324,7 @@
     "deleted_at": null,
     "like": "52",
     "comment_count": "33",
-    "hits": "275",
+    "hits": 279,
     "profileImagePath": "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
     "comments": [
       {
@@ -392,7 +392,7 @@
     "deleted_at": null,
     "like": "80",
     "comment_count": "44",
-    "hits": "400",
+    "hits": "4001",
     "profileImagePath": "https://i.pinimg.com/564x/57/d2/48/57d24857c011219093f895b4e64f5f59.jpg",
     "comments": [
       {
@@ -426,7 +426,7 @@
     "deleted_at": null,
     "like": "35",
     "comment_count": "20",
-    "hits": "200",
+    "hits": "200111",
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "comments": [
       {
@@ -460,7 +460,7 @@
     "deleted_at": null,
     "like": "50",
     "comment_count": "30",
-    "hits": "250",
+    "hits": "2501",
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "comments": [
       {
@@ -677,7 +677,7 @@
     "nickname": "배고픈강아지",
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
-    "hits": 0,
+    "hits": 1,
     "comment_count": 0,
     "comment": []
   },
@@ -709,7 +709,7 @@
     "nickname": "배고픈강아지",
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
-    "hits": 0,
+    "hits": 5,
     "comment_count": 0,
     "comment": []
   },

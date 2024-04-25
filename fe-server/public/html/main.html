@@ -14,8 +14,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
     />
-      <!-- Pretendard-Regular 폰트를 페이지 속도 개선 등의 이유로 preload로 불러오기 -->
-      <link
+    <!-- Pretendard-Regular 폰트를 페이지 속도 개선 등의 이유로 preload로 불러오기 -->
+    <link
       rel="preload"
       href="https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff"
       as="font"
@@ -33,13 +33,17 @@
         <div class="arrow">
           <div><a href=""><</a></div>
         </div>
-        <div><h1><a href="/html/main.html">아무 말 대잔치</a></h1></div>
+        <div>
+          <h1><a href="/main">아무 말 대잔치</a></h1>
+        </div>
         <div class="profile">
           <div></div>
         </div>
         <div class="menu">
-          <div class="profile"><a href="./editprofile.html">회원정보 수정</a></div>
-          <div class="pwd"><a href="./editpwd.html">비밀번호 수정</a></div>
+          <div class="profile">
+            <a href="/users/editprofile">회원정보 수정</a>
+          </div>
+          <div class="pwd"><a href="/users/editpwd">비밀번호 수정</a></div>
           <div class="logout"><a href="/">로그아웃</a></div>
         </div>
       </div>
@@ -53,35 +57,9 @@
           </h1>
         </div>
         <div class="btnContainer">
-          <div class="btn"><a href="./makepost.html">게시글 작성</a></div>
+          <div class="btn"><a href="/main/post">게시글 작성</a></div>
         </div>
-        <div class="posts">
-          <!-- <div class="post">
-            <a href="./post.html">
-              <div class="content one">
-                <h2>이 제목은 26자가 넘어 제목이 잘리는 예시입니다.</h2>
-                <div class="texts">
-                  <div class="left">
-                    <p>좋아요 0</p>
-                    <p>댓글 0</p>
-                    <p>조회수 0</p>
-                  </div>
-                  <div class="right">
-                    <p>2021-01-01 00:00:00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="writer">
-                <div class="img"></div>
-                <div class="name">더미 작성자 1</div>
-              </div>
-            </a>
-          </div> -->
-        
-
-         
-          </div>
-        </div>
+        <div class="posts"></div>
       </div>
     </main>
   </body>

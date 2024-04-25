@@ -2,16 +2,17 @@ import { formatDate, setupModalToggle, changeNum } from "/js/utils.js";
 
 const postContainer = document.querySelector(".inner");
 
+// main.js에서 클릭한 게시글의 post_id를 url에서 가져온다.
+const postId = new URLSearchParams(window.location.search).get("post_id");
+console.log(postId);
+
 //  fetch로 json 파일 불러오기
-fetch("/json/posts.json")
+fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
   .then((data) => {
-    const postId = 7;
-    if (data.length > 0) {
-      console.log(data[postId - 1]);
-      renderPost(data[postId - 1], postContainer);
-      afterRender();
-    }
+    console.log(data);
+    renderPost(data, postContainer);
+    afterRender();
   });
 
 function renderPost(postData, container) {
@@ -62,9 +63,11 @@ function renderPost(postData, container) {
     </form>
   </div>
     <div class="commentsList">
-    ${postData.comments
-      .map(
-        (comment) => `
+    ${
+      postData.comments && postData.comments.length > 0
+        ? postData.comments
+            .map(
+              (comment) => `
       <div class="comments">
         <div class="left">
           <div class="top">
@@ -86,8 +89,10 @@ function renderPost(postData, container) {
         </div>
       </div>
     `
-      )
-      .join("")}
+            )
+            .join("")
+        : ""
+    }
   </div>
   `;
 }
@@ -120,7 +125,7 @@ const afterRender = () => {
   });
   setupModalToggle(cancelBtn, modalPostEl, bodyEl);
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
-  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/html/main.html");
+  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
 
   // 댓글 입력 시 버튼 색 변경

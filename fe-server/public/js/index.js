@@ -13,19 +13,6 @@ let check = {
   password: false,
 };
 
-// fetch로 json 파일 불러오기
-// 미리 받아오면 안된다.
-const users = [];
-fetch("/json/users.json")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    data.forEach((user) => {
-      users.push({ email: user.email, password: user.password });
-    });
-    console.log(users);
-  });
-
 formEl.addEventListener("input", (event) => {
   if (event.target.id === "email") {
     console.log(event.target.value, redEmailEl.textContent);
@@ -44,21 +31,32 @@ formEl.addEventListener("input", (event) => {
 });
 
 // json 내 유저정보와 일치하는 경우에만 submit
-formEl.addEventListener("submit", (event) => {
+formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   check.email = emailCheck(emailEl.value, redEmailEl);
   check.password = pwdCheck(pwdEl.value, redPwdEl);
-  if (users.length && check.email && check.password) {
-    let next = users.find((user) => user.email == emailEl.value);
-    if (next) {
-      next = users.find((user) => user.password == pwdEl.value);
-      if (next) {
-        formEl.submit();
-      } else {
-        alert("비밀번호가 일치하지 않습니다.");
-      }
-    } else {
-      alert("아이디가 존재하지 않습니다.");
-    }
+  console.log(emailEl.value, pwdEl.value, check.email, check.password);
+
+  const response = await fetch("http://localhost:4000/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: emailEl.value,
+      password: pwdEl.value,
+    }),
+  });
+
+  const data = await response.json();
+  if (!data.emailExists) {
+    redEmailEl.textContent = "이메일이 존재하지 않습니다.";
+  }
+  if (data.emailExists && !data.pwdExists) {
+    redPwdEl.textContent = "비밀번호가 일치하지 않습니다.";
+  }
+  if (data.emailExists && data.pwdExists) {
+    alert("로그인 성공");
+    location.href = "/main";
   }
 });
