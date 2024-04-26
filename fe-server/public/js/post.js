@@ -130,6 +130,7 @@ const afterRender = () => {
   const commentForm = document.querySelector(".comment-form");
 
   commentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
     fetch(`http://localhost:4000/posts/${postId}/comment`, {
       method: "POST",
       headers: {
@@ -143,13 +144,14 @@ const afterRender = () => {
           "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
         created_at: new Date(),
       }),
+    }).then((response) => {
+      const data = response.json();
+      console.log(data);
+      if (response.status === 201) {
+        alert("댓글이 등록되었습니다.");
+        location.href = `/main/posts/?post_id=${postId}`;
+      }
     });
-    const data = await response.json();
-    console.log(data);
-    if (response.status === 201) {
-      alert("댓글이 등록되었습니다.");
-      location.reload();
-    }
   });
 
   // 댓글 입력 시 버튼 색 변경
