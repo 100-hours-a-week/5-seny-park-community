@@ -5,7 +5,6 @@ const postContainer = document.querySelector(".inner");
 // main.js에서 클릭한 게시글의 post_id를 url에서 가져온다.
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
-
 //  fetch로 json 파일 불러오기
 fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
@@ -28,7 +27,7 @@ function renderPost(postData, container) {
           <div class="date">${formatDate(postData.created_at)}</div>
         </div>
         <div class="controlBtns">
-          <button class="modi"><a href="./editpost.html">수정</a></button>
+          <button class="modi"><a href="">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
       </div>
@@ -50,7 +49,7 @@ function renderPost(postData, container) {
       </button>
     </div>
     <div class="makeComment">
-    <form action="/posts/comment" method="post">
+    <form method="post" class="comment-form">
       <div class="box">
         <textarea
           class="write-comment"
@@ -127,6 +126,34 @@ const afterRender = () => {
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
   setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
+
+  const commentForm = document.querySelector(".comment-form");
+
+  commentForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    fetch(`http://localhost:4000/posts/${postId}/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        comment: commentEl.value,
+        user_id: "583c3ac3f38e84297c002546",
+        nickname: "엉뚱한개굴",
+        profileImagePath:
+          "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        created_at: new Date(),
+      }),
+    }).then((response) => {
+      const data = response.json();
+      console.log(data);
+      if (response.status === 201) {
+        alert("댓글이 등록되었습니다.");
+        // location.href = `/main/posts/?post_id=${postId}`;
+        location.reload();
+      }
+    });
+  });
 
   // 댓글 입력 시 버튼 색 변경
   commentEl.addEventListener("input", () => {

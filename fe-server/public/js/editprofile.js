@@ -1,24 +1,21 @@
 import { setupModalToggle, nicknameCheck, handleSelected } from "/js/utils.js";
 const userContainer = document.querySelector(".inner");
 
+const userId = 1; // 현재 로그인한 사용자의 id 임의로 설정
 // fetch로 json 파일 불러오기
-fetch("/json/users.json")
+fetch(`http://localhost:4000/users/editprofile`)
   .then((response) => response.json())
   .then((data) => {
-    const postId = 1;
-    if (data.length > 0) {
-      console.log(data[postId - 1]);
-      renderPost(data[postId - 1], userContainer);
-      afterRender();
-    }
+    console.log(data);
+    renderPost(data, userContainer);
+    afterRender();
   });
 
 function renderPost(userData, container) {
   container.innerHTML = `
     <h2>회원정보 수정</h2>
         <form
-          method="post"
-          action="/users/edit"
+          method="post" 
           id="edit-form"
           class="inputs"
         >
@@ -29,7 +26,7 @@ function renderPost(userData, container) {
             <div class="imgBox">
               <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
               <label for="profileUpload" class="file-upload-label">
-                <div class="mid"><div class="editbtn">변경</div></div>
+                <div class="mid" style="background-image: url(${userData.profileImagePath})" ><div class="editbtn">변경</div></div>
               </label>
               <!-- display: none -->
               <input type="file" id="profileUpload" name="profilePicture" />
@@ -98,8 +95,7 @@ const afterRender = () => {
     nickname: false,
   };
 
-  formEl.addEventListener("submit", (event) => {
-    console.log("submit");
+  formEl.addEventListener("submit", async (event) => {
     event.preventDefault(); // submit 기본 이벤트(새로고침) 막기
     check.nickname = nicknameCheck(
       formEl.elements.nickname.value,
@@ -107,12 +103,28 @@ const afterRender = () => {
     );
 
     if (check.nickname) {
-      formEl.submit();
-      toastEl.classList.add("active");
-      setTimeout(() => {
-        // 1초 후 토스트 el 사라짐
-        toastEl.classList.remove("active");
-      }, 1000);
+      const response = await fetch(`http://localhost:4000/users/editprofile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nickname: formEl.elements.nickname.value,
+        }),
+      });
+      console.log(response);
+      const data = await response.json();
+      if (data.nicknameExists) {
+        redNicknameEl.textContent = "중복된 닉네임입니다.";
+      }
+      if (response.status === 201) {
+        // 토스트 el 나타남
+        toastEl.classList.add("active");
+        setTimeout(() => {
+          // 1초 후 토스트 el 사라짐
+          toastEl.classList.remove("active");
+        }, 1000);
+      }
     }
   });
 

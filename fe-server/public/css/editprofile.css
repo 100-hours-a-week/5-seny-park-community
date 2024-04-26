@@ -60,7 +60,7 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다. ss
   height: 149px;
   border-radius: 50%;
   cursor: pointer;
-  background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512");
+  /* background-image: url("https://ca.slack-edge.com/T06S5PH98UA-U06S87QLBLL-00467c70c6e2-512"); */
   background-size: cover;
   position: relative; /* 가상 요소를 위한 포지셔닝 기준 추가 */
 }

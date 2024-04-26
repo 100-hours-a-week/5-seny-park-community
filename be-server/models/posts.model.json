@@ -11,8 +11,7 @@
     "updated_at": "2024-04-12T03:04:19.000Z",
     "deleted_at": null,
     "like": "2509",
-    "comment_count": "15",
-    "hits": 2005,
+    "hits": 2042,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -30,6 +29,110 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 3,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글추가",
+        "created_at": "2024-04-25T14:59:29.758Z"
+      },
+      {
+        "comment_id": 4,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "사진이 넘 귀여워용",
+        "created_at": "2024-04-25T15:00:40.604Z"
+      },
+      {
+        "comment_id": 5,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글추강",
+        "created_at": "2024-04-26T00:38:55.815Z"
+      },
+      {
+        "comment_id": 6,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글",
+        "created_at": "2024-04-26T00:42:59.619Z"
+      },
+      {
+        "comment_id": 7,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "서앙ㅇㅇㄹㄴㅁ",
+        "created_at": "2024-04-26T00:44:58.722Z"
+      },
+      {
+        "comment_id": 8,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "아아",
+        "created_at": "2024-04-26T00:48:22.136Z"
+      },
+      {
+        "comment_id": 9,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "동작",
+        "created_at": "2024-04-26T00:48:41.260Z"
+      },
+      {
+        "comment_id": 10,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "추가",
+        "created_at": "2024-04-26T00:52:16.298Z"
+      },
+      {
+        "comment_id": 11,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "djkfkaf",
+        "created_at": "2024-04-26T00:57:52.218Z"
+      },
+      {
+        "comment_id": 12,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "dfaff",
+        "created_at": "2024-04-26T00:58:38.275Z"
+      },
+      {
+        "comment_id": 13,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 추가",
+        "created_at": "2024-04-26T02:25:11.290Z"
+      },
+      {
+        "comment_id": 14,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글을 계속추가",
+        "created_at": "2024-04-26T02:25:47.291Z"
+      },
+      {
+        "comment_id": 15,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글댓글",
+        "created_at": "2024-04-26T02:30:42.201Z"
       }
     ]
   },
@@ -45,8 +148,7 @@
     "updated_at": "2024-04-13T10:15:00.000Z",
     "deleted_at": null,
     "like": "40",
-    "comment_count": "12",
-    "hits": "150",
+    "hits": 161,
     "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
     "comments": [
       {
@@ -64,6 +166,30 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 3,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "kkj",
+        "created_at": "2024-04-25T15:03:59.536Z"
+      },
+      {
+        "comment_id": 4,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 추가",
+        "created_at": "2024-04-25T15:07:00.102Z"
+      },
+      {
+        "comment_id": 5,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 추가아",
+        "created_at": "2024-04-26T02:24:52.831Z"
       }
     ]
   },
@@ -79,8 +205,7 @@
     "updated_at": "2024-04-14T12:24:30.000Z",
     "deleted_at": null,
     "like": "55",
-    "comment_count": "25",
-    "hits": "300",
+    "hits": 303,
     "profileImagePath": "https://i.pinimg.com/564x/fa/07/b8/fa07b804beb68c07d48c67627ec26ac3.jpg",
     "comments": [
       {
@@ -98,6 +223,14 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 3,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글추가아",
+        "created_at": "2024-04-26T02:26:00.055Z"
       }
     ]
   },
@@ -113,8 +246,7 @@
     "updated_at": "2024-04-15T14:34:45.000Z",
     "deleted_at": null,
     "like": "85",
-    "comment_count": "40",
-    "hits": "500",
+    "hits": 501,
     "profileImagePath": "https://i.pinimg.com/564x/57/d2/48/57d24857c011219093f895b4e64f5f59.jpg",
     "comments": [
       {
@@ -147,8 +279,7 @@
     "updated_at": "2024-04-16T16:45:00.000Z",
     "deleted_at": null,
     "like": "60",
-    "comment_count": "20",
-    "hits": "400",
+    "hits": 402,
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "comments": [
       {
@@ -171,40 +302,6 @@
   },
   {
     "post_id": 6,
-    "post_title": "Understanding Artificial Intelligence",
-    "post_content": "An introductory guide to understanding the basics and implications of AI.",
-    "attach_file_path": null,
-    "file_id": 106,
-    "user_id": "5840b9c4da0529cd293d7700",
-    "nickname": "배고픈강아지",
-    "created_at": "2024-04-17T18:55:15.000Z",
-    "updated_at": "2024-04-17T18:55:15.000Z",
-    "deleted_at": null,
-    "like": "75",
-    "comment_count": "45",
-    "hits": "600",
-    "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
-    "comments": [
-      {
-        "comment_id": 1,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "포스팅 잘보고 갑니당 ! ㅎㅎ",
-        "created_at": "2024-04-12T05:00:00.000Z"
-      },
-      {
-        "comment_id": 2,
-        "user_id": "5840b9b4da0529cd293d76ff",
-        "profileImagePath": "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
-        "nickname": "졸린다람쥐",
-        "comment": "글이 너무 재밌어요!",
-        "created_at": "2024-04-12T06:15:00.000Z"
-      }
-    ]
-  },
-  {
-    "post_id": 7,
     "post_title": "수정수정 24일 기준",
     "post_content": "글을 수정해봤습니당. !",
     "attach_file_path": "https://i.pinimg.com/564x/f2/18/fb/f218fb12989d3858f8aaac6788105b1d.jpg",
@@ -215,8 +312,7 @@
     "updated_at": "2024-04-24T00:49:27.568Z",
     "deleted_at": null,
     "like": "4500",
-    "comment_count": "30",
-    "hits": "2501",
+    "hits": 2506,
     "profileImagePath": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
     "comments": [
       {
@@ -242,11 +338,19 @@
         "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
         "comment": "댓글도 추가하면 json에 반영됩니다!",
         "created_at": "2024-04-24T00:49:46.883Z"
+      },
+      {
+        "comment_id": 4,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 추가",
+        "created_at": "2024-04-25T15:07:53.237Z"
       }
     ]
   },
   {
-    "post_id": 8,
+    "post_id": 7,
     "post_title": "The Evolution of the Internet",
     "post_content": "Exploring how the internet has evolved over the decades and its impact on society.",
     "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
@@ -257,8 +361,7 @@
     "updated_at": "2024-04-19T23:16:45.000Z",
     "deleted_at": null,
     "like": "30",
-    "comment_count": "18",
-    "hits": "1501",
+    "hits": 1503,
     "profileImagePath": "https://i.pinimg.com/564x/86/ed/45/86ed45e7100efb62b02e04f3a9d0f4ba.jpg",
     "comments": [
       {
@@ -308,11 +411,19 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 7,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "e댓글ㅊ 남기고 갑니당",
+        "created_at": "2024-04-25T15:41:42.090Z"
       }
     ]
   },
   {
-    "post_id": 9,
+    "post_id": 8,
     "post_title": "Deep Dive into the Ocean World",
     "post_content": "Unveiling the secrets of the ocean and its vast biodiversity.",
     "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
@@ -323,8 +434,40 @@
     "updated_at": "2024-04-20T01:27:00.000Z",
     "deleted_at": null,
     "like": "52",
-    "comment_count": "33",
-    "hits": 279,
+    "hits": 280,
+    "profileImagePath": "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
+    "comments": [
+      {
+        "comment_id": 1,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "포스팅 잘보고 갑니당 ! ㅎㅎ",
+        "created_at": "2024-04-12T05:00:00.000Z"
+      },
+      {
+        "comment_id": 2,
+        "user_id": "5840b9b4da0529cd293d76ff",
+        "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
+        "nickname": "졸린다람쥐",
+        "comment": "글이 너무 재밌어요!",
+        "created_at": "2024-04-12T06:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "post_id": 9,
+    "post_title": "History's Greatest Mysteries",
+    "post_content": "A look at some of the most puzzling mysteries through the ages.",
+    "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
+    "file_id": 110,
+    "user_id": "5840ba7bda0529cd293d7704",
+    "nickname": "어리석은펭귄",
+    "created_at": "2024-04-21T03:37:15.000Z",
+    "updated_at": "2024-04-21T03:37:15.000Z",
+    "deleted_at": null,
+    "like": "67",
+    "hits": 311,
     "profileImagePath": "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
     "comments": [
       {
@@ -347,40 +490,6 @@
   },
   {
     "post_id": 10,
-    "post_title": "History's Greatest Mysteries",
-    "post_content": "A look at some of the most puzzling mysteries through the ages.",
-    "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
-    "file_id": 110,
-    "user_id": "5840ba7bda0529cd293d7704",
-    "nickname": "어리석은펭귄",
-    "created_at": "2024-04-21T03:37:15.000Z",
-    "updated_at": "2024-04-21T03:37:15.000Z",
-    "deleted_at": null,
-    "like": "67",
-    "comment_count": "39",
-    "hits": "310",
-    "profileImagePath": "https://i.pinimg.com/564x/4d/0d/81/4d0d81c446de4f899e166b960edcc323.jpg",
-    "comments": [
-      {
-        "comment_id": 1,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "포스팅 잘보고 갑니당 ! ㅎㅎ",
-        "created_at": "2024-04-12T05:00:00.000Z"
-      },
-      {
-        "comment_id": 2,
-        "user_id": "5840b9b4da0529cd293d76ff",
-        "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
-        "nickname": "졸린다람쥐",
-        "comment": "글이 너무 재밌어요!",
-        "created_at": "2024-04-12T06:15:00.000Z"
-      }
-    ]
-  },
-  {
-    "post_id": 11,
     "post_title": "Future of Space Exploration",
     "post_content": "What the next 50 years may hold for human space travel.",
     "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
@@ -391,8 +500,7 @@
     "updated_at": "2024-04-22T05:48:30.000Z",
     "deleted_at": null,
     "like": "80",
-    "comment_count": "44",
-    "hits": "4001",
+    "hits": 4002,
     "profileImagePath": "https://i.pinimg.com/564x/57/d2/48/57d24857c011219093f895b4e64f5f59.jpg",
     "comments": [
       {
@@ -414,7 +522,7 @@
     ]
   },
   {
-    "post_id": 12,
+    "post_id": 11,
     "post_title": "The Art of Photography",
     "post_content": "Exploring the world of photography and its impact on visual storytelling.",
     "attach_file_path": "https://i.pinimg.com/564x/98/d4/d0/98d4d01e75b6feb6b1b3d166b04fa141.jpg",
@@ -425,8 +533,7 @@
     "updated_at": "2024-04-23T07:59:45.000Z",
     "deleted_at": null,
     "like": "35",
-    "comment_count": "20",
-    "hits": "200111",
+    "hits": 200112,
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "comments": [
       {
@@ -459,8 +566,7 @@
     "updated_at": "2024-04-24T10:10:00.000Z",
     "deleted_at": null,
     "like": "50",
-    "comment_count": "30",
-    "hits": "2501",
+    "hits": 2507,
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "comments": [
       {
@@ -478,6 +584,30 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 3,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글남겨요",
+        "created_at": "2024-04-25T15:22:38.795Z"
+      },
+      {
+        "comment_id": 4,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 남기는중\n",
+        "created_at": "2024-04-25T15:24:51.912Z"
+      },
+      {
+        "comment_id": 5,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글 추가!",
+        "created_at": "2024-04-25T15:36:56.697Z"
       }
     ]
   },
@@ -493,8 +623,7 @@
     "updated_at": "2024-04-23T08:00:19.000Z",
     "deleted_at": null,
     "like": "34",
-    "comment_count": "12",
-    "hits": "190",
+    "hits": 191,
     "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
     "comments": [
       {
@@ -512,6 +641,14 @@
         "nickname": "졸린다람쥐",
         "comment": "글이 너무 재밌어요!",
         "created_at": "2024-04-12T06:15:00.000Z"
+      },
+      {
+        "comment_id": 3,
+        "user_id": "583c5484cb79a5fe593425a9",
+        "nickname": "조용한낙타",
+        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+        "comment": "댓글을 추가합니당",
+        "created_at": "2024-04-25T15:35:32.522Z"
       }
     ]
   },
@@ -527,7 +664,6 @@
     "updated_at": "2024-04-23T10:15:30.000Z",
     "deleted_at": null,
     "like": "45",
-    "comment_count": "14",
     "hits": "210",
     "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
     "comments": [
@@ -561,7 +697,6 @@
     "updated_at": "2024-04-23T12:35:45.000Z",
     "deleted_at": null,
     "like": "67",
-    "comment_count": "22",
     "hits": "250",
     "profileImagePath": "https://i.pinimg.com/564x/fa/07/b8/fa07b804beb68c07d48c67627ec26ac3.jpg",
     "comments": [
@@ -595,7 +730,6 @@
     "updated_at": "2024-04-23T14:50:00.000Z",
     "deleted_at": null,
     "like": "52",
-    "comment_count": "18",
     "hits": "300",
     "profileImagePath": "https://i.pinimg.com/564x/57/d2/48/57d24857c011219093f895b4e64f5f59.jpg",
     "comments": [
@@ -630,7 +764,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -646,7 +779,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -662,7 +794,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -678,7 +809,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 1,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -694,7 +824,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -710,7 +839,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 5,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -726,7 +854,6 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
   },
   {
@@ -742,7 +869,22 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 0,
-    "comment_count": 0,
     "comment": []
+  },
+  {
+    "post_id": 26,
+    "post_title": "게시글 추가해보기 be-server연결중",
+    "post_content": "작성작성",
+    "attach_file_path": "",
+    "file_id": null,
+    "user_id": "583c3ac3f38e84297c002546",
+    "nickname": "엉뚱한개굴",
+    "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+    "created_at": "2024-04-26T02:50:51.781Z",
+    "updated_at": "2024-04-26T02:50:51.781Z",
+    "deleted_at": null,
+    "like": 0,
+    "hits": 4,
+    "comments": []
   }
 ]
