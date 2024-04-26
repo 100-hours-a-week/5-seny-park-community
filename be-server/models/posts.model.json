@@ -11,7 +11,7 @@
     "updated_at": "2024-04-12T03:04:19.000Z",
     "deleted_at": null,
     "like": "2509",
-    "hits": 2042,
+    "hits": 2044,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -884,7 +884,16 @@
     "updated_at": "2024-04-26T02:50:51.781Z",
     "deleted_at": null,
     "like": 0,
-    "hits": 4,
-    "comments": []
+    "hits": 7,
+    "comments": [
+      {
+        "comment_id": 1,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글\n",
+        "created_at": "2024-04-26T03:00:16.056Z"
+      }
+    ]
   }
 ]

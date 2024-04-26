@@ -162,8 +162,14 @@ app.post("/posts/:postId/comment", (req, res) => {
     }
     const posts = JSON.parse(data);
     const post = posts.find((post) => post.post_id === Number(postId));
+    let commentId;
+    if (post.comments.length > 0) {
+      commentId = post.comments[post.comments.length - 1].comment_id + 1;
+    } else {
+      commentId = 1;
+    }
     post.comments.push({
-      comment_id: post.comments[post.comments.length - 1].comment_id + 1, // 마지막 댓글 id + 1
+      comment_id: commentId,
       user_id: user_id,
       nickname: nickname,
       profileImagePath: profileImagePath,
