@@ -1,24 +1,21 @@
 import { setupModalToggle, nicknameCheck, handleSelected } from "/js/utils.js";
 const userContainer = document.querySelector(".inner");
 
+const userId = 1; // 현재 로그인한 사용자의 id 임의로 설정
 // fetch로 json 파일 불러오기
-fetch("/json/users.json")
+fetch(`http://localhost:4000/users/editprofile`)
   .then((response) => response.json())
   .then((data) => {
-    const postId = 1;
-    if (data.length > 0) {
-      console.log(data[postId - 1]);
-      renderPost(data[postId - 1], userContainer);
-      afterRender();
-    }
+    console.log(data);
+    renderPost(data, userContainer);
+    afterRender();
   });
 
 function renderPost(userData, container) {
   container.innerHTML = `
     <h2>회원정보 수정</h2>
         <form
-          method="post"
-          action="/users/edit"
+          method="post" 
           id="edit-form"
           class="inputs"
         >
@@ -99,7 +96,6 @@ const afterRender = () => {
   };
 
   formEl.addEventListener("submit", (event) => {
-    console.log("submit");
     event.preventDefault(); // submit 기본 이벤트(새로고침) 막기
     check.nickname = nicknameCheck(
       formEl.elements.nickname.value,
@@ -107,7 +103,28 @@ const afterRender = () => {
     );
 
     if (check.nickname) {
-      formEl.submit();
+      fetch(`http://localhost:4000/users/editprofile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nickname: formEl.elements.nickname.value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+      if (data.nicknameExists) {
+        // 닉네임 중복 시
+        redNicknameEl.textContent = "중복된 닉네임입니다.";
+      }
+      if (response.status === 201) {
+        alert("닉네임 수정이 완료되었습니다.");
+        // window.location.href = "/";
+      }
+      // 토스트 el 나타남
       toastEl.classList.add("active");
       setTimeout(() => {
         // 1초 후 토스트 el 사라짐
