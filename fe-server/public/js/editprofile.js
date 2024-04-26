@@ -26,7 +26,7 @@ function renderPost(userData, container) {
             <div class="imgBox">
               <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
               <label for="profileUpload" class="file-upload-label">
-                <div class="mid"><div class="editbtn">변경</div></div>
+                <div class="mid" style="background-image: url(${userData.profileImagePath})" ><div class="editbtn">변경</div></div>
               </label>
               <!-- display: none -->
               <input type="file" id="profileUpload" name="profilePicture" />

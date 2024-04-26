@@ -138,10 +138,10 @@ const afterRender = () => {
       },
       body: JSON.stringify({
         comment: commentEl.value,
-        user_id: "583c5484cb79a5fe593425a9",
-        nickname: "조용한낙타",
+        user_id: "583c3ac3f38e84297c002546",
+        nickname: "엉뚱한개굴",
         profileImagePath:
-          "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
+          "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
         created_at: new Date(),
       }),
     }).then((response) => {

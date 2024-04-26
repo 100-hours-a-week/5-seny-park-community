@@ -12,7 +12,7 @@
     "deleted_at": null,
     "like": "2509",
     "comment_count": "15",
-    "hits": 2036,
+    "hits": 2040,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -126,6 +126,14 @@
         "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
         "comment": "댓글을 계속추가",
         "created_at": "2024-04-26T02:25:47.291Z"
+      },
+      {
+        "comment_id": 15,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글댓글",
+        "created_at": "2024-04-26T02:30:42.201Z"
       }
     ]
   },
