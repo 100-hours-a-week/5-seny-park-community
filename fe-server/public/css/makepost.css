@@ -99,6 +99,7 @@ main {
   color: #ff0000;
   font-size: 12px;
   font-weight: 400;
+  height: 16px;
 }
 
 .inner form .inputFile .fileLabel {
