@@ -149,7 +149,8 @@ const afterRender = () => {
       console.log(data);
       if (response.status === 201) {
         alert("댓글이 등록되었습니다.");
-        location.href = `/main/posts/?post_id=${postId}`;
+        // location.href = `/main/posts/?post_id=${postId}`;
+        location.reload();
       }
     });
   });
