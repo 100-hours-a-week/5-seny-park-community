@@ -95,7 +95,7 @@ const afterRender = () => {
     nickname: false,
   };
 
-  formEl.addEventListener("submit", (event) => {
+  formEl.addEventListener("submit", async (event) => {
     event.preventDefault(); // submit 기본 이벤트(새로고침) 막기
     check.nickname = nicknameCheck(
       formEl.elements.nickname.value,
@@ -103,7 +103,7 @@ const afterRender = () => {
     );
 
     if (check.nickname) {
-      fetch(`http://localhost:4000/users/editprofile`, {
+      const response = await fetch(`http://localhost:4000/users/editprofile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,25 +111,20 @@ const afterRender = () => {
         body: JSON.stringify({
           nickname: formEl.elements.nickname.value,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
+      });
+      console.log(response);
+      const data = await response.json();
       if (data.nicknameExists) {
-        // 닉네임 중복 시
         redNicknameEl.textContent = "중복된 닉네임입니다.";
       }
       if (response.status === 201) {
-        alert("닉네임 수정이 완료되었습니다.");
-        // window.location.href = "/";
+        // 토스트 el 나타남
+        toastEl.classList.add("active");
+        setTimeout(() => {
+          // 1초 후 토스트 el 사라짐
+          toastEl.classList.remove("active");
+        }, 1000);
       }
-      // 토스트 el 나타남
-      toastEl.classList.add("active");
-      setTimeout(() => {
-        // 1초 후 토스트 el 사라짐
-        toastEl.classList.remove("active");
-      }, 1000);
     }
   });
 

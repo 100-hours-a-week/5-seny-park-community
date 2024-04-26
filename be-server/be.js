@@ -189,3 +189,34 @@ app.get("/users/editprofile", (req, res) => {
     res.json(user);
   });
 });
+
+app.post("/users/editprofile", (req, res) => {
+  const { nickname } = req.body;
+  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
+    }
+    const users = JSON.parse(data);
+    const user = users.find(
+      (user) => user.user_id === "583c3ac3f38e84297c002546"
+    ); // 임의로 첫번째 사용자 정보 가져옴
+    const nicknameExists = users.some(
+      (diffuser) =>
+        diffuser.nickname === nickname && diffuser.user_id !== user.user_id
+    );
+    console.log(nicknameExists);
+    if (nicknameExists) {
+      return res.json({ nicknameExists });
+    }
+    user.nickname = nickname;
+    user.updated_at = new Date();
+    fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
+      if (err) {
+        return res.status(500).json({ message: "닉네임 수정 실패" });
+      }
+      return res.status(201).json({ message: "닉네임 수정 성공" });
+    });
+  });
+});
