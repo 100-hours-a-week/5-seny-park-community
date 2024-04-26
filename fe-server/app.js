@@ -54,48 +54,48 @@ app.get("/users/editpwd", (req, res) => {
   res.sendFile(path.join(__dirname, "public/html/editpwd.html"));
 });
 
-// 게시글 작성
-app.post("/posts", (req, res) => {
-  const { postTitle, postContent, postPicture } = req.body;
-  console.log(`Received new post: ${postTitle}`);
+// // 게시글 작성
+// app.post("/posts", (req, res) => {
+//   const { postTitle, postContent, postPicture } = req.body;
+//   console.log(`Received new post: ${postTitle}`);
 
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      console.error("Error reading posts file:", err);
-      return res.status(500).send("Failed to load posts data.");
-    }
+//   fs.readFile(filePostsPath, "utf-8", (err, data) => {
+//     if (err) {
+//       console.error("Error reading posts file:", err);
+//       return res.status(500).send("Failed to load posts data.");
+//     }
 
-    let posts;
-    posts = JSON.parse(data);
+//     let posts;
+//     posts = JSON.parse(data);
 
-    posts.push({
-      post_id: posts.length + 1,
-      post_title: postTitle,
-      post_content: postContent,
-      attach_file_path: postPicture,
-      user_id: "5840b9c4da0529cd293d7700",
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
-      nickname: "배고픈강아지",
-      profileImagePath:
-        "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
-      like: 0,
-      hits: 0,
-      comment_count: 0,
-      comment: [],
-    });
+//     posts.push({
+//       post_id: posts.length + 1,
+//       post_title: postTitle,
+//       post_content: postContent,
+//       attach_file_path: postPicture,
+//       user_id: "5840b9c4da0529cd293d7700",
+//       created_at: new Date(),
+//       updated_at: new Date(),
+//       deleted_at: null,
+//       nickname: "배고픈강아지",
+//       profileImagePath:
+//         "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
+//       like: 0,
+//       hits: 0,
+//       comment_count: 0,
+//       comment: [],
+//     });
 
-    fs.writeFile(filePostsPath, JSON.stringify(posts), (writeErr) => {
-      if (writeErr) {
-        console.error("Failed to write to posts file:", writeErr);
-        return res.status(500).send("Failed to save post.");
-      }
-      console.log("Post added successfully.");
-      // res.redirect("/html/main.html");
-    });
-  });
-});
+//     fs.writeFile(filePostsPath, JSON.stringify(posts), (writeErr) => {
+//       if (writeErr) {
+//         console.error("Failed to write to posts file:", writeErr);
+//         return res.status(500).send("Failed to save post.");
+//       }
+//       console.log("Post added successfully.");
+//       // res.redirect("/html/main.html");
+//     });
+//   });
+// });
 
 // 게시글 수정
 app.post("/posts/edit", (req, res) => {

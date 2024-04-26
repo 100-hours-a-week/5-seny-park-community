@@ -36,10 +36,26 @@ formEl.addEventListener("input", (event) => {
   }
 });
 
-formEl.addEventListener("submit", (event) => {
+formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   check = postCheck(formEl.elements.title, formEl.elements.content, redEl);
   if (check) {
-    formEl.submit();
+    const response = await fetch("http://localhost:4000/posts/createpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: titleEl.value,
+        content: contentEl.value,
+      }),
+    });
+    console.log(response);
+    if (response.status === 201) {
+      alert("게시글이 등록되었습니다.");
+      location.href = `/main`;
+    } else if (response.status === 500) {
+      alert("게시글 등록에 실패했습니다.");
+    }
   }
 });
