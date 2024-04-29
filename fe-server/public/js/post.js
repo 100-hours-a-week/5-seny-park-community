@@ -116,7 +116,7 @@ const afterRender = () => {
   const delCoBtns = document.querySelectorAll(".comments .del");
   const cancelCoBtn = document.querySelector(".shadow-comment .cancel");
   const confirmCoBtn = document.querySelector(".shadow-comment .delete");
-  const commentEditEl = document.querySelector(".comment.active");
+  const commentEditEls = document.querySelectorAll(".comment.active");
 
   // 게시글 및 댓글 모달 이벤트 리스너 설정
   setupModalToggle(delBtn, modalPostEl, bodyEl);
@@ -169,6 +169,7 @@ const afterRender = () => {
   // 클릭된 commentsEl 요소 안에 댓글 내용 요소인 div 수정버튼(.modi) 클릭 시 .comments의 댓글내용인 .comments .comment의 내용을 가져와서 commentEl에 넣어준다.
   modiCoBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
+      const commentEditEl = commentEditEls[index];
       console.log(commentEditEl.textContent);
       commentEl.value = commentEditEl.textContent;
       commentBtn.textContent = "댓글 수정";
