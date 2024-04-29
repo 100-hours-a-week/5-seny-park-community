@@ -84,7 +84,11 @@ const afterRender = () => {
   // 게시글 작성/편집 게시글 post
   formEl.addEventListener("submit", async (event) => {
     event.preventDefault();
-    check = postCheck(formEl.elements.title, formEl.elements.content, redEl);
+    let check = postCheck(
+      formEl.elements.title,
+      formEl.elements.content,
+      redEl
+    );
     if (check) {
       const response = await fetch(
         `http://localhost:4000/edit/posts/${postId}`,
@@ -131,14 +135,6 @@ const afterRender = () => {
       submitBtn.classList.add("active");
     } else {
       submitBtn.classList.remove("active");
-    }
-  });
-
-  formEl.addEventListener("submit", (event) => {
-    event.preventDefault();
-    check = postCheck(formEl.elements.title, formEl.elements.content, redEl);
-    if (check) {
-      formEl.submit();
     }
   });
 };

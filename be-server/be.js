@@ -161,6 +161,7 @@ app.get("/edit/posts/:postId", (req, res) => {
   });
 });
 
+// 게시글 추가
 app.post("/edit/posts/:postId", (req, res) => {
   const postId = req.params.postId;
   const { title, content } = req.body;
@@ -177,8 +178,10 @@ app.post("/edit/posts/:postId", (req, res) => {
     post.updated_at = new Date();
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {
+        console.log(err);
         return res.status(500).send("게시글 수정에 실패했습니다.");
       }
+      console.log("게시글 수정 성공");
       return res.status(201).send("게시글 수정 성공");
     });
   });
