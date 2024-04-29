@@ -148,6 +148,42 @@ app.get("/posts/:postId", (req, res) => {
   });
 });
 
+app.get("/edit/posts/:postId", (req, res) => {
+  const postId = req.params.postId;
+  console.log(`PostId: ${postId}`);
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const post = posts.find((post) => post.post_id === Number(postId));
+    res.json(post);
+  });
+});
+
+app.post("/edit/posts/:postId", (req, res) => {
+  const postId = req.params.postId;
+  const { title, content } = req.body;
+  console.log(`Title: ${title}, Content: ${content}`);
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const post = posts.find((post) => post.post_id === Number(postId));
+    console.log(post);
+    post.post_title = title;
+    post.post_content = content;
+    post.updated_at = new Date();
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("게시글 수정에 실패했습니다.");
+      }
+      return res.status(201).send("게시글 수정 성공");
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`앱이 포트 ${PORT}에서 실행 중입니다.`);
 });

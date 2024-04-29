@@ -2,15 +2,14 @@ import { postRules } from "./utils.js";
 const postContainer = document.querySelector(".inner");
 
 //  fetch로 json 파일 불러오기
-fetch("/json/posts.json")
+const postId = new URLSearchParams(window.location.search).get("post_id");
+console.log(postId);
+fetch(`http://localhost:4000/edit/posts/${postId}`)
   .then((response) => response.json())
   .then((data) => {
-    const postId = 7;
-    if (data.length > 0) {
-      console.log(data[postId - 1]);
-      renderPost(data[postId - 1], postContainer);
-      afterRender();
-    }
+    console.log(data);
+    renderPost(data, postContainer);
+    afterRender();
   });
 
 function renderPost(postData, container) {
@@ -20,8 +19,7 @@ function renderPost(postData, container) {
   </div>
   
   <form
-    method="post"
-    action="/posts/edit"
+    method="post" 
     id="editpost-form"
     class="inputs"
   >
@@ -53,8 +51,12 @@ function renderPost(postData, container) {
         <div class="btn">파일 선택</div>
         <div class="content3">파일을 선택해주세요.</div>
       </div>
-      <img class="upload-img active" src=${postData.attach_file_path} alt="이미지 삽입" />
-    </label>
+      ${
+        postData.attach_file_path
+          ? `<img src="${postData.attach_file_path}" class="upload-img active" />`
+          : ""
+      }
+        </label>
     <input
       type="file"
       id="postUpload"
@@ -78,6 +80,34 @@ const afterRender = () => {
   const formEl = document.querySelector("#editpost-form"); // Form element
   const submitBtn = document.querySelector(".btn.purple-btn"); // Submit button for the form
   const redEl = document.querySelector(".red"); // Element to display validation messages
+
+  // 게시글 작성/편집 게시글 post
+  formEl.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    check = postCheck(formEl.elements.title, formEl.elements.content, redEl);
+    if (check) {
+      const response = await fetch(
+        `http://localhost:4000/edit/posts/${postId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: titleEl.value,
+            content: contentEl.value,
+          }),
+        }
+      );
+      console.log(response);
+      if (response.status === 201) {
+        alert("게시글이 수정되었습니다.");
+        location.href = `/main/post?post_id=${postId}`;
+      } else if (response.status === 500) {
+        alert("게시글 수정에 실패했습니다.");
+      }
+    }
+  });
 
   // 제목 26글자 이내, 이미지 업로드
   postRules(titleEl, imgPrevEl, fileInput);

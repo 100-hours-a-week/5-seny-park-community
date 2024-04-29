@@ -39,7 +39,7 @@ app.get("/main/createpost", (req, res) => {
   res.sendFile(path.join(__dirname, "public/html/makepost.html"));
 });
 
-app.get("/main/editpost", (req, res) => {
+app.get("/main/edit/post", (req, res) => {
   // 게시글 수정
   res.sendFile(path.join(__dirname, "public/html/editpost.html"));
 });
