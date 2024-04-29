@@ -14,7 +14,7 @@ fetch("http://localhost:4000/posts")
         title: post.post_title,
         content: post.post_content,
         like: post.like,
-        comment_cnt: post.comment_count,
+        comment_cnt: post.comments ? post.comments.length : 0,
         hit: post.hits,
         date: formatDate(post.created_at),
         author: post.nickname,
