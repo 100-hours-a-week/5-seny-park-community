@@ -15,6 +15,7 @@ fetch(`http://localhost:4000/posts/${postId}`)
   });
 
 function renderPost(postData, container) {
+  const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
@@ -27,7 +28,7 @@ function renderPost(postData, container) {
           <div class="date">${formatDate(postData.created_at)}</div>
         </div>
         <div class="controlBtns">
-          <button class="modi"><a href="">수정</a></button>
+          <button class="modi"><a href="${editUrl}">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
       </div>
