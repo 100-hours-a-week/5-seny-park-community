@@ -18,6 +18,7 @@ fetch(`http://localhost:4000/posts/${postId}`)
 
 function renderPost(postData, container) {
   const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
+  let postContent = postData.post_content;
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>

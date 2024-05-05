@@ -99,7 +99,7 @@ const afterRender = () => {
           },
           body: JSON.stringify({
             title: titleEl.value,
-            content: contentEl.value,
+            content: contentEl.value.replace(/\n/g, "<br>"),
           }),
         }
       );
