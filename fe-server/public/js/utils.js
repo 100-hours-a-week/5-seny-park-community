@@ -155,21 +155,12 @@ export const toggleModal = (isOpening, modalElement, bodyEl) => {
 };
 
 // 이벤트 리스너 설정 함수
-export const setupModalToggle = (
-  triggerEl,
-  modalEl,
-  bodyEl,
-  redirect = false
-) => {
+export const setupModalToggle = (triggerEl, modalEl, bodyEl) => {
   triggerEl.addEventListener("click", (event) => {
     event.preventDefault();
-    if (redirect) {
-      toggleModal(false, modalEl, bodyEl);
-      location.href = redirect; // 페이지 이동
-    } else {
-      const isOpening = !modalEl.classList.contains("popClick"); // 모달이 열려있는지 확인
-      toggleModal(isOpening, modalEl, bodyEl);
-    }
+
+    const isOpening = !modalEl.classList.contains("popClick"); // 모달이 열려있는지 확인
+    toggleModal(isOpening, modalEl, bodyEl);
   });
 };
 

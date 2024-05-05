@@ -47,7 +47,7 @@ formEl.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify({
         title: titleEl.value,
-        content: contentEl.value,
+        content: contentEl.value.replace(/\n/g, "<br>"),
       }),
     });
     console.log(response);

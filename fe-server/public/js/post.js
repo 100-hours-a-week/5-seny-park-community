@@ -9,13 +9,16 @@ console.log(postId);
 fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     renderPost(data, postContainer);
-    afterRender();
+    afterRender(data);
+  })
+  .catch((error) => {
+    console.error("데이터를 불러오는 중에 오류가 발생했습니다:", error.message);
   });
 
 function renderPost(postData, container) {
   const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
+  let postContent = postData.post_content;
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
@@ -68,7 +71,7 @@ function renderPost(postData, container) {
         ? postData.comments
             .map(
               (comment) => `
-      <div class="comments">
+      <div class="comments ${comment.comment_id}">
         <div class="left">
           <div class="top">
             <div class="img"><div style="background-image: url('${
@@ -97,7 +100,7 @@ function renderPost(postData, container) {
   `;
 }
 
-const afterRender = () => {
+const afterRender = (data) => {
   // 게시글 수정 삭제 버튼
   const modiBtn = document.querySelector(".title .modi");
   const delBtn = document.querySelector(".title .del");
@@ -116,7 +119,9 @@ const afterRender = () => {
   const delCoBtns = document.querySelectorAll(".comments .del");
   const cancelCoBtn = document.querySelector(".shadow-comment .cancel");
   const confirmCoBtn = document.querySelector(".shadow-comment .delete");
-  const commentEditEl = document.querySelector(".comment.active");
+  const commentEditEls = document.querySelectorAll(".comment.active");
+
+  let commentId = undefined; // 수정할 댓글의 ID
 
   // 게시글 및 댓글 모달 이벤트 리스너 설정
   setupModalToggle(delBtn, modalPostEl, bodyEl);
@@ -125,20 +130,24 @@ const afterRender = () => {
   });
   setupModalToggle(cancelBtn, modalPostEl, bodyEl);
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
-  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
+  setupModalToggle(confirmBtn, modalPostEl, bodyEl);
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
 
   const commentForm = document.querySelector(".comment-form");
+  let exist = false;
 
   commentForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    console.log(commentEl.value);
     fetch(`http://localhost:4000/posts/${postId}/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        comment: commentEl.value,
+        exist: exist,
+        comment_id: commentId,
+        comment_content: commentEl.value,
         user_id: "583c3ac3f38e84297c002546",
         nickname: "엉뚱한개굴",
         profileImagePath:
@@ -152,6 +161,12 @@ const afterRender = () => {
         alert("댓글이 등록되었습니다.");
         // location.href = `/main/posts/?post_id=${postId}`;
         location.reload();
+      }
+      if (response.status === 204) {
+        console.log(data);
+        alert("댓글이 수정되었습니다.");
+        location.reload();
+        exist = false;
       }
     });
   });
@@ -169,11 +184,50 @@ const afterRender = () => {
   // 클릭된 commentsEl 요소 안에 댓글 내용 요소인 div 수정버튼(.modi) 클릭 시 .comments의 댓글내용인 .comments .comment의 내용을 가져와서 commentEl에 넣어준다.
   modiCoBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
+      const commentEditEl = commentEditEls[index];
       console.log(commentEditEl.textContent);
       commentEl.value = commentEditEl.textContent;
       commentBtn.textContent = "댓글 수정";
       commentBtn.classList.add("modi");
       commentEl.focus();
+      exist = true;
+      commentId = btn.closest(".comments").classList[1]; // 댓글의 ID가 클래스 리스트의 두 번째 항목에 있다고 가정
+      console.log(commentId);
+    });
+  });
+
+  // 댓글 삭제 버튼 클릭 시 해당하는 댓글의 ID를 가져와서 저장한다.
+  delCoBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      commentId = btn.closest(".comments").classList[1];
+    });
+  });
+
+  // 댓글 삭제 버튼 클릭시 등장하는 모달 팝업의 확인 버튼 클릭 시 댓글 삭제 요청 보내고, 삭제 성공 시 새로고침
+  confirmCoBtn.addEventListener("click", () => {
+    fetch(`http://localhost:4000/posts/${postId}/comment/${commentId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 204) {
+        alert("댓글이 삭제되었습니다.");
+        location.reload();
+      } else {
+        alert("댓글 삭제에 실패했습니다." + response.status);
+      }
+    });
+  });
+
+  // 게시글 삭제 버튼 클릭 시 등장하는 모달 팝업의 확인 버튼 클릭 시 게시글 삭제 요청 보내고, 삭제 성공 시 메인 페이지로 이동
+  confirmBtn.addEventListener("click", () => {
+    fetch(`http://localhost:4000/posts/${postId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 204) {
+        alert("게시글이 삭제되었습니다.");
+        location.href = "/main";
+      } else {
+        alert("게시글 삭제에 실패했습니다." + response.status);
+      }
     });
   });
 
