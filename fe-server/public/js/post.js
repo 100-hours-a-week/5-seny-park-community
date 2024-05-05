@@ -9,7 +9,6 @@ console.log(postId);
 fetch(`http://localhost:4000/posts/${postId}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     renderPost(data, postContainer);
     afterRender(data);
   })
@@ -193,6 +192,27 @@ const afterRender = (data) => {
       exist = true;
       commentId = btn.closest(".comments").classList[1]; // 댓글의 ID가 클래스 리스트의 두 번째 항목에 있다고 가정
       console.log(commentId);
+    });
+  });
+
+  // 댓글 삭제 버튼 클릭 시 해당하는 댓글의 ID를 가져와서 저장한다.
+  delCoBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      commentId = btn.closest(".comments").classList[1];
+    });
+  });
+
+  // 댓글 삭제 버튼 클릭시 등장하는 모달 팝업의 확인 버튼 클릭 시 댓글 삭제 요청 보내고, 삭제 성공 시 새로고침
+  confirmCoBtn.addEventListener("click", () => {
+    fetch(`http://localhost:4000/posts/${postId}/comment/${commentId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 204) {
+        alert("댓글이 삭제되었습니다.");
+        location.reload();
+      } else {
+        alert("댓글 삭제에 실패했습니다." + response.status);
+      }
     });
   });
 

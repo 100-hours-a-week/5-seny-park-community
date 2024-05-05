@@ -11,50 +11,9 @@
     "updated_at": "2024-04-29T08:19:28.991Z",
     "deleted_at": null,
     "like": "2509",
-    "hits": 2124,
+    "hits": 2154,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
-      {
-        "comment_id": 1,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "created_at": "2024-04-12T05:00:00.000Z",
-        "updated_at": "2024-05-05T10:48:10.931Z",
-        "comment": "수저엉"
-      },
-      {
-        "comment_id": 2,
-        "user_id": "5840b9b4da0529cd293d76ff",
-        "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
-        "nickname": "졸린다람쥐",
-        "comment": "글이 너무 재밌어요!",
-        "created_at": "2024-04-12T06:15:00.000Z"
-      },
-      {
-        "comment_id": 3,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "댓글추가",
-        "created_at": "2024-04-25T14:59:29.758Z"
-      },
-      {
-        "comment_id": 4,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "사진이 넘 귀여워용",
-        "created_at": "2024-04-25T15:00:40.604Z"
-      },
-      {
-        "comment_id": 5,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "댓글추강",
-        "created_at": "2024-04-26T00:38:55.815Z"
-      },
       {
         "comment_id": 6,
         "user_id": "583c5484cb79a5fe593425a9",
@@ -64,61 +23,13 @@
         "created_at": "2024-04-26T00:42:59.619Z"
       },
       {
-        "comment_id": 7,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "서앙ㅇㅇㄹㄴㅁ 수정수정",
-        "created_at": "2024-04-26T00:44:58.722Z",
-        "updated_at": "2024-05-05T10:49:34.841Z"
-      },
-      {
-        "comment_id": 8,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "아아",
-        "created_at": "2024-04-26T00:48:22.136Z"
-      },
-      {
-        "comment_id": 9,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "동작",
-        "created_at": "2024-04-26T00:48:41.260Z"
-      },
-      {
-        "comment_id": 10,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "추가",
-        "created_at": "2024-04-26T00:52:16.298Z"
-      },
-      {
         "comment_id": 11,
         "user_id": "583c5484cb79a5fe593425a9",
         "nickname": "조용한낙타",
         "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "djkfkaf",
-        "created_at": "2024-04-26T00:57:52.218Z"
-      },
-      {
-        "comment_id": 12,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "dfaff",
-        "created_at": "2024-04-26T00:58:38.275Z"
-      },
-      {
-        "comment_id": 13,
-        "user_id": "583c5484cb79a5fe593425a9",
-        "nickname": "조용한낙타",
-        "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "댓글 추가",
-        "created_at": "2024-04-26T02:25:11.290Z"
+        "comment": "djkfkaf 댓글 수정수정",
+        "created_at": "2024-04-26T00:57:52.218Z",
+        "updated_at": "2024-05-05T11:16:58.108Z"
       },
       {
         "comment_id": 14,
@@ -130,11 +41,29 @@
         "updated_at": "2024-05-05T10:47:58.330Z"
       },
       {
+        "comment_id": 15,
         "user_id": "583c3ac3f38e84297c002546",
         "nickname": "엉뚱한개굴",
         "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
-        "comment": "댓글 추가",
-        "created_at": "2024-05-05T10:49:25.612Z"
+        "comment": "댓글 추가아아아",
+        "created_at": "2024-05-05T11:24:11.466Z",
+        "updated_at": "2024-05-05T11:24:31.030Z"
+      },
+      {
+        "comment_id": 16,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글 추가아아아앙",
+        "created_at": "2024-05-05T11:24:38.611Z"
+      },
+      {
+        "comment_id": 17,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "추가추가",
+        "created_at": "2024-05-05T11:24:44.619Z"
       }
     ]
   },

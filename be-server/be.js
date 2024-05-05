@@ -230,7 +230,7 @@ app.post("/posts/:postId/comment", (req, res) => {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
         post.comments.push({
-          comment_id: comment_id,
+          comment_id: post.comments[post.comments.length - 1].comment_id + 1, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
@@ -245,6 +245,38 @@ app.post("/posts/:postId/comment", (req, res) => {
         });
       }
     }
+  });
+});
+
+// 댓글 삭제
+app.delete("/posts/:postId/comment/:commentId", (req, res) => {
+  const postId = req.params.postId;
+  const commentId = req.params.commentId;
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("댓글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const postIndex = posts.findIndex(
+      (post) => post.post_id === Number(postId)
+    );
+    if (postIndex === -1) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
+    }
+    const post = posts[postIndex];
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment.comment_id === Number(commentId)
+    );
+    if (commentIndex === -1) {
+      return res.status(404).send("댓글을 찾을 수 없습니다.");
+    }
+    post.comments.splice(commentIndex, 1);
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("댓글 삭제에 실패했습니다.");
+      }
+      return res.status(204).send("댓글 삭제 성공");
+    });
   });
 });
 
