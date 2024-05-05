@@ -1,19 +1,13 @@
-import express from "express";
-import cors from "cors";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import bodyParser from "body-parser";
 // commonJS로 변경하기
-// const express = require("express");
-// const cors = require("cors");
-// const fs = require("fs");
-// const path = require("path");
-// const { fileURLToPath } = require("url");
-// const bodyParser = require("body-parser");
+const express = require("express");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
+const { fileURLToPath } = require("url");
+const bodyParser = require("body-parser");
 
-// const usersRouter = require("./routes/users.router");
-// const postsRouter = require("./routes/posts.router");
+const usersRouter = require("./routes/users.router");
+const postsRouter = require("./routes/posts.router");
 
 const PORT = 4000;
 
