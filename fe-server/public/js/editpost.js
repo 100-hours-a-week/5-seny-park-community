@@ -4,7 +4,7 @@ const postContainer = document.querySelector(".inner");
 //  fetch로 json 파일 불러오기
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
-fetch(`http://localhost:4000/edit/posts/${postId}`)
+fetch(`http://localhost:4000/posts/edit/${postId}`)
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
@@ -91,7 +91,7 @@ const afterRender = () => {
     );
     if (check) {
       const response = await fetch(
-        `http://localhost:4000/edit/posts/${postId}`,
+        `http://localhost:4000/posts/edit/${postId}`,
         {
           method: "POST",
           headers: {
