@@ -161,7 +161,7 @@ app.get("/edit/posts/:postId", (req, res) => {
   });
 });
 
-// 게시글 추가
+// 게시글 수정
 app.post("/edit/posts/:postId", (req, res) => {
   const postId = req.params.postId;
   const { title, content } = req.body;
@@ -191,36 +191,60 @@ app.listen(PORT, () => {
   console.log(`앱이 포트 ${PORT}에서 실행 중입니다.`);
 });
 
-// 댓글 추가
+// 댓글 추가 & 수정
 app.post("/posts/:postId/comment", (req, res) => {
   const postId = req.params.postId;
-  const { comment, user_id, nickname, profileImagePath, created_at } = req.body;
+  const {
+    exist,
+    comment_id,
+    comment_content,
+    user_id,
+    nickname,
+    profileImagePath,
+    created_at,
+  } = req.body;
+  console.log(req.body);
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("댓글 불러오기에 실패했습니다.");
     }
     const posts = JSON.parse(data);
     const post = posts.find((post) => post.post_id === Number(postId));
-    let commentId;
-    if (post.comments.length > 0) {
-      commentId = post.comments[post.comments.length - 1].comment_id + 1;
+
+    if (exist) {
+      // 댓글 수정
+      console.log(post.comments, comment_id);
+      const matchComment = post.comments.find(
+        (comment) => comment.comment_id === Number(comment_id)
+      );
+      console.log(comment_content);
+      matchComment.comment = comment_content;
+      matchComment.updated_at = new Date();
+      fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+        if (err) {
+          return res.status(500).send("댓글 수정에 실패했습니다.");
+        }
+        return res.status(204).send("댓글 수정 성공");
+      });
     } else {
-      commentId = 1;
-    }
-    post.comments.push({
-      comment_id: commentId,
-      user_id: user_id,
-      nickname: nickname,
-      profileImagePath: profileImagePath,
-      comment: comment,
-      created_at: created_at,
-    });
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("댓글 추가에 실패했습니다.");
+      // 댓글 추가 요청이 아닌 경우에만 실행
+      if (!exist) {
+        post.comments.push({
+          comment_id: comment_id,
+          user_id: user_id,
+          nickname: nickname,
+          profileImagePath: profileImagePath,
+          comment: comment_content,
+          created_at: created_at,
+        });
+        fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+          if (err) {
+            return res.status(500).send("댓글 추가에 실패했습니다.");
+          }
+          return res.status(201).send("댓글 추가 성공");
+        });
       }
-      return res.status(201).send("댓글 추가 성공");
-    });
+    }
   });
 });
 

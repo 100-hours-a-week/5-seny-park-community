@@ -11,7 +11,10 @@ fetch(`http://localhost:4000/posts/${postId}`)
   .then((data) => {
     console.log(data);
     renderPost(data, postContainer);
-    afterRender();
+    afterRender(data);
+  })
+  .catch((error) => {
+    console.error("데이터를 불러오는 중에 오류가 발생했습니다:", error.message);
   });
 
 function renderPost(postData, container) {
@@ -68,7 +71,7 @@ function renderPost(postData, container) {
         ? postData.comments
             .map(
               (comment) => `
-      <div class="comments">
+      <div class="comments ${comment.comment_id}">
         <div class="left">
           <div class="top">
             <div class="img"><div style="background-image: url('${
@@ -97,7 +100,7 @@ function renderPost(postData, container) {
   `;
 }
 
-const afterRender = () => {
+const afterRender = (data) => {
   // 게시글 수정 삭제 버튼
   const modiBtn = document.querySelector(".title .modi");
   const delBtn = document.querySelector(".title .del");
@@ -118,6 +121,8 @@ const afterRender = () => {
   const confirmCoBtn = document.querySelector(".shadow-comment .delete");
   const commentEditEls = document.querySelectorAll(".comment.active");
 
+  let commentId = undefined; // 수정할 댓글의 ID
+
   // 게시글 및 댓글 모달 이벤트 리스너 설정
   setupModalToggle(delBtn, modalPostEl, bodyEl);
   delCoBtns.forEach((btn) => {
@@ -129,16 +134,20 @@ const afterRender = () => {
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
 
   const commentForm = document.querySelector(".comment-form");
+  let exist = false;
 
   commentForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    console.log(commentEl.value);
     fetch(`http://localhost:4000/posts/${postId}/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        comment: commentEl.value,
+        exist: exist,
+        comment_id: commentId,
+        comment_content: commentEl.value,
         user_id: "583c3ac3f38e84297c002546",
         nickname: "엉뚱한개굴",
         profileImagePath:
@@ -152,6 +161,12 @@ const afterRender = () => {
         alert("댓글이 등록되었습니다.");
         // location.href = `/main/posts/?post_id=${postId}`;
         location.reload();
+      }
+      if (response.status === 204) {
+        console.log(data);
+        alert("댓글이 수정되었습니다.");
+        location.reload();
+        exist = false;
       }
     });
   });
@@ -175,6 +190,9 @@ const afterRender = () => {
       commentBtn.textContent = "댓글 수정";
       commentBtn.classList.add("modi");
       commentEl.focus();
+      exist = true;
+      commentId = btn.closest(".comments").classList[1]; // 댓글의 ID가 클래스 리스트의 두 번째 항목에 있다고 가정
+      console.log(commentId);
     });
   });
 

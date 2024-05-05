@@ -11,7 +11,7 @@
     "updated_at": "2024-04-29T08:19:28.991Z",
     "deleted_at": null,
     "like": "2509",
-    "hits": 2091,
+    "hits": 2120,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -19,8 +19,9 @@
         "user_id": "583c5484cb79a5fe593425a9",
         "nickname": "조용한낙타",
         "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "포스팅 잘보고 갑니당 ! ㅎㅎ",
-        "created_at": "2024-04-12T05:00:00.000Z"
+        "created_at": "2024-04-12T05:00:00.000Z",
+        "updated_at": "2024-05-05T10:48:10.931Z",
+        "comment": "수저엉"
       },
       {
         "comment_id": 2,
@@ -123,8 +124,9 @@
         "user_id": "583c5484cb79a5fe593425a9",
         "nickname": "조용한낙타",
         "profileImagePath": "https://i.pinimg.com/564x/3e/fc/6e/3efc6e820481b9125452a0bd93b56781.jpg",
-        "comment": "댓글을 계속추가",
-        "created_at": "2024-04-26T02:25:47.291Z"
+        "comment": "댓글을 계속추가 가 아니라 수정을 합니다",
+        "created_at": "2024-04-26T02:25:47.291Z",
+        "updated_at": "2024-05-05T10:47:58.330Z"
       },
       {
         "comment_id": 15,
@@ -141,6 +143,55 @@
         "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
         "comment": "포스팅 잘보고 갑니당 ! ㅎㅎ",
         "created_at": "2024-04-29T08:36:39.660Z"
+      },
+      {
+        "comment_id": 17,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글 추강dd",
+        "created_at": "2024-05-03T02:26:19.898Z",
+        "updated_at": "2024-05-05T10:41:32.500Z"
+      },
+      {
+        "comment_id": 18,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글 추강ㅇㅇ",
+        "created_at": "2024-05-03T02:26:26.529Z"
+      },
+      {
+        "comment_id": 19,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "dfaff t수정수정",
+        "created_at": "2024-05-05T10:12:12.637Z",
+        "updated_at": "2024-05-05T10:42:08.957Z"
+      },
+      {
+        "comment_id": 20,
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "ddd",
+        "created_at": "2024-05-05T10:17:13.250Z"
+      },
+      {
+        "comment_id": "1",
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "created_at": "2024-05-05T10:38:19.133Z"
+      },
+      {
+        "comment_id": "17",
+        "user_id": "583c3ac3f38e84297c002546",
+        "nickname": "엉뚱한개굴",
+        "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+        "comment": "댓글 추강dd",
+        "created_at": "2024-05-05T10:41:32.442Z"
       }
     ]
   },
