@@ -1,12 +1,11 @@
 {
   "name": "be-server",
   "version": "0.0.1",
-  "type": "module",
   "private": true,
   "main": "be.js",
   "scripts": {
-    "start": "node be.js",
-    "dev": "nodemon be.js"
+    "start": "node be.cjs",
+    "dev": "nodemon be.cjs"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
