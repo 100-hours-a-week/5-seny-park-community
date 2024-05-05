@@ -161,6 +161,40 @@ app.get("/edit/posts/:postId", (req, res) => {
   });
 });
 
+// 게시글 등록
+app.post("/posts/createpost", (req, res) => {
+  const { title, content } = req.body;
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    posts.push({
+      post_id: posts[posts.length - 1].post_id + 1, // 마지막 게시글 id + 1
+      post_title: title,
+      post_content: content,
+      attach_file_path: "",
+      file_id: null,
+      user_id: "583c3ac3f38e84297c002546",
+      profileImagePath:
+        "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
+      nickname: "엉뚱한개굴",
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted_at: null,
+      like: 0,
+      hits: 0,
+      comments: [],
+    });
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("게시글 추가에 실패했습니다.");
+      }
+      return res.status(201).send("게시글 추가 성공");
+    });
+  });
+});
+
 // 게시글 수정
 app.post("/edit/posts/:postId", (req, res) => {
   const postId = req.params.postId;
@@ -189,6 +223,30 @@ app.post("/edit/posts/:postId", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`앱이 포트 ${PORT}에서 실행 중입니다.`);
+});
+
+// 게시글 삭제
+app.delete("/posts/:postId", (req, res) => {
+  const postId = req.params.postId;
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const postIndex = posts.findIndex(
+      (post) => post.post_id === Number(postId)
+    );
+    if (postIndex === -1) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
+    }
+    posts.splice(postIndex, 1);
+    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("게시글 삭제에 실패했습니다.");
+      }
+      return res.status(204).send("게시글 삭제 성공");
+    });
+  });
 });
 
 // 댓글 추가 & 수정
@@ -229,8 +287,12 @@ app.post("/posts/:postId/comment", (req, res) => {
     } else {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
+        const newCommentId =
+          post.comments.length === 0
+            ? 0
+            : post.comments[post.comments.length - 1].comment_id;
         post.comments.push({
-          comment_id: post.comments[post.comments.length - 1].comment_id + 1, // 마지막 댓글 id + 1
+          comment_id: newCommentId, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
@@ -323,40 +385,6 @@ app.post("/users/editprofile", (req, res) => {
         return res.status(500).json({ message: "닉네임 수정 실패" });
       }
       return res.status(201).json({ message: "닉네임 수정 성공" });
-    });
-  });
-});
-
-// 게시글 등록
-app.post("/posts/createpost", (req, res) => {
-  const { title, content } = req.body;
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    posts.push({
-      post_id: posts[posts.length - 1].post_id + 1, // 마지막 게시글 id + 1
-      post_title: title,
-      post_content: content,
-      attach_file_path: "",
-      file_id: null,
-      user_id: "583c3ac3f38e84297c002546",
-      profileImagePath:
-        "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
-      nickname: "엉뚱한개굴",
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
-      like: 0,
-      hits: 0,
-      comments: [],
-    });
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("게시글 추가에 실패했습니다.");
-      }
-      return res.status(201).send("게시글 추가 성공");
     });
   });
 });

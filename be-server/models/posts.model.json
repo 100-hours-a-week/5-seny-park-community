@@ -11,7 +11,7 @@
     "updated_at": "2024-04-29T08:19:28.991Z",
     "deleted_at": null,
     "like": "2509",
-    "hits": 2154,
+    "hits": 2156,
     "profileImagePath": "https://i.pinimg.com/564x/c2/00/42/c20042e84a280a18ed2fbeb8be998978.jpg",
     "comments": [
       {
@@ -695,7 +695,7 @@
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "like": 0,
     "hits": 0,
-    "comment": []
+    "comments": []
   },
   {
     "post_id": 19,
@@ -710,7 +710,7 @@
     "profileImagePath": "https://i.pinimg.com/564x/75/c3/86/75c386449739f22da99819e9ce7b984c.jpg",
     "like": 0,
     "hits": 0,
-    "comment": []
+    "comments": []
   },
   {
     "post_id": 20,
@@ -725,7 +725,7 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 2,
-    "comment": []
+    "comments": []
   },
   {
     "post_id": 21,
@@ -740,7 +740,7 @@
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
     "hits": 1,
-    "comment": []
+    "comments": []
   },
   {
     "post_id": 22,
@@ -754,53 +754,8 @@
     "nickname": "배고픈강아지",
     "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
     "like": 0,
-    "hits": 0,
-    "comment": []
-  },
-  {
-    "post_id": 23,
-    "post_title": "게시글 작성 시간 표기 테스트 - 현재 오전 1:37",
-    "post_content": "과연 몇시로 저장이 되려나 체크해봅니다..",
-    "attach_file_path": "",
-    "user_id": "5840b9c4da0529cd293d7700",
-    "created_at": "2024-04-23T16:37:05.548Z",
-    "updated_at": "2024-04-23T16:37:05.548Z",
-    "deleted_at": null,
-    "nickname": "배고픈강아지",
-    "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
-    "like": 0,
-    "hits": 5,
-    "comment": []
-  },
-  {
-    "post_id": 24,
-    "post_title": "시간 표기 기준 확인 : 현재시각 오전 1:49",
-    "post_content": "ㅇ",
-    "attach_file_path": "",
-    "user_id": "5840b9c4da0529cd293d7700",
-    "created_at": "2024-04-23T16:49:53.943Z",
-    "updated_at": "2024-04-23T16:49:53.943Z",
-    "deleted_at": null,
-    "nickname": "배고픈강아지",
-    "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
-    "like": 0,
-    "hits": 8,
-    "comment": []
-  },
-  {
-    "post_id": 25,
-    "post_title": "테스트 시간 : 오전 9: 54",
-    "post_content": "아무아무 내용 적어요",
-    "attach_file_path": "",
-    "user_id": "5840b9c4da0529cd293d7700",
-    "created_at": "2024-04-24T00:54:47.686Z",
-    "updated_at": "2024-04-24T00:54:47.686Z",
-    "deleted_at": null,
-    "nickname": "배고픈강아지",
-    "profileImagePath": "https://i.pinimg.com/564x/d9/23/1d/d9231dd1faf237fc69a6e4d5f6723d05.jpg",
-    "like": 0,
-    "hits": 0,
-    "comment": []
+    "hits": 1,
+    "comments": []
   },
   {
     "post_id": 26,
@@ -840,7 +795,7 @@
     "updated_at": "2024-04-29T00:33:48.189Z",
     "deleted_at": null,
     "like": 0,
-    "hits": 40,
+    "hits": 41,
     "comments": [
       {
         "comment_id": 1,

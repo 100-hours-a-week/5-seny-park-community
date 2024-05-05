@@ -129,7 +129,7 @@ const afterRender = (data) => {
   });
   setupModalToggle(cancelBtn, modalPostEl, bodyEl);
   setupModalToggle(cancelCoBtn, modalCommentEl, bodyEl);
-  setupModalToggle(confirmBtn, modalPostEl, bodyEl, "/main.html");
+  setupModalToggle(confirmBtn, modalPostEl, bodyEl);
   setupModalToggle(confirmCoBtn, modalCommentEl, bodyEl);
 
   const commentForm = document.querySelector(".comment-form");
@@ -212,6 +212,20 @@ const afterRender = (data) => {
         location.reload();
       } else {
         alert("댓글 삭제에 실패했습니다." + response.status);
+      }
+    });
+  });
+
+  // 게시글 삭제 버튼 클릭 시 등장하는 모달 팝업의 확인 버튼 클릭 시 게시글 삭제 요청 보내고, 삭제 성공 시 메인 페이지로 이동
+  confirmBtn.addEventListener("click", () => {
+    fetch(`http://localhost:4000/posts/${postId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 204) {
+        alert("게시글이 삭제되었습니다.");
+        location.href = "/main";
+      } else {
+        alert("게시글 삭제에 실패했습니다." + response.status);
       }
     });
   });
