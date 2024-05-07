@@ -438,5 +438,66 @@
     "updated_at": "2024-05-05T15:23:18.719Z",
     "deleted_at": null,
     "auth_token": null
+  },
+  {
+    "user_id": 44,
+    "email": "zkzmftm@ak.ak",
+    "password": "zkzmftm123A!",
+    "nickname": "이미지저장테스트",
+    "created_at": "2024-05-07T15:12:45.197Z",
+    "updated_at": "2024-05-07T15:12:45.197Z",
+    "deleted_at": null,
+    "auth_token": null
+  },
+  {
+    "user_id": 45,
+    "email": "pse@ddd.ccc",
+    "password": "qlalfqjsgh123A!",
+    "nickname": "테스트ㅇ",
+    "created_at": "2024-05-07T15:24:51.394Z",
+    "updated_at": "2024-05-07T15:24:51.394Z",
+    "deleted_at": null,
+    "auth_token": null
+  },
+  {
+    "user_id": 46,
+    "email": "pse@jdk.dkd",
+    "password": "qlqjs123A!",
+    "nickname": "테스트으응",
+    "created_at": "2024-05-07T16:12:07.923Z",
+    "updated_at": "2024-05-07T16:12:07.923Z",
+    "deleted_at": null,
+    "auth_token": null,
+    "profileImagePath": null
+  },
+  {
+    "user_id": 47,
+    "email": "kdj@dj.dk",
+    "password": "qlqjs123A!",
+    "nickname": "노랑카클스",
+    "created_at": "2024-05-07T16:28:25.049Z",
+    "updated_at": "2024-05-07T16:28:25.049Z",
+    "deleted_at": null,
+    "auth_token": null,
+    "profileImagePath": null
+  },
+  {
+    "user_id": 48,
+    "created_at": "2024-05-07T16:31:43.032Z",
+    "updated_at": "2024-05-07T16:31:43.032Z",
+    "deleted_at": null,
+    "auth_token": null,
+    "profileImagePath": null
+  },
+  {
+    "user_id": 49,
+    "email": "join@pp.com",
+    "password": "rkdlq123A!",
+    "nickname": "가입",
+    "created_at": "2024-05-07T16:42:35.057Z",
+    "updated_at": "2024-05-07T16:42:35.057Z",
+    "deleted_at": null,
+    "auth_token": null,
+    "profileImagePath": "images/1715100155046___black.png"
   }
 ]
