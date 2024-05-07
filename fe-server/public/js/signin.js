@@ -91,16 +91,10 @@ formEl.addEventListener("submit", async (event) => {
     check.checkPassword &&
     check.nickname
   ) {
+    const formData = new FormData(formEl);
     const response = await fetch("http://localhost:4000/users/signin", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: formEl.elements.email.value,
-        password: formEl.elements.password.value,
-        nickname: formEl.elements.nickname.value,
-      }),
+      body: formData,
     });
 
     const data = await response.json();

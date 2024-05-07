@@ -7,6 +7,7 @@ const fileUsersPath = path.join(__dirname, "../models/users.model.json");
 const postLogin = (req, res) => {
   const { email, password } = req.body;
   console.log(`Email be: ${email}, Password: ${password}`);
+  console.log(req.body, req.file);
 
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
     if (err) {
@@ -49,6 +50,12 @@ const postSignup = (req, res) => {
   const { email, password, nickname } = req.body;
   console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
 
+  const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
+  console.log(profilePicture);
+
+  // 파일 경로 설정
+  const profileImagePath = profilePicture ? profilePicture.path : null;
+
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
     if (err) {
       console.error(err);
@@ -56,7 +63,6 @@ const postSignup = (req, res) => {
     }
 
     const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
-    console.log(users);
     const emailExists = users.some((user) => user.email === email); // 중복 이메일 체크
     const nicknameExists = users.some((user) => user.nickname === nickname); // 중복 닉네임 체크
     if (emailExists || nicknameExists) {
@@ -72,6 +78,7 @@ const postSignup = (req, res) => {
       updated_at: new Date(),
       deleted_at: null,
       auth_token: null,
+      profileImagePath: profileImagePath,
     });
 
     fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
