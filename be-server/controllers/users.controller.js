@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const fileUsersPath = path.join(__dirname, "../models/users.model.json");
 
@@ -29,7 +30,8 @@ const postLogin = (req, res) => {
       });
     }
     // 회원정보 있으나 비번 틀린 경우
-    if (user.password !== password) {
+    // bcrypt.compareSync(입력한 비밀번호, 암호화된 비밀번호)
+    if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({
         emailExists: true,
         pwdExists: false,
@@ -48,10 +50,12 @@ const postLogin = (req, res) => {
 // 회원가입
 const postSignup = (req, res) => {
   const { email, password, nickname } = req.body;
-  console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
+  const hashedPassword = bcrypt.hashSync(password, 12); // 비밀번호 암호화
+  console.log(
+    `Email: ${email}, Password: ${hashedPassword}, Nickname: ${nickname}`
+  );
 
   const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
-  console.log(profilePicture);
 
   // 파일 경로 설정
   const profileImagePath = profilePicture ? profilePicture.path : null;
@@ -72,7 +76,7 @@ const postSignup = (req, res) => {
     users.push({
       user_id: users.length + 1,
       email: email,
-      password: password,
+      password: hashedPassword,
       nickname: nickname,
       created_at: new Date(),
       updated_at: new Date(),
