@@ -12,7 +12,7 @@ fetch(`http://localhost:4000/users/editprofile`)
   });
 
 function renderPost(userData, container) {
-  console.log(userData.profileImagePath);
+  console.log(userData.profileImagePath.slice(7));
   container.innerHTML = `
     <h2>회원정보 수정</h2>
         <form
@@ -27,7 +27,9 @@ function renderPost(userData, container) {
             <div class="imgBox">
               <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
               <label for="profileUpload" class="file-upload-label">
-              <div class="mid" style="background-image: url('${userData.profileImagePath}')"><div class="editbtn">변경</div></div>
+              <div class="mid" style="background-image: url('http://localhost:4000/${userData.profileImagePath.slice(
+                7
+              )}')"><div class="editbtn">변경</div></div>
               </label>
               <!-- display: none -->
               <input type="file" id="profileUpload" name="profilePicture" />

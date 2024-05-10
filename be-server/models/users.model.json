@@ -15,9 +15,9 @@
     "profileImagePath": "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
     "email": "123@test.com",
     "password": "qlalfqjsgh123A!",
-    "nickname": "엉뚱한개굴2",
+    "nickname": "kjsadhjk",
     "created_at": "2023-11-28T14:10:11.338Z",
-    "updated_at": "2024-04-29T00:31:00.372Z",
+    "updated_at": "2024-05-09T08:41:14.995Z",
     "deleted_at": null,
     "auth_token": "pGGXsa6vaKs615CYO0GpJjcDpN6WUjQa"
   },
@@ -499,5 +499,16 @@
     "deleted_at": null,
     "auth_token": null,
     "profileImagePath": "images/1715100155046___black.png"
+  },
+  {
+    "user_id": 50,
+    "email": "dkjfa@dkfjal.dklfj",
+    "password": "qlalfqjsgh13A!",
+    "nickname": "djdfkajs",
+    "created_at": "2024-05-09T06:58:50.700Z",
+    "updated_at": "2024-05-09T06:58:50.700Z",
+    "deleted_at": null,
+    "auth_token": null,
+    "profileImagePath": "images/profile/1715237930688_2024-05-092.17.30.png"
   }
 ]
