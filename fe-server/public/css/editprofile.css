@@ -45,6 +45,17 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다. ss
   box-sizing: border-box;
 }
 
+.inner .imgContainer .red {
+  color: #ff0000;
+  box-sizing: border-box; /* padding, border 포함 */
+  font-size: 12px;
+  font-weight: 400;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
 .inner .imgContainer .imgBox {
   display: flex;
   justify-content: center;

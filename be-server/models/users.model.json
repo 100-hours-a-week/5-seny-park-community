@@ -485,11 +485,11 @@
     "user_id": 49,
     "email": "100@test.com",
     "password": "$2b$12$xodk19WWLq7ShQjMqI9ev.JkSpI./I0sBch9D4AO5R7BoT7esgifO",
-    "nickname": "ddfaf",
+    "nickname": "닉네임수정22",
     "created_at": "2024-05-10T08:44:04.271Z",
-    "updated_at": "2024-05-10T17:03:09.370Z",
+    "updated_at": "2024-05-10T17:35:30.486Z",
     "deleted_at": null,
     "auth_token": null,
-    "profileImagePath": "http://localhost:4000/images/profile/1715330644060_2024-05-104.42.29.png"
+    "profileImagePath": "http://localhost:4000/images/profile/1715362530481_2024-05-111.15.46.png"
   }
 ]

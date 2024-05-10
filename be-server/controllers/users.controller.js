@@ -111,7 +111,9 @@ const getEditProfile = (req, res) => {
 // 회원정보 수정페이지 - 수정된 정보 저장
 const postEditProfile = (req, res) => {
   const { nickname } = req.body;
-  console.log(nickname);
+  const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
+  const profileImagePath = profilePicture ? profilePicture.path : null;
+
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
     if (err) {
       return res
@@ -128,7 +130,13 @@ const postEditProfile = (req, res) => {
     if (nicknameExists) {
       return res.json({ nicknameExists });
     }
+    console.log(
+      profilePicture,
+      profileImagePath,
+      `http://localhost:4000/${profileImagePath}`
+    );
 
+    user.profileImagePath = `http://localhost:4000/${profileImagePath}`;
     user.nickname = nickname;
     user.updated_at = new Date();
     fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
