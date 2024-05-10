@@ -38,4 +38,7 @@ usersRouter.post(
   usersController.postEditProfile
 );
 
+// 회원정보 비밀번호 수정페이지 - 비밀번호 수정
+usersRouter.post("/editpwd", usersController.postEditPwd);
+
 module.exports = usersRouter;
