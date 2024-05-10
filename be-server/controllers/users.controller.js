@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const fileUsersPath = path.join(__dirname, "../models/users.model.json");
 
@@ -29,7 +30,8 @@ const postLogin = (req, res) => {
       });
     }
     // 회원정보 있으나 비번 틀린 경우
-    if (user.password !== password) {
+    // bcrypt.compareSync(입력한 비밀번호, 암호화된 비밀번호)
+    if (!bcrypt.compareSync(password, user.password)) {
       return res.status(400).json({
         emailExists: true,
         pwdExists: false,
@@ -48,10 +50,12 @@ const postLogin = (req, res) => {
 // 회원가입
 const postSignup = (req, res) => {
   const { email, password, nickname } = req.body;
-  console.log(`Email: ${email}, Password: ${password}, Nickname: ${nickname}`);
+  const hashedPassword = bcrypt.hashSync(password, 12); // 비밀번호 암호화
+  console.log(
+    `Email: ${email}, Password: ${hashedPassword}, Nickname: ${nickname}`
+  );
 
   const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
-  console.log(profilePicture);
 
   // 파일 경로 설정
   const profileImagePath = profilePicture ? profilePicture.path : null;
@@ -72,13 +76,13 @@ const postSignup = (req, res) => {
     users.push({
       user_id: users.length + 1,
       email: email,
-      password: password,
+      password: hashedPassword,
       nickname: nickname,
       created_at: new Date(),
       updated_at: new Date(),
       deleted_at: null,
       auth_token: null,
-      profileImagePath: profileImagePath,
+      profileImagePath: `http://localhost:4000/${profileImagePath}`,
     });
 
     fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
@@ -98,10 +102,8 @@ const getEditProfile = (req, res) => {
       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
     }
     const users = JSON.parse(data);
-    const user = users.find(
-      (user) => user.user_id === "583c3ac3f38e84297c002546"
-    ); // 임의로 첫번째 사용자 정보 가져옴
-    console.log(user);
+    const user = users.find((user) => user.user_id === 49); // 임의로 첫번째 사용자 정보 가져옴
+    console.log(user, 111);
     res.json(user);
   });
 };
@@ -109,6 +111,9 @@ const getEditProfile = (req, res) => {
 // 회원정보 수정페이지 - 수정된 정보 저장
 const postEditProfile = (req, res) => {
   const { nickname } = req.body;
+  const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
+  const profileImagePath = profilePicture ? profilePicture.path : null;
+
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
     if (err) {
       return res
@@ -116,9 +121,7 @@ const postEditProfile = (req, res) => {
         .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
     }
     const users = JSON.parse(data);
-    const user = users.find(
-      (user) => user.user_id === "583c3ac3f38e84297c002546"
-    ); // 임의로 첫번째 사용자 정보 가져옴
+    const user = users.find((user) => user.user_id === 49); // 임의로 첫번째 사용자 정보 가져옴
     const nicknameExists = users.some(
       (diffuser) =>
         diffuser.nickname === nickname && diffuser.user_id !== user.user_id
@@ -127,6 +130,13 @@ const postEditProfile = (req, res) => {
     if (nicknameExists) {
       return res.json({ nicknameExists });
     }
+    console.log(
+      profilePicture,
+      profileImagePath,
+      `http://localhost:4000/${profileImagePath}`
+    );
+
+    user.profileImagePath = `http://localhost:4000/${profileImagePath}`;
     user.nickname = nickname;
     user.updated_at = new Date();
     fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
@@ -138,9 +148,36 @@ const postEditProfile = (req, res) => {
   });
 };
 
+// 회원정보 비밀번호 수정 - 수정된 정보 저장
+const postEditPwd = (req, res) => {
+  const { password } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 12); // 비밀번호 암호화
+  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
+    }
+    const users = JSON.parse(data);
+    const user = users.find((user) => user.user_id === 49); // 임의로 첫번째 사용자 정보 가져옴
+    console.log(user.password, hashedPassword);
+    user.password = hashedPassword;
+    user.updated_at = new Date();
+    console.log(user, password);
+    fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
+      if (err) {
+        return res.status(500).json({ message: "비밀번호 수정 실패" });
+      }
+      console.log("수정성공");
+      return res.status(201).json({ message: "비밀번호 수정 성공" });
+    });
+  });
+};
+
 module.exports = {
   postLogin,
   postSignup,
   getEditProfile,
   postEditProfile,
+  postEditPwd,
 };

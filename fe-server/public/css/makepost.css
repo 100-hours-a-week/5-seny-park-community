@@ -132,7 +132,7 @@ main {
 .inner form .inputFile .upload-img.active {
   padding: 8px;
   display: flex;
-  height: 200px;
+  width: 200px;
 }
 
 .inner form .hidden {

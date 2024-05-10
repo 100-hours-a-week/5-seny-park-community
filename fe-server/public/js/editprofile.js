@@ -1,4 +1,9 @@
-import { setupModalToggle, nicknameCheck, handleSelected } from "/js/utils.js";
+import {
+  setupModalToggle,
+  ProfileImgCheck,
+  nicknameCheck,
+  handleSelected,
+} from "/js/utils.js";
 const userContainer = document.querySelector(".inner");
 
 const userId = 1; // 현재 로그인한 사용자의 id 임의로 설정
@@ -12,22 +17,27 @@ fetch(`http://localhost:4000/users/editprofile`)
   });
 
 function renderPost(userData, container) {
-  console.log(userData.profileImagePath);
+  const profileLink =
+    "http://localhost:4000/profile/" +
+    userData.profileImagePath.split("/").pop();
+  console.log(profileLink);
   container.innerHTML = `
     <h2>회원정보 수정</h2>
         <form
           method="post" 
           id="edit-form"
           class="inputs"
+          enctype="multipart/form-data"
         >
           <div class="imgContainer">
             <div class="left">
               <p class="profile">프로필 사진*</p>
+              <div class="red img"></div>
             </div>
             <div class="imgBox">
               <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
               <label for="profileUpload" class="file-upload-label">
-              <div class="mid" style="background-image: url('${userData.profileImagePath}')"><div class="editbtn">변경</div></div>
+              <div class="mid" style="background-image: url('${profileLink}')"><div class="editbtn">변경</div></div>
               </label>
               <!-- display: none -->
               <input type="file" id="profileUpload" name="profilePicture" />
@@ -74,6 +84,7 @@ const afterRender = () => {
   // 이미지 수정
   const fileInput = document.querySelector("#profileUpload"); // input[type="file"] - display:none
   const imgPrevEl = document.querySelector(".mid"); // img 보이는 태그
+  const redImgEl = document.querySelector(".red.img"); // 이미지 업로드 경고문
   // 수정하기 버튼 클릭 시 토스트 페이지 이벤트
   const toastEl = document.querySelector(".toast");
 
@@ -90,28 +101,29 @@ const afterRender = () => {
     if (event.target.id === "nickname") {
       nicknameCheck(event.target.value, redNicknameEl);
     }
+    if (event.target.id === "profileUpload") {
+      handleSelected(fileInput, imgPrevEl, redImgEl);
+    }
   });
 
   let check = {
+    profileImage: true,
     nickname: false,
   };
 
   formEl.addEventListener("submit", async (event) => {
     event.preventDefault(); // submit 기본 이벤트(새로고침) 막기
+    check.profileImage = ProfileImgCheck(imgPrevEl, redImgEl); // 이미지 체크(업로드 여부
     check.nickname = nicknameCheck(
       formEl.elements.nickname.value,
       redNicknameEl
     );
 
-    if (check.nickname) {
+    if (check.profileImage && check.nickname) {
+      const formData = new FormData(formEl);
       const response = await fetch(`http://localhost:4000/users/editprofile`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nickname: formEl.elements.nickname.value,
-        }),
+        body: formData,
       });
       console.log(response);
       const data = await response.json();

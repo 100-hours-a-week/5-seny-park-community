@@ -9,6 +9,10 @@ const usersRouter = require("./routes/users.router");
 const postsRouter = require("./routes/posts.router");
 
 const app = express();
+
+// 정적 파일 제공을 위한 미들웨어
+app.use(express.static("images"));
+
 app.use(
   cors({
     origin: "http://localhost:3000",

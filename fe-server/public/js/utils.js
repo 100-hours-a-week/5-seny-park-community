@@ -20,7 +20,7 @@ export const addListeners = (reader, imgPrev, redImgEl) => {
 
 export const handleSelected = (fileInput, imgPrev, redImgEl = null) => {
   const files = fileInput.files;
-  console.log(imgPrev.tagName);
+  // console.log(imgPrev.tagName);
   if (files.length === 0) {
     console.log("No file selected or file was deselected.");
     clearImageContent(imgPrev, redImgEl); // 이미 선택된 이미지 제거

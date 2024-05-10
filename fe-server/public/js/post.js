@@ -18,7 +18,18 @@ fetch(`http://localhost:4000/posts/${postId}`)
 
 function renderPost(postData, container) {
   const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
-  let postContent = postData.post_content;
+  let postImgLink = "";
+  if (
+    postData.attach_file_path &&
+    postData.attach_file_path !== "http://localhost:4000/"
+  ) {
+    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+      .split("/")
+      .pop()}`;
+  }
+
+  console.log(postImgLink);
+
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
@@ -37,7 +48,8 @@ function renderPost(postData, container) {
       </div>
     </div>
     <div class="contents">
-    <img class="img" src="${postData.attach_file_path}">
+    ${postData.attach_file_path ? `<img src="${postImgLink}" />` : ""}
+
 
       <div class="texts">${postData.post_content}</div>
     </div>

@@ -35,8 +35,8 @@ formEl.addEventListener("input", (event) => {
     editBtn.classList.remove("active");
   }
 });
-console.log(check.password, check.checkPassword);
-formEl.addEventListener("submit", (event) => {
+
+formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   check.password = pwdCheck(pwdEl.value, redPwdEl);
   check.checkPassword = pwdCheckSame(
@@ -46,12 +46,22 @@ formEl.addEventListener("submit", (event) => {
   );
 
   if (check.password && check.checkPassword) {
-    // formEl.submit();
-    // 수정하기 버튼 클릭 시 토스트 페이지 이벤트
-    toastEl.classList.add("active");
-    setTimeout(() => {
-      // 1초 후 토스트 el 사라짐
-      toastEl.classList.remove("active");
-    }, 1000);
+    const response = await fetch(`http://localhost:4000/users/editpwd`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: formEl.elements.password.value,
+      }),
+    });
+    console.log(response);
+    if (response.status === 201) {
+      toastEl.classList.add("active");
+      setTimeout(() => {
+        // 1초 후 토스트 el 사라짐
+        toastEl.classList.remove("active");
+      }, 1000);
+    }
   }
 });

@@ -4,6 +4,7 @@ const postContainer = document.querySelector(".inner");
 //  fetch로 json 파일 불러오기
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
+
 fetch(`http://localhost:4000/posts/edit/${postId}`)
   .then((response) => response.json())
   .then((data) => {
@@ -13,6 +14,15 @@ fetch(`http://localhost:4000/posts/edit/${postId}`)
   });
 
 function renderPost(postData, container) {
+  let postImgLink = "";
+  if (
+    postData.attach_file_path &&
+    postData.attach_file_path !== "http://localhost:4000/"
+  ) {
+    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+      .split("/")
+      .pop()}`;
+  }
   container.innerHTML = `
    <div class="h2Title">
     <h2>게시글 수정</h2>
@@ -22,6 +32,7 @@ function renderPost(postData, container) {
     method="post" 
     id="editpost-form"
     class="inputs"
+    enctype="multipart/form-data"
   >
     <label class="input">
       <div class="title">제목*</div>
@@ -53,7 +64,7 @@ function renderPost(postData, container) {
       </div>
       ${
         postData.attach_file_path
-          ? `<img src="${postData.attach_file_path}" class="upload-img active" />`
+          ? `<img src="${postImgLink}" class="upload-img active" />`
           : ""
       }
         </label>
@@ -90,17 +101,12 @@ const afterRender = () => {
       redEl
     );
     if (check) {
+      const formData = new FormData(formEl);
       const response = await fetch(
         `http://localhost:4000/posts/edit/${postId}`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: titleEl.value,
-            content: contentEl.value.replace(/\n/g, "<br>"),
-          }),
+          body: formData,
         }
       );
       console.log(response);

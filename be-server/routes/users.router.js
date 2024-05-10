@@ -32,6 +32,13 @@ usersRouter.post(
 usersRouter.get("/editprofile", usersController.getEditProfile);
 
 // 회원정보 수정페이지 - 수정된 정보 저장
-usersRouter.post("/editprofile", usersController.postEditProfile);
+usersRouter.post(
+  "/editprofile",
+  upload.single("profilePicture"),
+  usersController.postEditProfile
+);
+
+// 회원정보 비밀번호 수정페이지 - 비밀번호 수정
+usersRouter.post("/editpwd", usersController.postEditPwd);
 
 module.exports = usersRouter;
