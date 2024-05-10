@@ -1,3 +1,6 @@
 node_modules
-images
-models
+# Ignore images folder
+be-server/images/
+
+# Ignore models folder
+be-server/models/
