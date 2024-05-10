@@ -40,15 +40,10 @@ formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   check = postCheck(formEl.elements.title, formEl.elements.content, redEl);
   if (check) {
-    const response = await fetch("http://localhost:4000/posts/createpost", {
+    const formData = new FormData(formEl);
+    const response = await fetch(`http://localhost:4000/posts/createpost`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: titleEl.value,
-        content: contentEl.value.replace(/\n/g, "<br>"),
-      }),
+      body: formData,
     });
     console.log(response);
     if (response.status === 201) {

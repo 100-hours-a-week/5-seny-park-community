@@ -23,7 +23,11 @@ const getPost = (req, res) => {
     }
     const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
     const post = posts.find((post) => post.post_id === Number(postId));
-    post.hits = Number(post.hits) + 1; // 조회수 증가
+
+    // 만약 post 객체가 존재하면 hits 속성을 증가시킵니다.
+    if (post) {
+      post.hits = Number(post.hits) + 1; // 조회수 증가
+    }
 
     console.log(post);
     // 업데이트된 게시글 정보를 파일에 저장
@@ -54,8 +58,11 @@ const getEditPost = (req, res) => {
 // 게시글 수정 페이지 - 수정된 정보 저장
 const postEditPost = (req, res) => {
   const postId = req.params.postId;
-  const { title, content } = req.body;
-  console.log(`Title: ${title}, Content: ${content}`);
+  console.log(req.body);
+  const { postTitle, postContent } = req.body;
+  console.log(`Title: ${postTitle}, Content: ${postContent}`);
+  const postImg = req.file; // 이미지 파일 정보
+  const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
@@ -63,9 +70,16 @@ const postEditPost = (req, res) => {
     const posts = JSON.parse(data);
     const post = posts.find((post) => post.post_id === Number(postId));
     console.log(post);
-    post.post_title = title;
-    post.post_content = content;
-    post.updated_at = new Date();
+    post.post_title = postTitle;
+    post.post_content = postContent;
+    // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음
+    if (
+      postImg &&
+      post.attach_file_path !== `http://localhost:4000/${postImgPath}`
+    ) {
+      post.attach_file_path = `http://localhost:4000/${postImgPath}`;
+    }
+
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {
         console.log(err);
@@ -79,18 +93,22 @@ const postEditPost = (req, res) => {
 
 // 게시글 등록
 const postPost = (req, res) => {
-  const { title, content } = req.body;
+  const { postTitle, postContent } = req.body;
+  console.log(`Title: ${postTitle}, Content: ${postContent}`);
+  const postImg = req.file; // 이미지 파일 정보
+  const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
+  console.log(req.file, req.body, 1000);
+
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
     }
     const posts = JSON.parse(data);
     posts.push({
-      post_id: posts[posts.length - 1].post_id + 1, // 마지막 게시글 id + 1
-      post_title: title,
-      post_content: content,
-      attach_file_path: "",
-      file_id: null,
+      post_id: posts.length ? posts[posts.length - 1].post_id + 1 : 1, // 마지막 게시글 id + 1
+      post_title: postTitle,
+      post_content: postContent,
+      attach_file_path: `http://localhost:4000/${postImgPath}`,
       user_id: "583c3ac3f38e84297c002546",
       profileImagePath:
         "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
