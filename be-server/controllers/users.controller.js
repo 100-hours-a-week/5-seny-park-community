@@ -82,7 +82,7 @@ const postSignup = (req, res) => {
       updated_at: new Date(),
       deleted_at: null,
       auth_token: null,
-      profileImagePath: profileImagePath,
+      profileImagePath: `http://localhost:4000/${profileImagePath}`,
     });
 
     fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
@@ -102,7 +102,7 @@ const getEditProfile = (req, res) => {
       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
     }
     const users = JSON.parse(data);
-    const user = users.find((user) => user.user_id === 50); // 임의로 첫번째 사용자 정보 가져옴
+    const user = users.find((user) => user.user_id === 49); // 임의로 첫번째 사용자 정보 가져옴
     console.log(user);
     res.json(user);
   });
