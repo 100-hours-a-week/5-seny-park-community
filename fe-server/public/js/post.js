@@ -27,9 +27,7 @@ function renderPost(postData, container) {
       .split("/")
       .pop()}`;
   }
-
   console.log(postImgLink);
-
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
@@ -48,10 +46,12 @@ function renderPost(postData, container) {
       </div>
     </div>
     <div class="contents">
-    ${postData.attach_file_path ? `<img src="${postImgLink}" />` : ""}
-
-
-      <div class="texts">${postData.post_content}</div>
+    ${
+      postImgLink !== ""
+        ? `<div class="img" style="background-image: url('${postImgLink}')"></div>`
+        : ""
+    }
+    <div class="texts">${postData.post_content}</div>
     </div>
 
     <div class="clickBtn">
