@@ -59,7 +59,7 @@ const getEditPost = (req, res) => {
 const postEditPost = (req, res) => {
   const postId = req.params.postId;
   console.log(req.body);
-  const { postTitle, postContent } = req.body;
+  const { postTitle, postContent, click } = req.body;
   console.log(`Title: ${postTitle}, Content: ${postContent}`);
   const postImg = req.file; // 이미지 파일 정보
   const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
@@ -72,12 +72,18 @@ const postEditPost = (req, res) => {
     console.log(post);
     post.post_title = postTitle;
     post.post_content = postContent;
-    // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음
-    if (
-      postImg &&
-      post.attach_file_path !== `http://localhost:4000/${postImgPath}`
-    ) {
+    console.log(postImg, postImgPath, click);
+    // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
+    if (postImg) {
+      // 이미지가 업로드된 경우
       post.attach_file_path = `http://localhost:4000/${postImgPath}`;
+    } else if (post.attach_file_path && !req.file && click < 2) {
+      // 이미지가 제거된 경우
+      // 이미지가 업로드되지 않은 경우
+      post.attach_file_path = post.attach_file_path;
+    } else {
+      // 이미지가 제거된 경우
+      post.attach_file_path = "";
     }
 
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
@@ -191,12 +197,13 @@ const postComment = (req, res) => {
     } else {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
+        console.log(post.comments, post.comments.length, 1000);
         const newCommentId =
           post.comments.length === 0
             ? 0
             : post.comments[post.comments.length - 1].comment_id;
         post.comments.push({
-          comment_id: newCommentId, // 마지막 댓글 id + 1
+          comment_id: newCommentId + 1, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
