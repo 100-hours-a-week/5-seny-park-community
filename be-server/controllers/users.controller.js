@@ -159,7 +159,7 @@ const postEditPwd = (req, res) => {
         .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
     }
     const users = JSON.parse(data);
-    const user = users.find((user) => user.user_id === 49); // 임의로 첫번째 사용자 정보 가져옴
+    const user = users.find((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
     console.log(user.password, hashedPassword);
     user.password = hashedPassword;
     user.updated_at = new Date();
