@@ -59,13 +59,13 @@ function renderPost(postData, container) {
     <label for="postUpload" class="inputFile">
       <div class="title">이미지</div>
       <div class="fileLabel">
-        <div class="btn">파일 선택</div>
+        <div class="file btn">파일 선택</div>
         <div class="content3">파일을 선택해주세요.</div>
       </div>
       ${
         postData.attach_file_path
           ? `<img src="${postImgLink}" class="upload-img active" />`
-          : ""
+          : `<img src="" class="upload-img" />`
       }
         </label>
     <input
@@ -87,10 +87,16 @@ const afterRender = () => {
   // 이미지 업로드
   const imgPrevEl = document.querySelector(".upload-img");
   const fileInput = document.querySelector(".fileinput");
+  const fileSelectBtn = document.querySelector(".file.btn");
+  let clickCount = 0; // 파일 선택 버튼 클릭 횟수 저장
   // 유효성검사
   const formEl = document.querySelector("#editpost-form"); // Form element
   const submitBtn = document.querySelector(".btn.purple-btn"); // Submit button for the form
   const redEl = document.querySelector(".red"); // Element to display validation messages
+
+  fileSelectBtn.addEventListener("click", () => {
+    clickCount++; // 파일 선택 버튼 클릭 횟수 증가 // 현재는 두번이상 클릭시 이미지 업로드가 안되도록 설정
+  });
 
   // 게시글 작성/편집 게시글 post
   formEl.addEventListener("submit", async (event) => {
@@ -102,6 +108,8 @@ const afterRender = () => {
     );
     if (check) {
       const formData = new FormData(formEl);
+      formData.append("click", clickCount); // 클릭 횟수를 formData에 추가
+      console.log(clickCount);
       const response = await fetch(
         `http://localhost:4000/posts/edit/${postId}`,
         {
