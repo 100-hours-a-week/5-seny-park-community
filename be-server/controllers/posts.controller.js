@@ -73,11 +73,14 @@ const postEditPost = (req, res) => {
     post.post_title = postTitle;
     post.post_content = postContent;
     // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음
+    console.log(postImg, post.attach_file_path, postImgPath, 1000);
     if (
       postImg &&
       post.attach_file_path !== `http://localhost:4000/${postImgPath}`
     ) {
       post.attach_file_path = `http://localhost:4000/${postImgPath}`;
+    } else if (!postImg) {
+      post.attach_file_path = "";
     }
 
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
