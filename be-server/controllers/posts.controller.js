@@ -71,7 +71,7 @@ const postEditPost = (req, res) => {
     const post = posts.find((post) => post.post_id === Number(postId));
     console.log(post);
     post.post_title = postTitle;
-    post.post_content = postContent.replace(/\n/g, "<br>");
+    post.post_content = postContent;
     // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음
     if (
       postImg &&
@@ -107,7 +107,7 @@ const postPost = (req, res) => {
     posts.push({
       post_id: posts.length ? posts[posts.length - 1].post_id + 1 : 1, // 마지막 게시글 id + 1
       post_title: postTitle,
-      post_content: postContent.replace(/\n/g, "<br>"),
+      post_content: postContent,
       attach_file_path: `http://localhost:4000/${postImgPath}`,
       user_id: "583c3ac3f38e84297c002546",
       profileImagePath:

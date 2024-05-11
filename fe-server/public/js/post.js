@@ -51,7 +51,7 @@ function renderPost(postData, container) {
         ? `<div class="img" style="background-image: url('${postImgLink}')"></div>`
         : ""
     }
-    <div class="texts">${postData.post_content}</div>
+    <div class="texts">${postData.post_content.replace(/\n/g, "<br>")}</div>
     </div>
 
     <div class="clickBtn">
