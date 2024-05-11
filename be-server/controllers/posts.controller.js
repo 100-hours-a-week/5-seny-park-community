@@ -197,12 +197,13 @@ const postComment = (req, res) => {
     } else {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
+        console.log(post.comments, post.comments.length, 1000);
         const newCommentId =
           post.comments.length === 0
             ? 0
             : post.comments[post.comments.length - 1].comment_id;
         post.comments.push({
-          comment_id: newCommentId, // 마지막 댓글 id + 1
+          comment_id: newCommentId + 1, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
