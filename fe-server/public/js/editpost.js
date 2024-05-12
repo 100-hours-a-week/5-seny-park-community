@@ -13,7 +13,7 @@ fetch(`http://localhost:4000/posts/edit/${postId}`)
     afterRender();
   });
 
-function renderPost(postData, container) {
+const renderPost = (postData, container) => {
   let postImgLink = "";
   if (
     postData.attach_file_path &&
@@ -78,7 +78,7 @@ function renderPost(postData, container) {
 
   <button type="submit" form="editpost-form" class="btn purple-btn">완료</button>  
     `;
-}
+};
 
 const afterRender = () => {
   // 게시글 작성/편집 게시글 내용

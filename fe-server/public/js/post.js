@@ -16,7 +16,7 @@ fetch(`http://localhost:4000/posts/${postId}`)
     console.error("데이터를 불러오는 중에 오류가 발생했습니다:", error.message);
   });
 
-function renderPost(postData, container) {
+const renderPost = (postData, container) => {
   const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
   let postImgLink = "";
   if (
@@ -110,7 +110,7 @@ function renderPost(postData, container) {
     }
   </div>
   `;
-}
+};
 
 const afterRender = (data) => {
   // 게시글 수정 삭제 버튼
