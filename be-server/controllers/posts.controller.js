@@ -198,12 +198,11 @@ const postComment = (req, res) => {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
         console.log(post.comments, post.comments.length, 1000);
-        const newCommentId =
-          post.comments.length === 0
-            ? 0
-            : post.comments[post.comments.length - 1].comment_id;
+        // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
+        const lastCommentId =
+          post.comments[post.comments.length - 1]?.comment_id || 0;
         post.comments.push({
-          comment_id: newCommentId + 1, // 마지막 댓글 id + 1
+          comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
