@@ -103,7 +103,6 @@ const getEditProfile = (req, res) => {
     }
     const users = JSON.parse(data);
     const user = users.find((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
-    console.log(user, 111);
     res.json(user);
   });
 };
@@ -136,9 +135,14 @@ const postEditProfile = (req, res) => {
       `http://localhost:4000/${profileImagePath}`
     );
 
-    user.profileImagePath = `http://localhost:4000/${profileImagePath}`;
-    user.nickname = nickname;
-    user.updated_at = new Date();
+    user = {
+      // 전개연산자 사용하여 업데이트하기
+      ...user,
+      profileImagePath: `http://localhost:4000/${profileImagePath}`,
+      nickname,
+      updated_at: new Date(),
+    };
+
     fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ message: "닉네임 수정 실패" });
@@ -161,9 +165,13 @@ const postEditPwd = (req, res) => {
     const users = JSON.parse(data);
     const user = users.find((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
     console.log(user.password, hashedPassword);
-    user.password = hashedPassword;
-    user.updated_at = new Date();
-    console.log(user, password);
+
+    user = {
+      ...user,
+      password: hashedPassword,
+      updated_at: new Date(),
+    };
+
     fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ message: "비밀번호 수정 실패" });

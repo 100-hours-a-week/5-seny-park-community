@@ -16,7 +16,7 @@ fetch(`http://localhost:4000/users/editprofile`)
     afterRender();
   });
 
-function renderPost(userData, container) {
+const renderPost = (userData, container) => {
   const profileLink =
     "http://localhost:4000/profile/" +
     userData.profileImagePath.split("/").pop();
@@ -78,7 +78,7 @@ function renderPost(userData, container) {
           <div class="btn-toast toast">수정완료</div>
         </div>
     `;
-}
+};
 
 const afterRender = () => {
   // 이미지 수정

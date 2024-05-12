@@ -70,21 +70,18 @@ const postEditPost = (req, res) => {
     const posts = JSON.parse(data);
     const post = posts.find((post) => post.post_id === Number(postId));
     console.log(post);
-    post.post_title = postTitle;
-    post.post_content = postContent;
-    console.log(postImg, postImgPath, click);
-    // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
-    if (postImg) {
-      // 이미지가 업로드된 경우
-      post.attach_file_path = `http://localhost:4000/${postImgPath}`;
-    } else if (post.attach_file_path && !req.file && click < 2) {
-      // 이미지가 제거된 경우
-      // 이미지가 업로드되지 않은 경우
-      post.attach_file_path = post.attach_file_path;
-    } else {
-      // 이미지가 제거된 경우
-      post.attach_file_path = "";
-    }
+    // 전개연산자로 업데이트하기
+    post = {
+      ...post,
+      post_title: postTitle,
+      post_content: postContent,
+      attach_file_path: postImg // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
+        ? `http://localhost:4000/${postImgPath}`
+        : post.attach_file_path && !req.file && click < 2 // 삼항 연산자 중첩을 통해 if...else if...else 구문 표현
+        ? post.attach_file_path // 이미지가 업로드되지 않은 경우 기존 이미지 유지
+        : "", // 이미지가 제거된 경우
+      updated_at: new Date(),
+    };
 
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {
@@ -185,9 +182,12 @@ const postComment = (req, res) => {
       const matchComment = post.comments.find(
         (comment) => comment.comment_id === Number(comment_id)
       );
-      console.log(comment_content);
-      matchComment.comment = comment_content;
-      matchComment.updated_at = new Date();
+      // 댓글 수정 업데이트
+      matchComment = {
+        ...matchComment,
+        comment: comment_content,
+        updated_at: new Date(),
+      };
       fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
         if (err) {
           return res.status(500).send("댓글 수정에 실패했습니다.");
@@ -198,12 +198,11 @@ const postComment = (req, res) => {
       // 댓글 추가 요청이 아닌 경우에만 실행
       if (!exist) {
         console.log(post.comments, post.comments.length, 1000);
-        const newCommentId =
-          post.comments.length === 0
-            ? 0
-            : post.comments[post.comments.length - 1].comment_id;
+        // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
+        const lastCommentId =
+          post.comments[post.comments.length - 1]?.comment_id || 0;
         post.comments.push({
-          comment_id: newCommentId + 1, // 마지막 댓글 id + 1
+          comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
           user_id: user_id,
           nickname: nickname,
           profileImagePath: profileImagePath,
