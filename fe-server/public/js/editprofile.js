@@ -37,7 +37,7 @@ const renderPost = (userData, container) => {
             <div class="imgBox">
               <!-- label로 묶어 파일 인풋 가능하도록. id값으로 연결 -->
               <label for="profileUpload" class="file-upload-label">
-              <div class="mid" style="background-image: url('${profileLink}')"><div class="editbtn">변경</div></div>
+              <div class="mid" style="background-image: url('${profileLink}')"><div class="file editbtn">변경</div></div>
               </label>
               <!-- display: none -->
               <input type="file" id="profileUpload" name="profilePicture" />
@@ -85,8 +85,14 @@ const afterRender = () => {
   const fileInput = document.querySelector("#profileUpload"); // input[type="file"] - display:none
   const imgPrevEl = document.querySelector(".mid"); // img 보이는 태그
   const redImgEl = document.querySelector(".red.img"); // 이미지 업로드 경고문
+  const fileSelectBtn = document.querySelector(".file.editbtn"); // 파일 선택 버튼
+  let clickCount = 0; // 파일 선택 버튼 클릭 횟수 저장
   // 수정하기 버튼 클릭 시 토스트 페이지 이벤트
   const toastEl = document.querySelector(".toast");
+
+  fileSelectBtn.addEventListener("click", () => {
+    clickCount++; // 파일 선택 버튼 클릭 횟수 증가
+  });
 
   // 이미지 업로드
   fileInput.addEventListener("change", () => {
@@ -121,6 +127,7 @@ const afterRender = () => {
 
     if (check.profileImage && check.nickname) {
       const formData = new FormData(formEl);
+      formData.append("click", clickCount); // 클릭 횟수를 formData에 추가
       const response = await fetch(`http://localhost:4000/users/editprofile`, {
         method: "POST",
         body: formData,

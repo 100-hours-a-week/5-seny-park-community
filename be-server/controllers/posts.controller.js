@@ -68,20 +68,22 @@ const postEditPost = (req, res) => {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
     }
     const posts = JSON.parse(data);
-    const post = posts.find((post) => post.post_id === Number(postId));
-    console.log(post);
-    // 전개연산자로 업데이트하기
-    post = {
-      ...post,
-      post_title: postTitle,
-      post_content: postContent,
-      attach_file_path: postImg // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
-        ? `http://localhost:4000/${postImgPath}`
-        : post.attach_file_path && !req.file && click < 2 // 삼항 연산자 중첩을 통해 if...else if...else 구문 표현
-        ? post.attach_file_path // 이미지가 업로드되지 않은 경우 기존 이미지 유지
-        : "", // 이미지가 제거된 경우
-      updated_at: new Date(),
-    };
+    const postIndex = posts.findIndex(
+      (post) => post.post_id === Number(postId)
+    );
+    if (postIndex !== -1) {
+      posts[postIndex] = {
+        ...posts[postIndex],
+        post_title: postTitle,
+        post_content: postContent,
+        attach_file_path: postImg // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
+          ? `http://localhost:4000/${postImgPath}`
+          : posts[postIndex].attach_file_path && !req.file && click < 2 // 삼항 연산자 중첩을 통해 if...else if...else 구문 표현
+          ? posts[postIndex].attach_file_path // 이미지가 업로드되지 않은 경우 기존 이미지 유지
+          : "", // 이미지가 제거된 경우
+        updated_at: new Date(),
+      };
+    }
 
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {
@@ -179,15 +181,19 @@ const postComment = (req, res) => {
     if (exist) {
       // 댓글 수정
       console.log(post.comments, comment_id);
-      const matchComment = post.comments.find(
+      const commentIndex = post.comments.findIndex(
         (comment) => comment.comment_id === Number(comment_id)
       );
-      // 댓글 수정 업데이트
-      matchComment = {
-        ...matchComment,
-        comment: comment_content,
-        updated_at: new Date(),
-      };
+
+      if (commentIndex !== -1) {
+        // 댓글 수정 업데이트
+        post.comments[commentIndex] = {
+          ...post.comments[commentIndex],
+          comment: comment_content,
+          updated_at: new Date(),
+        };
+      }
+
       fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
         if (err) {
           return res.status(500).send("댓글 수정에 실패했습니다.");
