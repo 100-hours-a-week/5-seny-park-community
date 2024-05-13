@@ -109,7 +109,7 @@ const getEditProfile = (req, res) => {
 
 // 회원정보 수정페이지 - 수정된 정보 저장
 const postEditProfile = (req, res) => {
-  const { nickname } = req.body;
+  const { nickname, click } = req.body;
   const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
   const profileImagePath = profilePicture ? profilePicture.path : null;
 
@@ -120,26 +120,27 @@ const postEditProfile = (req, res) => {
         .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
     }
     const users = JSON.parse(data);
-    const user = users.find((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
+    const userIndex = users.findIndex((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
     const nicknameExists = users.some(
       (diffuser) =>
-        diffuser.nickname === nickname && diffuser.user_id !== user.user_id
+        diffuser.nickname === nickname &&
+        diffuser.user_id !== users[userIndex].user_id
     );
     console.log(nicknameExists);
     if (nicknameExists) {
       return res.json({ nicknameExists });
     }
-    console.log(
-      profilePicture,
-      profileImagePath,
-      `http://localhost:4000/${profileImagePath}`
-    );
+    // 이미지 경로 설정 로직 변경
+    const newProfileImagePath = profilePicture
+      ? `http://localhost:4000/${profileImagePath}` // 새 이미지가 있으면 그 경로 사용
+      : click >= 2
+      ? "" // `click`이 2 이상이고 파일이 없으면 이미지 제거
+      : users[userIndex].profileImagePath; // 그 외는 기존 이미지 유지
 
-    user = {
-      // 전개연산자 사용하여 업데이트하기
-      ...user,
-      profileImagePath: `http://localhost:4000/${profileImagePath}`,
+    users[userIndex] = {
+      ...users[userIndex],
       nickname,
+      profileImagePath: newProfileImagePath,
       updated_at: new Date(),
     };
 
@@ -164,10 +165,10 @@ const postEditPwd = (req, res) => {
     }
     const users = JSON.parse(data);
     const user = users.find((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
-    console.log(user.password, hashedPassword);
+    const userIndex = users.findIndex((user) => user.user_id === 13); // 임의로 첫번째 사용자 정보 가져옴
 
-    user = {
-      ...user,
+    users[userIndex] = {
+      ...users[userIndex],
       password: hashedPassword,
       updated_at: new Date(),
     };

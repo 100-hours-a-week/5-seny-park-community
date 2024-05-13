@@ -244,6 +244,15 @@ CSS 클래스가 여러 파일에 걸쳐서 중복 발생하고 있습니다. ss
   bottom: 100px;
 }
 
+.inner .btn-toast.active {
+  opacity: 1;
+  bottom: 50px;
+}
+
+.inner .btn-toast {
+  bottom: 0px;
+}
+
 .inner .completeBtn .btn-pwd-toast {
   bottom: 200px;
 }
