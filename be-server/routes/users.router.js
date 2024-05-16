@@ -21,6 +21,9 @@ const upload = multer({ storage: storage });
 // 로그인
 usersRouter.post("/login", usersController.postLogin);
 
+// 로그아웃
+usersRouter.get("/logout", usersController.getLogout);
+
 // 회원가입
 usersRouter.post(
   "/signin",

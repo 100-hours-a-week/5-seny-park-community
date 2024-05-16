@@ -5,7 +5,9 @@ const postContainer = document.querySelector(".inner");
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
 
-fetch(`http://localhost:4000/posts/edit/${postId}`)
+fetch(`http://localhost:4000/posts/edit/${postId}`, {
+  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+})
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
@@ -115,6 +117,7 @@ const afterRender = () => {
         {
           method: "POST",
           body: formData,
+          credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
         }
       );
       console.log(response);

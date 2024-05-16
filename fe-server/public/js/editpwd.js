@@ -54,6 +54,7 @@ formEl.addEventListener("submit", async (event) => {
       body: JSON.stringify({
         password: formEl.elements.password.value,
       }),
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
     });
     console.log(response);
     if (response.status === 201) {

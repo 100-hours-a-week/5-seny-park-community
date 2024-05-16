@@ -4,26 +4,29 @@ const postsContainer = document.querySelector(".posts");
 // fetch로 json 파일 불러오기
 const posts = [];
 // 얘는 미리받아와도 된다
-fetch("http://localhost:4000/posts")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    data.forEach((post) => {
-      posts.push({
-        post_id: post.post_id,
-        title: post.post_title,
-        content: post.post_content,
-        like: post.like,
-        comment_cnt: post.comments ? post.comments.length : 0,
-        hit: post.hits,
-        date: formatDate(post.created_at),
-        author: post.nickname,
-        profile: post.profileImagePath,
+fetch("http://localhost:4000/posts"),
+  {
+    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+  }
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      data.forEach((post) => {
+        posts.push({
+          post_id: post.post_id,
+          title: post.post_title,
+          content: post.post_content,
+          like: post.like,
+          comment_cnt: post.comments ? post.comments.length : 0,
+          hit: post.hits,
+          date: formatDate(post.created_at),
+          author: post.nickname,
+          profile: post.profileImagePath,
+        });
       });
+      console.log(posts.length);
+      render();
     });
-    console.log(posts.length);
-    render();
-  });
 
 const render = () => {
   if (posts.length) {

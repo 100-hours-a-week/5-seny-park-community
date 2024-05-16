@@ -8,13 +8,16 @@ const userContainer = document.querySelector(".inner");
 
 const userId = 1; // 현재 로그인한 사용자의 id 임의로 설정
 // fetch로 json 파일 불러오기
-fetch(`http://localhost:4000/users/editprofile`)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    renderPost(data, userContainer);
-    afterRender();
-  });
+fetch(`http://localhost:4000/users/editprofile`),
+  {
+    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+  }
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      renderPost(data, userContainer);
+      afterRender();
+    });
 
 const renderPost = (userData, container) => {
   const profileLink =
@@ -131,6 +134,7 @@ const afterRender = () => {
       const response = await fetch(`http://localhost:4000/users/editprofile`, {
         method: "POST",
         body: formData,
+        credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
       });
       console.log(response);
       const data = await response.json();

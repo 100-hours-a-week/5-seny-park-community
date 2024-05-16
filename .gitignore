@@ -4,3 +4,6 @@ be-server/images/
 
 # Ignore models folder
 be-server/models/
+
+# Ignore .env file
+.env

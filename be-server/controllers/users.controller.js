@@ -1,13 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const bcrypt = require("bcrypt");
-
-const fileUsersPath = path.join(__dirname, "../models/users.model.json");
+const bcrypt = require("bcrypt"); // 비밀번호 암호화 모듈
 
 // 로그인
 const postLogin = (req, res) => {
   const { email, password } = req.body;
-  console.log(`Email be: ${email}, Password: ${password}`);
   console.log(req.body, req.file);
 
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
@@ -39,11 +36,23 @@ const postLogin = (req, res) => {
       });
     }
     // 회원정보 있고 비번 일치
+    req.session.userId = user.id; // 세션에 사용자 id 저장
     return res.status(200).json({
       emailExists: true,
       pwdExists: true,
       message: "Login successful.",
     });
+  });
+};
+
+// 로그아웃 처리
+const getLogout = (req, res) => {
+  // 세션 삭제
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Failed to logout");
+    }
+    res.status(200).send("Logged out");
   });
 };
 
