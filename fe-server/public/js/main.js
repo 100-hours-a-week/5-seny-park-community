@@ -4,29 +4,36 @@ const postsContainer = document.querySelector(".posts");
 // fetch로 json 파일 불러오기
 const posts = [];
 // 얘는 미리받아와도 된다
-fetch("http://localhost:4000/posts"),
-  {
-    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
-  }
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      data.forEach((post) => {
-        posts.push({
-          post_id: post.post_id,
-          title: post.post_title,
-          content: post.post_content,
-          like: post.like,
-          comment_cnt: post.comments ? post.comments.length : 0,
-          hit: post.hits,
-          date: formatDate(post.created_at),
-          author: post.nickname,
-          profile: post.profileImagePath,
-        });
+fetch("http://localhost:4000/posts", {
+  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+})
+  .then((response) => {
+    if (!response.ok && response.status === 401) {
+      // Unauthorized, 사용자가 로그인되지 않음
+      alert("로그인을 해주세요.");
+      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+      return;
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    data.forEach((post) => {
+      posts.push({
+        post_id: post.post_id,
+        title: post.post_title,
+        content: post.post_content,
+        like: post.like,
+        comment_cnt: post.comments ? post.comments.length : 0,
+        hit: post.hits,
+        date: formatDate(post.created_at),
+        author: post.nickname,
+        profile: post.profileImagePath,
       });
-      console.log(posts.length);
-      render();
     });
+    console.log(posts.length);
+    render();
+  });
 
 const render = () => {
   if (posts.length) {

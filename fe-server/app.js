@@ -45,7 +45,7 @@ app.get("/main/edit/post", (req, res) => {
 
 app.get("/users/editprofile", (req, res) => {
   // 프로필 수정
-  res.sendFile(path.join(__dirname, "public/html/editprofile.html"));
+  res.sendFile(path.join(__dirname, "public/html/profile.html"));
 });
 
 app.get("/users/editpwd", (req, res) => {

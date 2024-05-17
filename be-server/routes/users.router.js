@@ -32,7 +32,7 @@ usersRouter.post(
 );
 
 // 회원정보 수정페이지 - 회원정보 가져오기
-usersRouter.get("/editprofile", usersController.getEditProfile);
+usersRouter.get("/profile", usersController.getProfile);
 
 // 회원정보 수정페이지 - 수정된 정보 저장
 usersRouter.post(

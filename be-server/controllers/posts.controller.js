@@ -5,13 +5,17 @@ const filePostsPath = path.join(__dirname, "../models/posts.model.json");
 
 // 게시글 목록
 const getPosts = (req, res) => {
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    res.json(posts);
-  });
+  if (!req.session.userId) {
+    res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
+  } else {
+    fs.readFile(filePostsPath, "utf-8", (err, data) => {
+      if (err) {
+        return res.status(500).send("게시글 불러오기에 실패했습니다.");
+      }
+      const posts = JSON.parse(data);
+      res.json(posts);
+    });
+  }
 };
 
 // 게시글 상세 페이지

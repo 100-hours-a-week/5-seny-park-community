@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt"); // 비밀번호 암호화 모듈
 
+const fileUsersPath = path.join(__dirname, "../models/users.model.json");
+
 // 로그인
 const postLogin = (req, res) => {
   const { email, password } = req.body;
@@ -36,7 +38,7 @@ const postLogin = (req, res) => {
       });
     }
     // 회원정보 있고 비번 일치
-    req.session.userId = user.id; // 세션에 사용자 id 저장
+    req.session.userId = user.user_id; // 세션에 사용자 id 저장
     return res.status(200).json({
       emailExists: true,
       pwdExists: true,
@@ -105,7 +107,7 @@ const postSignup = (req, res) => {
 };
 
 // 회원정보 수정페이지 - 회원정보 가져오기
-const getEditProfile = (req, res) => {
+const getProfile = (req, res) => {
   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
@@ -194,8 +196,9 @@ const postEditPwd = (req, res) => {
 
 module.exports = {
   postLogin,
+  getLogout,
   postSignup,
-  getEditProfile,
+  getProfile,
   postEditProfile,
   postEditPwd,
 };
