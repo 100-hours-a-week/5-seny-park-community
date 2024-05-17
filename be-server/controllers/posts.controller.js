@@ -45,6 +45,24 @@ const getPost = (req, res) => {
   });
 };
 
+// 게시글 수정 권한 확인
+const checkEditPermission = (req, res, next) => {
+  const postId = req.params.postId;
+  const { id } = req.session.user;
+  fs.readFile(filePostsPath, "utf-8", (err, data) => {
+    if (err) {
+      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+    }
+    const posts = JSON.parse(data);
+    const post = posts.find((post) => post.post_id === Number(postId));
+    if (post.user_id !== id) {
+      console.log("권한 없음");
+      return res.status(403).send("게시글 수정 권한이 없습니다.");
+    }
+    res.status(200).send("권한 확인 성공");
+  });
+};
+
 // 게시글 수정 페이지
 const getEditPost = (req, res) => {
   const postId = req.params.postId;
@@ -262,6 +280,7 @@ const deleteComment = (req, res) => {
 module.exports = {
   getPosts,
   getPost,
+  checkEditPermission,
   getEditPost,
   postEditPost,
   postPost,

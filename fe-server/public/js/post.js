@@ -27,7 +27,6 @@ fetch(`http://localhost:4000/posts/${postId}`, {
   });
 
 const renderPost = (postData, container) => {
-  const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
   let postImgLink = "";
   if (
     postData.attach_file_path &&
@@ -50,7 +49,7 @@ const renderPost = (postData, container) => {
           <div class="date">${formatDate(postData.created_at)}</div>
         </div>
         <div class="controlBtns">
-          <button class="modi"><a href="${editUrl}">수정</a></button>
+          <button class="modi">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
       </div>
@@ -158,6 +157,7 @@ const afterRender = (data) => {
   const commentForm = document.querySelector(".comment-form");
   let exist = false;
 
+  // 댓글 등록/수정 요청
   commentForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     console.log(commentEl.value);
@@ -192,6 +192,34 @@ const afterRender = (data) => {
         exist = false;
       }
     });
+  });
+
+  // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
+  modiBtn.addEventListener("click", (event) => {
+    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    event.preventDefault(); // 기본 이벤트 방지
+    console.log("click");
+
+    // 서버에 수정 권한 확인 요청
+    fetch(`http://localhost:4000/posts/edit/${postId}/permission`, {
+      method: "GET",
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+    })
+      .then((response) => {
+        console.log(111);
+        if (response.status === 403) {
+          console.log(403);
+          alert("게시글 수정 권한이 없습니다.");
+          location.reload(); // 페이지 새로고침
+        } else if (response.status === 200) {
+          console.log(200);
+          window.location.href = editUrl; // 수정 페이지로 이동
+        }
+      })
+      .catch((error) => {
+        console.error("게시글 수정 요청 중 에러 발생: ", error);
+        alert("게시글 수정 요청 중 문제가 발생했습니다.");
+      });
   });
 
   // 댓글 입력 시 버튼 색 변경
