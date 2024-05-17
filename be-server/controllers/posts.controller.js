@@ -157,6 +157,7 @@ const postPost = (req, res) => {
 // 게시글 삭제
 const deletePost = (req, res) => {
   const postId = req.params.postId;
+  const { id } = req.session.user;
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
@@ -168,6 +169,10 @@ const deletePost = (req, res) => {
     if (postIndex === -1) {
       return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
+    if (posts[postIndex].user_id !== id) {
+      return res.status(403).send("게시글 삭제 권한이 없습니다.");
+    }
+
     posts.splice(postIndex, 1);
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {

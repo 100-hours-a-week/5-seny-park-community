@@ -276,8 +276,12 @@ const afterRender = (data) => {
   confirmBtn.addEventListener("click", () => {
     fetch(`http://localhost:4000/posts/${postId}`, {
       method: "DELETE",
+      credentials: "include",
     }).then((response) => {
-      if (response.status === 204) {
+      if (response.status === 403) {
+        alert("게시글 삭제 권한이 없습니다.");
+        location.reload();
+      } else if (response.status === 204) {
         alert("게시글이 삭제되었습니다.");
         location.href = "/main";
       } else {
