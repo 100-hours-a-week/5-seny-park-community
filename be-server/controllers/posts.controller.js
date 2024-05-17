@@ -5,7 +5,7 @@ const filePostsPath = path.join(__dirname, "../models/posts.model.json");
 
 // 게시글 목록
 const getPosts = (req, res) => {
-  if (!req.session.userId) {
+  if (!req.session.user) {
     res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
   } else {
     fs.readFile(filePostsPath, "utf-8", (err, data) => {
@@ -106,7 +106,8 @@ const postPost = (req, res) => {
   console.log(`Title: ${postTitle}, Content: ${postContent}`);
   const postImg = req.file; // 이미지 파일 정보
   const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
-  console.log(req.file, req.body, 1000);
+  const { id, nickname, profileImg } = req.session.user;
+  console.log(id, nickname, profileImg, 1000);
 
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
@@ -118,10 +119,9 @@ const postPost = (req, res) => {
       post_title: postTitle,
       post_content: postContent,
       attach_file_path: `http://localhost:4000/${postImgPath}`,
-      user_id: "583c3ac3f38e84297c002546",
-      profileImagePath:
-        "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
-      nickname: "엉뚱한개굴",
+      user_id: id,
+      profileImagePath: profileImg.replace("/images", ""),
+      nickname: nickname,
       created_at: new Date(),
       updated_at: new Date(),
       deleted_at: null,
