@@ -54,7 +54,14 @@ formEl.addEventListener("submit", async (event) => {
       body: JSON.stringify({
         password: formEl.elements.password.value,
       }),
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
     });
+    if (!response.ok && response.status === 401) {
+      // Unauthorized, 사용자가 로그인되지 않음
+      alert("로그인을 해주세요.");
+      window.location.href = "/l"; // 로그인 페이지로 리다이렉션
+      return;
+    }
     console.log(response);
     if (response.status === 201) {
       toastEl.classList.add("active");

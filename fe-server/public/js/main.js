@@ -4,8 +4,18 @@ const postsContainer = document.querySelector(".posts");
 // fetch로 json 파일 불러오기
 const posts = [];
 // 얘는 미리받아와도 된다
-fetch("http://localhost:4000/posts")
-  .then((response) => response.json())
+fetch("http://localhost:4000/posts", {
+  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+})
+  .then((response) => {
+    if (!response.ok && response.status === 401) {
+      // Unauthorized, 사용자가 로그인되지 않음
+      alert("로그인을 해주세요.");
+      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+      return;
+    }
+    return response.json();
+  })
   .then((data) => {
     console.log(data);
     data.forEach((post) => {

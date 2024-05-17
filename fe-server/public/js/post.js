@@ -6,8 +6,18 @@ const postContainer = document.querySelector(".inner");
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
 //  fetch로 json 파일 불러오기
-fetch(`http://localhost:4000/posts/${postId}`)
-  .then((response) => response.json())
+fetch(`http://localhost:4000/posts/${postId}`, {
+  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+})
+  .then((response) => {
+    if (!response.ok && response.status === 401) {
+      // Unauthorized, 사용자가 로그인되지 않음
+      alert("로그인을 해주세요.");
+      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+      return;
+    }
+    return response.json();
+  })
   .then((data) => {
     renderPost(data, postContainer);
     afterRender(data);
@@ -17,7 +27,6 @@ fetch(`http://localhost:4000/posts/${postId}`)
   });
 
 const renderPost = (postData, container) => {
-  const editUrl = `/main/edit/post?post_id=${postData.post_id}`;
   let postImgLink = "";
   if (
     postData.attach_file_path &&
@@ -40,7 +49,7 @@ const renderPost = (postData, container) => {
           <div class="date">${formatDate(postData.created_at)}</div>
         </div>
         <div class="controlBtns">
-          <button class="modi"><a href="${editUrl}">수정</a></button>
+          <button class="modi">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
       </div>
@@ -148,6 +157,7 @@ const afterRender = (data) => {
   const commentForm = document.querySelector(".comment-form");
   let exist = false;
 
+  // 댓글 등록/수정 요청
   commentForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     console.log(commentEl.value);
@@ -160,15 +170,16 @@ const afterRender = (data) => {
         exist: exist,
         comment_id: commentId,
         comment_content: commentEl.value,
-        user_id: "583c3ac3f38e84297c002546",
-        nickname: "엉뚱한개굴",
-        profileImagePath:
-          "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
         created_at: new Date(),
       }),
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
     }).then((response) => {
       const data = response.json();
       console.log(data);
+      if (response.status === 403) {
+        alert("댓글 수정 권한이 없습니다.");
+        location.reload();
+      }
       if (response.status === 201) {
         alert("댓글이 등록되었습니다.");
         // location.href = `/main/posts/?post_id=${postId}`;
@@ -181,6 +192,34 @@ const afterRender = (data) => {
         exist = false;
       }
     });
+  });
+
+  // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
+  modiBtn.addEventListener("click", (event) => {
+    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    event.preventDefault(); // 기본 이벤트 방지
+    console.log("click");
+
+    // 서버에 수정 권한 확인 요청
+    fetch(`http://localhost:4000/posts/edit/${postId}/permission`, {
+      method: "GET",
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+    })
+      .then((response) => {
+        console.log(111);
+        if (response.status === 403) {
+          console.log(403);
+          alert("게시글 수정 권한이 없습니다.");
+          location.reload(); // 페이지 새로고침
+        } else if (response.status === 200) {
+          console.log(200);
+          window.location.href = editUrl; // 수정 페이지로 이동
+        }
+      })
+      .catch((error) => {
+        console.error("게시글 수정 요청 중 에러 발생: ", error);
+        alert("게시글 수정 요청 중 문제가 발생했습니다.");
+      });
   });
 
   // 댓글 입력 시 버튼 색 변경
@@ -219,8 +258,12 @@ const afterRender = (data) => {
   confirmCoBtn.addEventListener("click", () => {
     fetch(`http://localhost:4000/posts/${postId}/comment/${commentId}`, {
       method: "DELETE",
+      credentials: "include",
     }).then((response) => {
-      if (response.status === 204) {
+      if (response.status === 403) {
+        alert("댓글 삭제 권한이 없습니다.");
+        location.reload();
+      } else if (response.status === 204) {
         alert("댓글이 삭제되었습니다.");
         location.reload();
       } else {
@@ -233,8 +276,12 @@ const afterRender = (data) => {
   confirmBtn.addEventListener("click", () => {
     fetch(`http://localhost:4000/posts/${postId}`, {
       method: "DELETE",
+      credentials: "include",
     }).then((response) => {
-      if (response.status === 204) {
+      if (response.status === 403) {
+        alert("게시글 삭제 권한이 없습니다.");
+        location.reload();
+      } else if (response.status === 204) {
         alert("게시글이 삭제되었습니다.");
         location.href = "/main";
       } else {

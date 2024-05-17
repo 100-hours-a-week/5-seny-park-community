@@ -33,6 +33,12 @@ postsRouter.post(
 // 게시글 수정 페이지
 postsRouter.get("/edit/:postId", postsController.getEditPost);
 
+// 게시글 수정 권환 확인
+postsRouter.get(
+  "/edit/:postId/permission",
+  postsController.checkEditPermission
+);
+
 // 게시글 수정 페이지 - 수정된 정보 저장
 postsRouter.post(
   "/edit/:postId",

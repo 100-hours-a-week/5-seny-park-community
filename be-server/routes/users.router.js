@@ -21,6 +21,9 @@ const upload = multer({ storage: storage });
 // 로그인
 usersRouter.post("/login", usersController.postLogin);
 
+// 로그아웃
+usersRouter.get("/logout", usersController.getLogout);
+
 // 회원가입
 usersRouter.post(
   "/signin",
@@ -29,7 +32,7 @@ usersRouter.post(
 );
 
 // 회원정보 수정페이지 - 회원정보 가져오기
-usersRouter.get("/editprofile", usersController.getEditProfile);
+usersRouter.get("/profile", usersController.getProfile);
 
 // 회원정보 수정페이지 - 수정된 정보 저장
 usersRouter.post(

@@ -44,6 +44,7 @@ formEl.addEventListener("submit", async (event) => {
     const response = await fetch(`http://localhost:4000/posts/createpost`, {
       method: "POST",
       body: formData,
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
     });
     console.log(response);
     if (response.status === 201) {

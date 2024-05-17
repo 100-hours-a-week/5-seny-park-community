@@ -46,6 +46,7 @@ formEl.addEventListener("submit", async (event) => {
       email: emailEl.value,
       password: pwdEl.value,
     }),
+    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
   });
 
   const data = await response.json();
