@@ -4,8 +4,6 @@ const menuEl = document.querySelector(".menu");
 const logoutEl = document.querySelector(".menu .logout");
 const profileImgEl = document.querySelector("header div.profile div");
 
-let userData = null; // 전역 변수로 사용자 데이터를 캐시
-
 // 프로필 이미지  가져오기
 export const getProfileImg = async () => {
   if (userData) {
@@ -24,7 +22,6 @@ export const getProfileImg = async () => {
       .pop()}`;
     console.log(profileLink);
     profileImgEl.style.backgroundImage = `url('${profileLink}')`;
-    userData = data; // 사용자 데이터를 캐시에 저장
     return data;
   }
 };
