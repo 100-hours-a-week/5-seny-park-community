@@ -1,3 +1,4 @@
+import { getProfileImg } from "./commonheader.js";
 import { formatDate, setupModalToggle, changeNum } from "/js/utils.js";
 
 const postContainer = document.querySelector(".inner");
@@ -5,52 +6,64 @@ const postContainer = document.querySelector(".inner");
 // main.js에서 클릭한 게시글의 post_id를 url에서 가져온다.
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
-//  fetch로 json 파일 불러오기
-fetch(`http://localhost:4000/posts/${postId}`, {
-  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
-})
-  .then((response) => {
-    if (!response.ok && response.status === 401) {
-      // Unauthorized, 사용자가 로그인되지 않음
-      alert("로그인을 해주세요.");
-      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
-      return;
-    }
-    return response.json();
-  })
-  .then((data) => {
-    renderPost(data, postContainer);
-    afterRender(data);
-  })
-  .catch((error) => {
-    console.error("데이터를 불러오는 중에 오류가 발생했습니다:", error.message);
-  });
 
-const renderPost = (postData, container) => {
-  console.log(postData, postData.post, postData.active);
+// 페이지 로드 시 프로필 이미지 및 사용자 정보 가져오기
+document.addEventListener("DOMContentLoaded", async () => {
+  const user = await getProfileImg(); // getProfileImg 함수가 완료될 때까지 기다림
+  fetchPostData(user); // getProfileImg 완료 후 fetchPostData 실행
+});
+
+const fetchPostData = async (user) => {
+  fetch(`http://localhost:4000/posts/${postId}`, {
+    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+  })
+    .then((response) => {
+      if (!response.ok && response.status === 401) {
+        // Unauthorized, 사용자가 로그인되지 않음
+        alert("로그인을 해주세요.");
+        window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+        return;
+      }
+      return response.json();
+    })
+    .then((data) => {
+      renderPost(data, postContainer, user);
+      afterRender(data);
+    })
+    .catch((error) => {
+      console.error(
+        "데이터를 불러오는 중에 오류가 발생했습니다:",
+        error.message
+      );
+    });
+};
+
+const renderPost = (postData, container, user) => {
   let postImgLink = "";
   if (
-    postData.post.attach_file_path &&
-    postData.post.attach_file_path !== "http://localhost:4000/"
+    postData.attach_file_path &&
+    postData.attach_file_path !== "http://localhost:4000/"
   ) {
-    postImgLink = `http://localhost:4000/post/${postData.post.attach_file_path
+    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
       .split("/")
       .pop()}`;
   }
   console.log(postImgLink);
   container.innerHTML = `
     <div class="title">
-      <h2>${postData.post.post_title}</h2>
+      <h2>${postData.post_title}</h2>
       <div class="control">
         <div class="writer">
           <div class="img"><div style="background-image: url('${
-            postData.post.profileImagePath
+            postData.profileImagePath
           }');"></div></div>
-          <div class="name">${postData.post.nickname}</div>
-          <div class="date">${formatDate(postData.post.created_at)}</div>
+          <div class="name">${postData.nickname}</div>
+          <div class="date">${formatDate(postData.created_at)}</div>
         </div>
         
-        <div class="controlBtns ${postData.active ? "active" : ""}">
+        <div class="controlBtns ${
+          postData.user_id === user.user_id ? "active" : ""
+        }">
           <button class="modi">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
@@ -62,19 +75,16 @@ const renderPost = (postData, container) => {
         ? `<div class="img" style="background-image: url('${postImgLink}')"></div>`
         : ""
     }
-    <div class="texts">${postData.post.post_content.replace(
-      /\n/g,
-      "<br>"
-    )}</div>
+    <div class="texts">${postData.post_content.replace(/\n/g, "<br>")}</div>
     </div>
 
     <div class="clickBtn">
       <button class="views">
-        <p class="count">${changeNum(postData.post.hits)}</p>
+        <p class="count">${changeNum(postData.hits)}</p>
         <p class="text">조회수</p>
       </button>
       <button class="comments">
-        <p class="count">${changeNum(postData.post.like)}</p>
+        <p class="count">${changeNum(postData.like)}</p>
         <p class="text">좋아요</p>
       </button>
     </div>
@@ -93,8 +103,8 @@ const renderPost = (postData, container) => {
   </div>
     <div class="commentsList">
     ${
-      postData.post.comments && postData.post.comments.length > 0
-        ? postData.post.comments
+      postData.comments && postData.comments.length > 0
+        ? postData.comments
             .map(
               (comment) => `
       <div class="comments ${comment.comment_id}">
@@ -111,7 +121,9 @@ const renderPost = (postData, container) => {
           </div>
         </div>
         <div class="right click">
-        <div class="controlBtns">
+        <div class="controlBtns ${
+          user.user_id === comment.user_id ? "active" : ""
+        }" >
           <button class="modi">수정</button>
           <button class="del">삭제</button>
           </div>

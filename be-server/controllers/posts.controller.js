@@ -21,7 +21,6 @@ const getPosts = (req, res) => {
 // 게시글 상세 페이지
 const getPost = (req, res) => {
   const postId = req.params.postId;
-  const { id } = req.session.user;
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("게시글 불러오기에 실패했습니다.");
@@ -34,16 +33,13 @@ const getPost = (req, res) => {
       post.hits = Number(post.hits) + 1; // 조회수 증가
     }
 
-    // 게시글 작성자와 로그인한 사용자가 같은 경우 active 속성을 true로 설정
-    const active = post.user_id === id;
-
     console.log(post);
     // 업데이트된 게시글 정보를 파일에 저장
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
       if (err) {
         return res.status(500).send("조회수 업데이트에 실패했습니다.");
       }
-      res.json({ post, active });
+      res.json(post);
     });
   });
 };
