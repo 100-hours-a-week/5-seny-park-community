@@ -103,11 +103,9 @@ const postEditPost = (req, res) => {
 // 게시글 등록
 const postPost = (req, res) => {
   const { postTitle, postContent } = req.body;
-  console.log(`Title: ${postTitle}, Content: ${postContent}`);
+  const { id, nickname, profileImg } = req.session.user;
   const postImg = req.file; // 이미지 파일 정보
   const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
-  const { id, nickname, profileImg } = req.session.user;
-  console.log(id, nickname, profileImg, 1000);
 
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
@@ -165,16 +163,9 @@ const deletePost = (req, res) => {
 // 댓글 추가 & 수정
 const postComment = (req, res) => {
   const postId = req.params.postId;
-  const {
-    exist,
-    comment_id,
-    comment_content,
-    user_id,
-    nickname,
-    profileImagePath,
-    created_at,
-  } = req.body;
-  console.log(req.body);
+  const { exist, comment_id, comment_content, created_at } = req.body;
+  const { id, nickname, profileImg } = req.session.user;
+
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("댓글 불러오기에 실패했습니다.");
@@ -184,19 +175,23 @@ const postComment = (req, res) => {
 
     if (exist) {
       // 댓글 수정
-      console.log(post.comments, comment_id);
       const commentIndex = post.comments.findIndex(
         (comment) => comment.comment_id === Number(comment_id)
       );
 
-      if (commentIndex !== -1) {
-        // 댓글 수정 업데이트
-        post.comments[commentIndex] = {
-          ...post.comments[commentIndex],
-          comment: comment_content,
-          updated_at: new Date(),
-        };
+      if (commentIndex === -1) {
+        return res.status(404).send("댓글을 찾을 수 없습니다.");
       }
+
+      if (post.comments[commentIndex].user_id !== id) {
+        return res.status(403).send("댓글 수정 권한이 없습니다.");
+      }
+
+      post.comments[commentIndex] = {
+        ...post.comments[commentIndex],
+        comment: comment_content,
+        updated_at: new Date(),
+      };
 
       fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
         if (err) {
@@ -206,26 +201,23 @@ const postComment = (req, res) => {
       });
     } else {
       // 댓글 추가 요청이 아닌 경우에만 실행
-      if (!exist) {
-        console.log(post.comments, post.comments.length, 1000);
-        // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
-        const lastCommentId =
-          post.comments[post.comments.length - 1]?.comment_id || 0;
-        post.comments.push({
-          comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
-          user_id: user_id,
-          nickname: nickname,
-          profileImagePath: profileImagePath,
-          comment: comment_content,
-          created_at: created_at,
-        });
-        fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-          if (err) {
-            return res.status(500).send("댓글 추가에 실패했습니다.");
-          }
-          return res.status(201).send("댓글 추가 성공");
-        });
-      }
+      // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
+      const lastCommentId =
+        post.comments[post.comments.length - 1]?.comment_id || 0;
+      post.comments.push({
+        comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
+        user_id: id,
+        nickname: nickname,
+        profileImagePath: profileImg.replace("/images", ""),
+        comment: comment_content,
+        created_at: created_at,
+      });
+      fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+        if (err) {
+          return res.status(500).send("댓글 추가에 실패했습니다.");
+        }
+        return res.status(201).send("댓글 추가 성공");
+      });
     }
   });
 };

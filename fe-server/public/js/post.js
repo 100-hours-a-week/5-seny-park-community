@@ -9,7 +9,15 @@ console.log(postId);
 fetch(`http://localhost:4000/posts/${postId}`, {
   credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
 })
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok && response.status === 401) {
+      // Unauthorized, 사용자가 로그인되지 않음
+      alert("로그인을 해주세요.");
+      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+      return;
+    }
+    return response.json();
+  })
   .then((data) => {
     renderPost(data, postContainer);
     afterRender(data);
@@ -162,16 +170,16 @@ const afterRender = (data) => {
         exist: exist,
         comment_id: commentId,
         comment_content: commentEl.value,
-        user_id: "583c3ac3f38e84297c002546",
-        nickname: "엉뚱한개굴",
-        profileImagePath:
-          "https://i.pinimg.com/564x/4d/50/fe/4d50fe8cc1918b8a9b6e6fb8499d1c76.jpg",
         created_at: new Date(),
       }),
       credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
     }).then((response) => {
       const data = response.json();
       console.log(data);
+      if (response.status === 403) {
+        alert("댓글 수정 권한이 없습니다.");
+        location.reload();
+      }
       if (response.status === 201) {
         alert("댓글이 등록되었습니다.");
         // location.href = `/main/posts/?post_id=${postId}`;
