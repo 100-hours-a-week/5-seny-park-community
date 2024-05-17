@@ -226,6 +226,8 @@ const postComment = (req, res) => {
 const deleteComment = (req, res) => {
   const postId = req.params.postId;
   const commentId = req.params.commentId;
+  const { id } = req.session.user;
+  console.log(id, req.session.user);
   fs.readFile(filePostsPath, "utf-8", (err, data) => {
     if (err) {
       return res.status(500).send("댓글 불러오기에 실패했습니다.");
@@ -243,6 +245,9 @@ const deleteComment = (req, res) => {
     );
     if (commentIndex === -1) {
       return res.status(404).send("댓글을 찾을 수 없습니다.");
+    }
+    if (post.comments[commentIndex].user_id !== id) {
+      return res.status(403).send("댓글 삭제 권한이 없습니다.");
     }
     post.comments.splice(commentIndex, 1);
     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {

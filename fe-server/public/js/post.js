@@ -230,8 +230,12 @@ const afterRender = (data) => {
   confirmCoBtn.addEventListener("click", () => {
     fetch(`http://localhost:4000/posts/${postId}/comment/${commentId}`, {
       method: "DELETE",
+      credentials: "include",
     }).then((response) => {
-      if (response.status === 204) {
+      if (response.status === 403) {
+        alert("댓글 삭제 권한이 없습니다.");
+        location.reload();
+      } else if (response.status === 204) {
         alert("댓글이 삭제되었습니다.");
         location.reload();
       } else {
