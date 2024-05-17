@@ -81,13 +81,18 @@ main {
 
 .inner .title .control .controlBtns,
 .inner .comments .right .controlBtns {
+  display: none;
   width: 128px;
   height: 64px;
   margin-right: 16px;
-  display: flex;
   gap: 8px;
   justify-content: center;
   align-items: center;
+}
+
+.inner .title .control .controlBtns.active,
+.inner .comments .right .controlBtns.active {
+  display: flex;
 }
 
 .inner .title .control .controlBtns button,

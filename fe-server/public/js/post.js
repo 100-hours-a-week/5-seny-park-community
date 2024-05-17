@@ -27,28 +27,30 @@ fetch(`http://localhost:4000/posts/${postId}`, {
   });
 
 const renderPost = (postData, container) => {
+  console.log(postData, postData.post, postData.active);
   let postImgLink = "";
   if (
-    postData.attach_file_path &&
-    postData.attach_file_path !== "http://localhost:4000/"
+    postData.post.attach_file_path &&
+    postData.post.attach_file_path !== "http://localhost:4000/"
   ) {
-    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+    postImgLink = `http://localhost:4000/post/${postData.post.attach_file_path
       .split("/")
       .pop()}`;
   }
   console.log(postImgLink);
   container.innerHTML = `
     <div class="title">
-      <h2>${postData.post_title}</h2>
+      <h2>${postData.post.post_title}</h2>
       <div class="control">
         <div class="writer">
           <div class="img"><div style="background-image: url('${
-            postData.profileImagePath
+            postData.post.profileImagePath
           }');"></div></div>
-          <div class="name">${postData.nickname}</div>
-          <div class="date">${formatDate(postData.created_at)}</div>
+          <div class="name">${postData.post.nickname}</div>
+          <div class="date">${formatDate(postData.post.created_at)}</div>
         </div>
-        <div class="controlBtns">
+        
+        <div class="controlBtns ${postData.active ? "active" : ""}">
           <button class="modi">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
@@ -60,16 +62,19 @@ const renderPost = (postData, container) => {
         ? `<div class="img" style="background-image: url('${postImgLink}')"></div>`
         : ""
     }
-    <div class="texts">${postData.post_content.replace(/\n/g, "<br>")}</div>
+    <div class="texts">${postData.post.post_content.replace(
+      /\n/g,
+      "<br>"
+    )}</div>
     </div>
 
     <div class="clickBtn">
       <button class="views">
-        <p class="count">${changeNum(postData.hits)}</p>
+        <p class="count">${changeNum(postData.post.hits)}</p>
         <p class="text">조회수</p>
       </button>
       <button class="comments">
-        <p class="count">${changeNum(postData.like)}</p>
+        <p class="count">${changeNum(postData.post.like)}</p>
         <p class="text">좋아요</p>
       </button>
     </div>
@@ -88,8 +93,8 @@ const renderPost = (postData, container) => {
   </div>
     <div class="commentsList">
     ${
-      postData.comments && postData.comments.length > 0
-        ? postData.comments
+      postData.post.comments && postData.post.comments.length > 0
+        ? postData.post.comments
             .map(
               (comment) => `
       <div class="comments ${comment.comment_id}">
@@ -196,7 +201,7 @@ const afterRender = (data) => {
 
   // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
   modiBtn.addEventListener("click", (event) => {
-    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    const editUrl = `/main/edit/post?post_id=${data.post.post_id}`;
     event.preventDefault(); // 기본 이벤트 방지
     console.log("click");
 
