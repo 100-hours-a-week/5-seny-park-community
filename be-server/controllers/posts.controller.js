@@ -39,7 +39,6 @@ const getPost = (req, res) => {
       if (err) {
         return res.status(500).send("조회수 업데이트에 실패했습니다.");
       }
-
       res.json(post);
     });
   });

@@ -1,3 +1,4 @@
+import { getProfileImg } from "./commonheader.js";
 import { formatDate, setupModalToggle, changeNum } from "/js/utils.js";
 
 const postContainer = document.querySelector(".inner");
@@ -5,28 +6,39 @@ const postContainer = document.querySelector(".inner");
 // main.js에서 클릭한 게시글의 post_id를 url에서 가져온다.
 const postId = new URLSearchParams(window.location.search).get("post_id");
 console.log(postId);
-//  fetch로 json 파일 불러오기
-fetch(`http://localhost:4000/posts/${postId}`, {
-  credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
-})
-  .then((response) => {
-    if (!response.ok && response.status === 401) {
-      // Unauthorized, 사용자가 로그인되지 않음
-      alert("로그인을 해주세요.");
-      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
-      return;
-    }
-    return response.json();
-  })
-  .then((data) => {
-    renderPost(data, postContainer);
-    afterRender(data);
-  })
-  .catch((error) => {
-    console.error("데이터를 불러오는 중에 오류가 발생했습니다:", error.message);
-  });
 
-const renderPost = (postData, container) => {
+// 페이지 로드 시 프로필 이미지 및 사용자 정보 가져오기
+document.addEventListener("DOMContentLoaded", async () => {
+  const user = await getProfileImg(); // getProfileImg 함수가 완료될 때까지 기다림
+  fetchPostData(user); // getProfileImg 완료 후 fetchPostData 실행
+});
+
+const fetchPostData = async (user) => {
+  fetch(`http://localhost:4000/posts/${postId}`, {
+    credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+  })
+    .then((response) => {
+      if (!response.ok && response.status === 401) {
+        // Unauthorized, 사용자가 로그인되지 않음
+        alert("로그인을 해주세요.");
+        window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+        return;
+      }
+      return response.json();
+    })
+    .then((data) => {
+      renderPost(data, postContainer, user);
+      afterRender(data);
+    })
+    .catch((error) => {
+      console.error(
+        "데이터를 불러오는 중에 오류가 발생했습니다:",
+        error.message
+      );
+    });
+};
+
+const renderPost = (postData, container, user) => {
   let postImgLink = "";
   if (
     postData.attach_file_path &&
@@ -48,7 +60,10 @@ const renderPost = (postData, container) => {
           <div class="name">${postData.nickname}</div>
           <div class="date">${formatDate(postData.created_at)}</div>
         </div>
-        <div class="controlBtns">
+        
+        <div class="controlBtns ${
+          postData.user_id === user.user_id ? "active" : ""
+        }">
           <button class="modi">수정</a></button>
           <button class="del"><a href="#">삭제</a></button>
         </div>
@@ -106,7 +121,9 @@ const renderPost = (postData, container) => {
           </div>
         </div>
         <div class="right click">
-        <div class="controlBtns">
+        <div class="controlBtns ${
+          user.user_id === comment.user_id ? "active" : ""
+        }" >
           <button class="modi">수정</button>
           <button class="del">삭제</button>
           </div>
@@ -196,7 +213,7 @@ const afterRender = (data) => {
 
   // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
   modiBtn.addEventListener("click", (event) => {
-    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    const editUrl = `/main/edit/post?post_id=${data.post.post_id}`;
     event.preventDefault(); // 기본 이벤트 방지
     console.log("click");
 
