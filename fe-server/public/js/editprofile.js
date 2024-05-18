@@ -12,12 +12,6 @@ fetch(`http://localhost:4000/users/profile`, {
   credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
 })
   .then((response) => {
-    if (!response.ok && response.status === 401) {
-      // Unauthorized, 사용자가 로그인되지 않음
-      alert("로그인을 해주세요.");
-      window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
-      return;
-    }
     return response.json();
   })
   .then((data) => {
