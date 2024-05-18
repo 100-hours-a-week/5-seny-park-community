@@ -172,6 +172,9 @@ const postEditProfile = (req, res) => {
         if (err) {
           return res.status(500).json({ message: "닉네임 수정 실패" });
         }
+        // 세션 정보 업데이트
+        req.session.user.nickname = nickname;
+        req.session.user.profileImg = newProfileImagePath;
         return res.status(201).json({ message: "닉네임 수정 성공" });
       });
     });

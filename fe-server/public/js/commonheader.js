@@ -6,15 +6,16 @@ const profileImgEl = document.querySelector("header div.profile div");
 
 // 프로필 이미지  가져오기
 export const getProfileImg = async () => {
-  if (userData) {
-    console.log("cached data");
-    return userData; // 이미 데이터가 있으면 캐시된 데이터 반환
-  }
-  console.log("not cached data1");
   const response = await fetch(`http://localhost:4000/users/profile`, {
     method: "GET",
     credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
   });
+  if (response.status === 401) {
+    // Unauthorized, 사용자가 로그인되지 않음
+    alert("로그인을 해주세요.");
+    window.location.href = "/"; // 홈이나 로그인 페이지로 리다이렉션
+    return;
+  }
   if (response.status === 200) {
     const data = await response.json();
     const profileLink = `http://localhost:4000/profile/${data.profileImagePath
