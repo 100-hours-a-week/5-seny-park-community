@@ -10,6 +10,7 @@ console.log(postId);
 // 페이지 로드 시 프로필 이미지 및 사용자 정보 가져오기
 document.addEventListener("DOMContentLoaded", async () => {
   const user = await getProfileImg(); // getProfileImg 함수가 완료될 때까지 기다림
+  console.log(user.user_id, user.nickname);
   fetchPostData(user); // getProfileImg 완료 후 fetchPostData 실행
 });
 
@@ -213,7 +214,7 @@ const afterRender = (data) => {
 
   // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
   modiBtn.addEventListener("click", (event) => {
-    const editUrl = `/main/edit/post?post_id=${data.post.post_id}`;
+    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
     event.preventDefault(); // 기본 이벤트 방지
     console.log("click");
 

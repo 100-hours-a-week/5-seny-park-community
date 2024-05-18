@@ -168,6 +168,10 @@ const postEditProfile = (req, res) => {
         updated_at: new Date(),
       };
 
+      // 세션 정보 업데이트
+      req.session.user.nickname = nickname;
+      req.session.user.profileImg = newProfileImagePath;
+
       fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
         if (err) {
           return res.status(500).json({ message: "닉네임 수정 실패" });
