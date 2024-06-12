@@ -7,3 +7,6 @@ be-server/models/
 
 # Ignore .env file
 .env
+
+# mysql.js 
+be-server/mysql.js
