@@ -66,9 +66,6 @@ const getLogout = (req, res) => {
 const postSignup = async (req, res) => {
   const { email, password, nickname } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 12); // 비밀번호 암호화
-  // console.log(
-  //   `Email: ${email}, Password: ${hashedPassword}, Nickname: ${nickname}`
-  // );
 
   const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
   // 파일 경로 설정
