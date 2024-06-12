@@ -11,7 +11,6 @@ const session = require("express-session");
 // 시크릿 키 .env 파일에서 가져오기
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const secretKey = process.env.SECRET_KEY;
-console.log(secretKey, 111);
 const app = express();
 
 // 정적 파일 제공을 위한 미들웨어

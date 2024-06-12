@@ -1,19 +1,14 @@
-// const fs = require("fs");
-// const path = require("path");
-const db = require("../mysql"); // mysql.js 파일 import
+const db = require("../mysql.js"); // mysql.js 파일 import
 const bcrypt = require("bcrypt"); // 비밀번호 암호화 모듈
-
-// const fileUsersPath = path.join(__dirname, "../models/users.model.json");
 
 // 로그인
 const postLogin = async (req, res) => {
   // req.body에 email, password가 담겨있음, req.session에 사용자 정보 저장
   const { email, password } = req.body;
-  // console.log(req.body, req.file);
 
   try {
     // DB에서 회원 정보 조회 -> MySQL 쿼리 실행 - 이메일로 사용자 검색
-    const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [
+    const [users] = await db.execute("SELECT * FROM user WHERE email = ?", [
       email,
     ]);
 
@@ -49,52 +44,12 @@ const postLogin = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Database error. - 로그인에 실패했습니다.");
+    return res.status(500).json({
+      message: "Database error. - 로그인에 실패했습니다.",
+      error: err.message,
+    });
   }
 };
-
-//   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
-//     }
-
-//     const users = JSON.parse(data);
-//     console.log(users);
-
-//     const user = users.find((user) => user.email === email);
-
-//     if (!user) {
-//       // 회원정보 없음
-//       return res.status(404).json({
-//         emailExists: false,
-//         pwdExists: false,
-//         message: "Email does not exist.",
-//       });
-//     }
-//     // 회원정보 있으나 비번 틀린 경우
-//     // bcrypt.compareSync(입력한 비밀번호, 암호화된 비밀번호)
-//     if (!bcrypt.compareSync(password, user.password)) {
-//       return res.status(400).json({
-//         emailExists: true,
-//         pwdExists: false,
-//         message: "Password does not match.",
-//       });
-//     }
-//     // 회원정보 있고 비번 일치
-//     req.session.user = {
-//       id: user.user_id,
-//       nickname: user.nickname,
-//       profileImg: user.profileImagePath,
-//     }; // 세션에 사용자 정보 저장
-
-//     return res.status(200).json({
-//       emailExists: true,
-//       pwdExists: true,
-//       message: "Login successful.",
-//     });
-//   });
-// };
 
 // 로그아웃 처리
 const getLogout = (req, res) => {
