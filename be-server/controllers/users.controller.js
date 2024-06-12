@@ -53,7 +53,7 @@ const postLogin = async (req, res) => {
 
 // 로그아웃 처리
 const getLogout = (req, res) => {
-  // 세션 삭제
+  // 세션 삭제하여 로그아웃 처리
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).send("Failed to logout");
@@ -63,51 +63,50 @@ const getLogout = (req, res) => {
 };
 
 // 회원가입
-const postSignup = (req, res) => {
+const postSignup = async (req, res) => {
   const { email, password, nickname } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 12); // 비밀번호 암호화
   // console.log(
   //   `Email: ${email}, Password: ${hashedPassword}, Nickname: ${nickname}`
   // );
 
-  // const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
-
+  const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
   // 파일 경로 설정
-  const profileImagePath = profilePicture ? profilePicture.path : null;
+  const profile_image = profilePicture ? profilePicture.path : null;
 
-  fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
-    }
+  try {
+    // DB에서 존재하는 이메일이나 닉네임 있는지 확인
+    const [results] = await db.execute(
+      "SELECT email, nickname FROM user WHERE email = ? OR nickname = ?",
+      [email, nickname]
+    );
 
-    const users = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
-    const emailExists = users.some((user) => user.email === email); // 중복 이메일 체크
-    const nicknameExists = users.some((user) => user.nickname === nickname); // 중복 닉네임 체크
+    const emailExists = results.some((user) => user.email === email); // 중복 이메일 체크
+    const nicknameExists = results.some((user) => user.nickname === nickname); // 중복 닉네임 체크
+
     if (emailExists || nicknameExists) {
       return res.json({ emailExists, nicknameExists });
     }
 
-    users.push({
-      user_id: users.length + 1,
-      email: email,
-      password: hashedPassword,
-      nickname: nickname,
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
-      auth_token: null,
-      profileImagePath: `http://localhost:4000/${profileImagePath}`,
-    });
+    // DB에 회원 정보 추가
+    await db.execute(
+      "INSERT INTO user (email, password, nickname, created_at, updated_at, profile_image) VALUES (?, ?, ?, NOW(), NOW(), ?)",
+      [
+        email,
+        hashedPassword,
+        nickname,
+        `http://localhost:4000/${profile_image}`,
+      ]
+    );
 
-    fs.writeFile(fileUsersPath, JSON.stringify(users), (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      res.status(201).json({ message: "회원가입성공" });
+    return res.status(201).json({ message: "회원가입성공" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Database error. - 회원가입에 실패했습니다.",
+      error: err.message,
     });
-  });
+  }
 };
 
 // 회원정보 수정페이지 - 회원정보 가져오기
