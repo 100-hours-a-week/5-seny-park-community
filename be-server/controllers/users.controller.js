@@ -107,74 +107,134 @@ const postSignup = async (req, res) => {
 };
 
 // 회원정보 수정페이지 - 회원정보 가져오기
-const getProfile = (req, res) => {
+const getProfile = async (req, res) => {
   if (!req.session.user) {
     res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
-  } else {
-    fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-      if (err) {
-        return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
-      }
-      const users = JSON.parse(data);
-      const user = users.find((user) => user.user_id === req.session.user.id);
-      res.json(user);
-    });
+  }
+
+  try {
+    // 세션에 저장된 사용자 ID와 일치하는 사용자 정보 조회
+    const [users] = await db.execute("SELECT * FROM user WHERE user_id = ?", [
+      req.session.user.id,
+    ]);
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    const user = users[0];
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
+    // } else {
+    //   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+    //     if (err) {
+    //       return res.status(500).send("사용자 정보를 읽어오는데 실패했습니다.");
+    //     }
+    //     const users = JSON.parse(data);
+    //     const user = users.find((user) => user.user_id === req.session.user.id);
+    //     res.json(user);
+    //   });
+    // }
   }
 };
 
 // 회원정보 수정페이지 - 수정된 정보 저장
-const postEditProfile = (req, res) => {
+const postEditProfile = async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ message: "Unauthorized" });
-  } else {
-    const { nickname, click } = req.body;
-    const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
-    const profileImagePath = profilePicture ? profilePicture.path : null;
-
-    fs.readFile(fileUsersPath, "utf-8", (err, data) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
-      }
-      const users = JSON.parse(data);
-      const userIndex = users.findIndex(
-        (user) => user.user_id === req.session.user.id
-      ); // 세션에 저장된 사용자 id로 사용자 정보 찾기
-      const nicknameExists = users.some(
-        (diffuser) =>
-          diffuser.nickname === nickname &&
-          diffuser.user_id !== users[userIndex].user_id
-      );
-      console.log(nicknameExists);
-      if (nicknameExists) {
-        return res.json({ nicknameExists });
-      }
-      // 이미지 경로 설정 로직 변경
-      const newProfileImagePath = profilePicture
-        ? `http://localhost:4000/${profileImagePath}` // 새 이미지가 있으면 그 경로 사용
-        : click >= 2
-        ? "" // `click`이 2 이상이고 파일이 없으면 이미지 제거
-        : users[userIndex].profileImagePath; // 그 외는 기존 이미지 유지
-
-      users[userIndex] = {
-        ...users[userIndex],
-        nickname,
-        profileImagePath: newProfileImagePath,
-        updated_at: new Date(),
-      };
-
-      fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
-        if (err) {
-          return res.status(500).json({ message: "닉네임 수정 실패" });
-        }
-        // 세션 정보 업데이트
-        req.session.user.nickname = nickname;
-        req.session.user.profileImg = newProfileImagePath;
-        return res.status(201).json({ message: "닉네임 수정 성공" });
-      });
-    });
   }
+
+  const { nickname, click } = req.body;
+  const img_path = req.file; // 업로드된 프로필 사진 파일 정보
+  const profile_image = img_path ? img_path.path : null;
+
+  try {
+    // 현재 사용자 정보 조회
+    const [users] = await db.execute("SELECT * FROM user WHERE user_id = ?", [
+      req.session.user.id,
+    ]);
+    const user = users[0];
+
+    // 닉네임 중복 확인
+    const [nicknameExists] = await db.execute(
+      "SELECT * FROM user WHERE nickname = ? AND user_id != ?",
+      [nickname, user.user_id]
+    );
+    if (nicknameExists.length > 0) {
+      return res.json({ nicknameExists: true });
+    }
+
+    // 프로필 이미지 경로 설정
+    const newProfileImagePath = profile_image
+      ? `http://localhost:4000/${profile_image}`
+      : click >= 2
+      ? ""
+      : user.profile_image;
+
+    // 사용자 정보 업데이트
+    await db.execute(
+      "UPDATE user SET nickname = ?, profile_image = ?, updated_at = NOW() WHERE user_id = ?",
+      [nickname, newProfileImagePath, user.user_id]
+    );
+
+    // 세션 정보 업데이트
+    req.session.user.nickname = nickname;
+    req.session.user.profileImg = newProfileImagePath;
+
+    return res.status(201).json({ message: "닉네임 수정 성공" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "닉네임 수정 실패" });
+  }
+  // } else {
+  //   const { nickname, click } = req.body;
+  //   const profilePicture = req.file; // 업로드된 프로필 사진 파일 정보
+  //   const profileImagePath = profilePicture ? profilePicture.path : null;
+
+  //   fs.readFile(fileUsersPath, "utf-8", (err, data) => {
+  //     if (err) {
+  //       return res
+  //         .status(500)
+  //         .json({ message: "사용자 정보를 읽어오는데 실패했습니다." });
+  //     }
+  //     const users = JSON.parse(data);
+  //     const userIndex = users.findIndex(
+  //       (user) => user.user_id === req.session.user.id
+  //     ); // 세션에 저장된 사용자 id로 사용자 정보 찾기
+  //     const nicknameExists = users.some(
+  //       (diffuser) =>
+  //         diffuser.nickname === nickname &&
+  //         diffuser.user_id !== users[userIndex].user_id
+  //     );
+  //     console.log(nicknameExists);
+  //     if (nicknameExists) {
+  //       return res.json({ nicknameExists });
+  //     }
+  //     // 이미지 경로 설정 로직 변경
+  //     const newProfileImagePath = profilePicture
+  //       ? `http://localhost:4000/${profileImagePath}` // 새 이미지가 있으면 그 경로 사용
+  //       : click >= 2
+  //       ? "" // `click`이 2 이상이고 파일이 없으면 이미지 제거
+  //       : users[userIndex].profileImagePath; // 그 외는 기존 이미지 유지
+
+  //     users[userIndex] = {
+  //       ...users[userIndex],
+  //       nickname,
+  //       profileImagePath: newProfileImagePath,
+  //       updated_at: new Date(),
+  //     };
+
+  //     fs.writeFile(fileUsersPath, JSON.stringify(users, null, 2), (err) => {
+  //       if (err) {
+  //         return res.status(500).json({ message: "닉네임 수정 실패" });
+  //       }
+  //       // 세션 정보 업데이트
+  //       req.session.user.nickname = nickname;
+  //       req.session.user.profileImg = newProfileImagePath;
+  //       return res.status(201).json({ message: "닉네임 수정 성공" });
+  //     });
+  //   });
+  // }
 };
 
 // 회원정보 비밀번호 수정 - 수정된 정보 저장
