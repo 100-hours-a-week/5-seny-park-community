@@ -18,7 +18,7 @@ export const getProfileImg = async () => {
   }
   if (response.status === 200) {
     const data = await response.json();
-    const profileLink = `http://localhost:4000/profile/${data.profileImagePath
+    const profileLink = `http://localhost:4000/profile/${data.profile_image
       .split("/")
       .pop()}`;
     console.log(profileLink);
