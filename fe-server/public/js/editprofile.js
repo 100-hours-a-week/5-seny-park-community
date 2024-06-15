@@ -22,8 +22,7 @@ fetch(`http://localhost:4000/users/profile`, {
 
 const renderPost = (userData, container) => {
   const profileLink =
-    "http://localhost:4000/profile/" +
-    userData.profileImagePath.split("/").pop();
+    "http://localhost:4000/profile/" + userData.profile_image.split("/").pop();
   console.log(profileLink);
   container.innerHTML = `
     <h2>회원정보 수정</h2>
