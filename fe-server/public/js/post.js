@@ -28,7 +28,10 @@ const fetchPostData = async (user) => {
       return response.json();
     })
     .then((data) => {
-      renderPost(data, postContainer, user);
+      renderPost(data.post, postContainer, user);
+      if (data.comments.length > 0) {
+        renderComments(data.comments, user);
+      }
       afterRender(data);
     })
     .catch((error) => {
@@ -41,22 +44,19 @@ const fetchPostData = async (user) => {
 
 const renderPost = (postData, container, user) => {
   let postImgLink = "";
-  if (
-    postData.attach_file_path &&
-    postData.attach_file_path !== "http://localhost:4000/"
-  ) {
-    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+  console.log(postData.post_image);
+  if (postData.post_image && postData.post_image !== "http://localhost:4000/") {
+    postImgLink = `http://localhost:4000/post/${postData.post_image
       .split("/")
       .pop()}`;
   }
-  console.log(postImgLink);
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
       <div class="control">
         <div class="writer">
           <div class="img"><div style="background-image: url('${
-            postData.profileImagePath
+            postData.profile_image.replace("/images", "") // '/images' 제거
           }');"></div></div>
           <div class="name">${postData.nickname}</div>
           <div class="date">${formatDate(postData.created_at)}</div>
@@ -85,7 +85,7 @@ const renderPost = (postData, container, user) => {
         <p class="text">조회수</p>
       </button>
       <button class="comments">
-        <p class="count">${changeNum(postData.like)}</p>
+        <p class="count">${changeNum(postData.comments)}</p>
         <p class="text">좋아요</p>
       </button>
     </div>
@@ -102,41 +102,40 @@ const renderPost = (postData, container, user) => {
       </div>
     </form>
   </div>
-    <div class="commentsList">
-    ${
-      postData.comments && postData.comments.length > 0
-        ? postData.comments
-            .map(
-              (comment) => `
-      <div class="comments ${comment.comment_id}">
-        <div class="left">
-          <div class="top">
-            <div class="img"><div style="background-image: url('${
-              comment.profileImagePath
-            }');"></div></div>
-            <div class="name">${comment.nickname}</div>
-            <div class="date">${formatDate(comment.created_at)}</div>
-          </div>
-          <div class="bottom">
-            <div class="comment active">${comment.comment}</div>
-          </div>
-        </div>
-        <div class="right click">
-        <div class="controlBtns ${
-          user.user_id === comment.user_id ? "active" : ""
-        }" >
-          <button class="modi">수정</button>
-          <button class="del">삭제</button>
-          </div>
-        </div>
-      </div>
-    `
-            )
-            .join("")
-        : ""
-    }
-  </div>
+    <div class="commentsList"></div>
   `;
+};
+
+const renderComments = (comments, user) => {
+  const commentsList = document.querySelector(".commentsList");
+  commentsList.innerHTML = comments
+    .map(
+      (comment) => `
+  <div class="comments ${comment.comment_id}">
+    <div class="left">
+      <div class="top">
+        <div class="img"><div style="background-image: url('${
+          comment.profile_image.replace("/images", "") // '/images' 제거
+        }');"></div></div>
+        <div class="name">${comment.nickname}</div>
+        <div class="date">${formatDate(comment.created_at)}</div>
+      </div>
+      <div class="bottom">
+        <div class="comment active">${comment.comment}</div>
+      </div>
+    </div>
+    <div class="right click">
+    <div class="controlBtns ${
+      user.user_id === comment.user_id ? "active" : ""
+    }" >
+      <button class="modi">수정</button>
+      <button class="del">삭제</button>
+      </div>
+    </div>
+  </div>
+`
+    )
+    .join("");
 };
 
 const afterRender = (data) => {
@@ -214,7 +213,7 @@ const afterRender = (data) => {
 
   // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
   modiBtn.addEventListener("click", (event) => {
-    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    const editUrl = `/main/edit/post?post_id=${data.post.post_id}`;
     event.preventDefault(); // 기본 이벤트 방지
     console.log("click");
 

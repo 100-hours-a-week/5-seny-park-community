@@ -17,11 +17,8 @@ fetch(`http://localhost:4000/posts/edit/${postId}`, {
 
 const renderPost = (postData, container) => {
   let postImgLink = "";
-  if (
-    postData.attach_file_path &&
-    postData.attach_file_path !== "http://localhost:4000/"
-  ) {
-    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+  if (postData.post_image && postData.post_image !== "http://localhost:4000/") {
+    postImgLink = `http://localhost:4000/post/${postData.post_image
       .split("/")
       .pop()}`;
   }
@@ -65,7 +62,7 @@ const renderPost = (postData, container) => {
         <div class="content3">파일을 선택해주세요.</div>
       </div>
       ${
-        postData.attach_file_path
+        postData.post_image
           ? `<img src="${postImgLink}" class="upload-img active" />`
           : `<img src="" class="upload-img" />`
       }
