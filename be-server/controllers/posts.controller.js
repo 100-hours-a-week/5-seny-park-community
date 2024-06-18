@@ -253,102 +253,205 @@ const deletePost = async (req, res) => {
 };
 
 // 댓글 추가 & 수정
-const postComment = (req, res) => {
+const postComment = async (req, res) => {
   const postId = req.params.postId;
-  const { exist, comment_id, comment_content, created_at } = req.body;
-  const { id, nickname, profileImg } = req.session.user;
+  const { exist, comment_id, comment_content } = req.body;
+  const { id } = req.session.user;
 
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("댓글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    const post = posts.find((post) => post.post_id === Number(postId));
+  // 트랜잭션 시작
+  const connection = await db.getConnection();
+  await connection.beginTransaction();
 
+  try {
     if (exist) {
-      // 댓글 수정
-      const commentIndex = post.comments.findIndex(
-        (comment) => comment.comment_id === Number(comment_id)
+      const [comments] = await connection.execute(
+        "SELECT * FROM comment WHERE comment_id = ?",
+        [comment_id]
       );
 
-      if (commentIndex === -1) {
+      if (comments.length === 0) {
+        await connection.rollback();
         return res.status(404).send("댓글을 찾을 수 없습니다.");
       }
 
-      if (post.comments[commentIndex].user_id !== id) {
+      const comment = comments[0];
+
+      if (comment.user_id !== id) {
+        await connection.rollback();
         return res.status(403).send("댓글 수정 권한이 없습니다.");
       }
 
-      post.comments[commentIndex] = {
-        ...post.comments[commentIndex],
-        comment: comment_content,
-        updated_at: new Date(),
-      };
+      await connection.execute(
+        `
+        UPDATE comment
+        SET comment = ?, updated_at = NOW()
+        WHERE comment_id = ?
+      `,
+        [comment_content, comment_id]
+      );
 
-      fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-        if (err) {
-          return res.status(500).send("댓글 수정에 실패했습니다.");
-        }
-        return res.status(204).send("댓글 수정 성공");
-      });
+      await connection.commit();
+      return res.status(204).send("댓글 수정 성공");
     } else {
-      // 댓글 수정 요청이 아닌 경우에만 실행
-      // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
-      const lastCommentId =
-        post.comments[post.comments.length - 1]?.comment_id || 0;
-      post.comments.push({
-        comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
-        user_id: id,
-        nickname: nickname,
-        profileImagePath: profileImg.replace("/images", ""),
-        comment: comment_content,
-        created_at: created_at,
-      });
-      fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-        if (err) {
-          return res.status(500).send("댓글 추가에 실패했습니다.");
-        }
-        return res.status(201).send("댓글 추가 성공");
-      });
+      await connection.execute(
+        `
+        INSERT INTO comment (post_id, user_id, comment, created_at, updated_at, deleted_at, is_deleted)
+        VALUES (?, ?, ?, NOW(), NOW(), NULL, 0)
+      `,
+        [postId, id, comment_content]
+      );
+
+      await connection.execute(
+        `UPDATE post SET comments = comments + 1 WHERE post_id = ?`,
+        [postId]
+      );
+
+      await connection.commit();
+      return res.status(201).send("댓글 추가 성공");
     }
-  });
+  } catch (err) {
+    await connection.rollback();
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "댓글 추가에 실패했습니다.", error: err.message });
+  } finally {
+    connection.release();
+  }
+
+  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send("댓글 불러오기에 실패했습니다.");
+  //   }
+  //   const posts = JSON.parse(data);
+  //   const post = posts.find((post) => post.post_id === Number(postId));
+
+  //   if (exist) {
+  //     // 댓글 수정
+  //     const commentIndex = post.comments.findIndex(
+  //       (comment) => comment.comment_id === Number(comment_id)
+  //     );
+
+  //     if (commentIndex === -1) {
+  //       return res.status(404).send("댓글을 찾을 수 없습니다.");
+  //     }
+
+  //     if (post.comments[commentIndex].user_id !== id) {
+  //       return res.status(403).send("댓글 수정 권한이 없습니다.");
+  //     }
+
+  //     post.comments[commentIndex] = {
+  //       ...post.comments[commentIndex],
+  //       comment: comment_content,
+  //       updated_at: new Date(),
+  //     };
+
+  //     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+  //       if (err) {
+  //         return res.status(500).send("댓글 수정에 실패했습니다.");
+  //       }
+  //       return res.status(204).send("댓글 수정 성공");
+  //     });
+  //   } else {
+  //     // 댓글 수정 요청이 아닌 경우에만 실행
+  //     // 옵셔녈 체이닝 사용 // || : 둘중하나만 참이면 되기 때문에, 참인 경우 처음 등장하는 참값 리턴. 모두 거짓이라면 마지막 거짓값을 리턴.  (거짓의 기준 : false인 모든 값)
+  //     const lastCommentId =
+  //       post.comments[post.comments.length - 1]?.comment_id || 0;
+  //     post.comments.push({
+  //       comment_id: lastCommentId + 1, // 마지막 댓글 id + 1
+  //       user_id: id,
+  //       nickname: nickname,
+  //       profileImagePath: profileImg.replace("/images", ""),
+  //       comment: comment_content,
+  //       created_at: created_at,
+  //     });
+  //     fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+  //       if (err) {
+  //         return res.status(500).send("댓글 추가에 실패했습니다.");
+  //       }
+  //       return res.status(201).send("댓글 추가 성공");
+  //     });
+  //   }
+  // });
 };
 
 // 댓글 삭제
-const deleteComment = (req, res) => {
+const deleteComment = async (req, res) => {
   const postId = req.params.postId;
   const commentId = req.params.commentId;
   const { id } = req.session.user;
-  console.log(id, req.session.user);
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("댓글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    const postIndex = posts.findIndex(
-      (post) => post.post_id === Number(postId)
+
+  const connection = await db.getConnection();
+  await connection.beginTransaction();
+
+  try {
+    const [comments] = await connection.execute(
+      `SELECT * FROM comment WHERE comment_id = ?`,
+      [commentId]
     );
-    if (postIndex === -1) {
-      return res.status(404).send("게시글을 찾을 수 없습니다.");
-    }
-    const post = posts[postIndex];
-    const commentIndex = post.comments.findIndex(
-      (comment) => comment.comment_id === Number(commentId)
-    );
-    if (commentIndex === -1) {
+
+    if (comments.length === 0) {
+      await connection.rollback();
       return res.status(404).send("댓글을 찾을 수 없습니다.");
     }
-    if (post.comments[commentIndex].user_id !== id) {
+
+    const comment = comments[0];
+
+    if (comment.user_id !== id) {
+      await connection.rollback();
       return res.status(403).send("댓글 삭제 권한이 없습니다.");
     }
-    post.comments.splice(commentIndex, 1);
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("댓글 삭제에 실패했습니다.");
-      }
-      return res.status(204).send("댓글 삭제 성공");
-    });
-  });
+
+    await connection.execute(
+      `UPDATE comment SET is_deleted = 1, deleted_at = NOW() WHERE comment_id = ?`,
+      [commentId]
+    );
+    await connection.execute(
+      `UPDATE post SET comments = comments - 1 WHERE post_id = ?`,
+      [postId]
+    );
+
+    await connection.commit();
+    return res.status(204).send("댓글 삭제 성공");
+  } catch (err) {
+    await connection.rollback();
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "댓글 삭제에 실패했습니다.", error: err.message });
+  } finally {
+    connection.release();
+  }
+  // console.log(id, req.session.user);
+  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send("댓글 불러오기에 실패했습니다.");
+  //   }
+  //   const posts = JSON.parse(data);
+  //   const postIndex = posts.findIndex(
+  //     (post) => post.post_id === Number(postId)
+  //   );
+  //   if (postIndex === -1) {
+  //     return res.status(404).send("게시글을 찾을 수 없습니다.");
+  //   }
+  //   const post = posts[postIndex];
+  //   const commentIndex = post.comments.findIndex(
+  //     (comment) => comment.comment_id === Number(commentId)
+  //   );
+  //   if (commentIndex === -1) {
+  //     return res.status(404).send("댓글을 찾을 수 없습니다.");
+  //   }
+  //   if (post.comments[commentIndex].user_id !== id) {
+  //     return res.status(403).send("댓글 삭제 권한이 없습니다.");
+  //   }
+  //   post.comments.splice(commentIndex, 1);
+  //   fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+  //     if (err) {
+  //       return res.status(500).send("댓글 삭제에 실패했습니다.");
+  //     }
+  //     return res.status(204).send("댓글 삭제 성공");
+  //   });
+  // });
 };
 
 module.exports = {
