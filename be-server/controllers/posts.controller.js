@@ -35,6 +35,22 @@ const getPost = async (req, res) => {
   await connection.beginTransaction();
 
   try {
+    // 조회수 증가
+    await db.execute("UPDATE post SET hits = hits + 1 WHERE post_id = ?", [
+      postId,
+    ]);
+
+    // 해당 게시글의 댓글들을 조회
+    const [comments] = await db.execute(
+      `
+      SELECT c.*, u.nickname, u.profile_image
+      FROM comment c
+      JOIN user u ON c.user_id = u.user_id
+      WHERE c.post_id = ? AND c.is_deleted = 0
+    `,
+      [postId]
+    );
+
     // postId 게시글 조회
     const [posts] = await db.execute(
       `
@@ -51,22 +67,6 @@ const getPost = async (req, res) => {
     }
 
     const post = posts[0];
-
-    // 조회수 증가
-    await db.execute("UPDATE post SET hits = hits + 1 WHERE post_id = ?", [
-      postId,
-    ]);
-
-    // 해당 게시글의 댓글들을 조회
-    const [comments] = await db.execute(
-      `
-      SELECT c.*, u.nickname, u.profile_image
-      FROM comment c
-      JOIN user u ON c.user_id = u.user_id
-      WHERE c.post_id = ? AND c.is_deleted = 0
-    `,
-      [postId]
-    );
 
     // 트랜잭션 커밋
     await connection.commit();
