@@ -27,30 +27,83 @@ const getPosts = async (req, res) => {
 };
 
 // 게시글 상세 페이지
-const getPost = (req, res) => {
+const getPost = async (req, res) => {
   const postId = req.params.postId;
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
-    const post = posts.find((post) => post.post_id === Number(postId));
 
-    // 만약 post 객체가 존재하면 hits 속성을 증가시킵니다.
-    if (post) {
-      post.hits = Number(post.hits) + 1; // 조회수 증가
+  // 트랜잭션 시작
+  const connection = await db.getConnection();
+  await connection.beginTransaction();
+
+  try {
+    // postId 게시글 조회
+    const [posts] = await db.execute(
+      `
+      SELECT p.*, u.nickname, u.profile_image
+      FROM post p
+      JOIN user u ON p.user_id = u.user_id
+      WHERE p.post_id = ? AND p.is_deleted = 0
+    `,
+      [postId]
+    );
+
+    if (posts.length === 0) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
 
-    console.log(post);
-    // 업데이트된 게시글 정보를 파일에 저장
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("조회수 업데이트에 실패했습니다.");
-      }
-      res.json(post);
-    });
-  });
+    const post = posts[0];
+
+    // 조회수 증가
+    await db.execute("UPDATE post SET hits = hits + 1 WHERE post_id = ?", [
+      postId,
+    ]);
+
+    // 해당 게시글의 댓글들을 조회
+    const [comments] = await db.execute(
+      `
+      SELECT c.*, u.nickname, u.profile_image
+      FROM comment c
+      JOIN user u ON c.user_id = u.user_id
+      WHERE c.post_id = ? AND c.is_deleted = 0
+    `,
+      [postId]
+    );
+
+    // 트랜잭션 커밋
+    await connection.commit();
+
+    // post.comments = comments;
+    res.json({ post, comments });
+  } catch (err) {
+    await connection.rollback();
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "게시글 불러오기에 실패했습니다.", error: err.message });
+  } finally {
+    connection.release();
+  }
 };
+// fs.readFile(filePostsPath, "utf-8", (err, data) => {
+//   if (err) {
+//     return res.status(500).send("게시글 불러오기에 실패했습니다.");
+//   }
+//   const posts = JSON.parse(data); // JSON 형식의 문자열을 객체로 변환
+//   const post = posts.find((post) => post.post_id === Number(postId));
+
+//   // 만약 post 객체가 존재하면 hits 속성을 증가시킵니다.
+//   if (post) {
+//     post.hits = Number(post.hits) + 1; // 조회수 증가
+//   }
+
+//   console.log(post);
+//   // 업데이트된 게시글 정보를 파일에 저장
+//   fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+//     if (err) {
+//       return res.status(500).send("조회수 업데이트에 실패했습니다.");
+//     }
+//     res.json(post);
+//   });
+// });
 
 // 게시글 수정 권한 확인
 const checkEditPermission = (req, res, next) => {
