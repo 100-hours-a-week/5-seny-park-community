@@ -44,15 +44,13 @@ const fetchPostData = async (user) => {
 
 const renderPost = (postData, container, user) => {
   let postImgLink = "";
-  if (
-    postData.attach_file_path &&
-    postData.attach_file_path !== "http://localhost:4000/"
-  ) {
-    postImgLink = `http://localhost:4000/post/${postData.attach_file_path
+  console.log(postData.post_image);
+  if (postData.post_image && postData.post_image !== "http://localhost:4000/") {
+    postImgLink = `http://localhost:4000/post/${postData.post_image
       .split("/")
       .pop()}`;
   }
-  console.log(postImgLink);
+  console.log(postImgLink, 1100);
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
