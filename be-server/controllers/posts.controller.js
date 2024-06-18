@@ -204,32 +204,52 @@ const postEditPost = async (req, res) => {
 };
 
 // 게시글 삭제
-const deletePost = (req, res) => {
+const deletePost = async (req, res) => {
   const postId = req.params.postId;
   const { id } = req.session.user;
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    const postIndex = posts.findIndex(
-      (post) => post.post_id === Number(postId)
+
+  // 트랜잭션 시작
+  const connection = await db.getConnection();
+  await connection.beginTransaction();
+
+  try {
+    const [posts] = await connection.execute(
+      "SELECT * FROM post WHERE post_id = ?",
+      [postId]
     );
-    if (postIndex === -1) {
+
+    if (posts.length === 0) {
+      await connection.rollback();
       return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
-    if (posts[postIndex].user_id !== id) {
+
+    const post = posts[0];
+
+    if (post.user_id !== id) {
+      await connection.rollback();
       return res.status(403).send("게시글 삭제 권한이 없습니다.");
     }
 
-    posts.splice(postIndex, 1);
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).send("게시글 삭제에 실패했습니다.");
-      }
-      return res.status(204).send("게시글 삭제 성공");
-    });
-  });
+    await connection.execute(
+      "UPDATE post SET is_deleted = 1, deleted_at = NOW() WHERE post_id = ?",
+      [postId]
+    );
+    await connection.execute(
+      "UPDATE comment SET is_deleted = 1, deleted_at = NOW() WHERE post_id = ?",
+      [postId]
+    );
+
+    await connection.commit();
+    return res.status(204).send("게시글 삭제 성공");
+  } catch (err) {
+    await connection.rollback();
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "게시글 삭제에 실패했습니다.", error: err.message });
+  } finally {
+    connection.release();
+  }
 };
 
 // 댓글 추가 & 수정
