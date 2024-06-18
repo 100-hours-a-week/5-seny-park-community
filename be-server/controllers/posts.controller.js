@@ -1,9 +1,10 @@
 const db = require("../mysql.js"); // mysql.js 파일 import
+const { post } = require("../routes/posts.router.js");
 
 // 게시글 목록
 const getPosts = async (req, res) => {
   if (!req.session.user) {
-    res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
+    return res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
   }
   try {
     // 게시글 목록, 작성자 정보 함께 조회
@@ -13,7 +14,7 @@ const getPosts = async (req, res) => {
       JOIN user u ON p.user_id = u.user_id
       WHERE p.is_deleted = 0
     `);
-    res.json(posts);
+    return res.json(posts);
   } catch (err) {
     console.error(err);
     return res
@@ -68,7 +69,7 @@ const getPost = async (req, res) => {
     await connection.commit();
 
     // post.comments = comments;
-    res.json({ post, comments });
+    return res.json({ post, comments });
   } catch (err) {
     await connection.rollback();
     console.error(err);
@@ -99,7 +100,7 @@ const postPost = async (req, res) => {
       [id, postTitle, postContent, postImgPath]
     );
 
-    res.status(201).send("게시글 추가 성공");
+    return res.status(201).send("게시글 추가 성공");
   } catch (err) {
     console.error(err);
     return res
@@ -109,76 +110,151 @@ const postPost = async (req, res) => {
 };
 
 // 게시글 수정 권한 확인
-const checkEditPermission = (req, res, next) => {
+const checkEditPermission = async (req, res) => {
   const postId = req.params.postId;
   const { id } = req.session.user;
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+
+  try {
+    const [posts] = await db.execute("SELECT * FROM post WHERE post_id = ?", [
+      postId,
+    ]);
+
+    if (posts.length === 0) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
-    const posts = JSON.parse(data);
-    const post = posts.find((post) => post.post_id === Number(postId));
+
+    const post = posts[0];
+
     if (post.user_id !== id) {
-      console.log("권한 없음");
       return res.status(403).send("게시글 수정 권한이 없습니다.");
     }
+
     res.status(200).send("권한 확인 성공");
-  });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "게시글 불러오기에 실패했습니다.", error: err.message });
+  }
+  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send("게시글 불러오기에 실패했습니다.");
+  //   }
+  //   const posts = JSON.parse(data);
+  //   const post = posts.find((post) => post.post_id === Number(postId));
+  //   if (post.user_id !== id) {
+  //     console.log("권한 없음");
+  //     return res.status(403).send("게시글 수정 권한이 없습니다.");
+  //   }
+  //   res.status(200).send("권한 확인 성공");
+  // });
 };
 
 // 게시글 수정 페이지
-const getEditPost = (req, res) => {
+const getEditPost = async (req, res) => {
   const postId = req.params.postId;
-  console.log(`PostId: ${postId}`);
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
+  // console.log(`PostId: ${postId}`);
+  try {
+    const [posts] = await db.execute("SELECT * FROM post WHERE post_id = ?", [
+      postId,
+    ]);
+
+    if (posts.length === 0) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
     }
-    const posts = JSON.parse(data);
-    const post = posts.find((post) => post.post_id === Number(postId));
+
+    const post = posts[0];
     res.json(post);
-  });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "게시글 불러오기에 실패했습니다.", error: err.message });
+  }
+  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send("게시글 불러오기에 실패했습니다.");
+  //   }
+  //   const posts = JSON.parse(data);
+  //   const post = posts.find((post) => post.post_id === Number(postId));
+  //   res.json(post);
+  // });
 };
 
 // 게시글 수정 페이지 - 수정된 정보 저장
-const postEditPost = (req, res) => {
+const postEditPost = async (req, res) => {
   const postId = req.params.postId;
-  console.log(req.body);
+  // console.log(req.body);
   const { postTitle, postContent, click } = req.body;
-  console.log(`Title: ${postTitle}, Content: ${postContent}`);
+  // console.log(`Title: ${postTitle}, Content: ${postContent}`);
   const postImg = req.file; // 이미지 파일 정보
-  const postImgPath = postImg ? postImg.path : ""; // 이미지 파일 경로 설정
-  fs.readFile(filePostsPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).send("게시글 불러오기에 실패했습니다.");
-    }
-    const posts = JSON.parse(data);
-    const postIndex = posts.findIndex(
-      (post) => post.post_id === Number(postId)
-    );
-    if (postIndex !== -1) {
-      posts[postIndex] = {
-        ...posts[postIndex],
-        post_title: postTitle,
-        post_content: postContent,
-        attach_file_path: postImg // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
-          ? `http://localhost:4000/${postImgPath}`
-          : posts[postIndex].attach_file_path && !req.file && click < 2 // 삼항 연산자 중첩을 통해 if...else if...else 구문 표현
-          ? posts[postIndex].attach_file_path // 이미지가 업로드되지 않은 경우 기존 이미지 유지
-          : "", // 이미지가 제거된 경우
-        updated_at: new Date(),
-      };
-    }
+  const postImgPath = postImg
+    ? `http://localhost:4000/images/post/${postImg.filename}`
+    : null;
 
-    fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).send("게시글 수정에 실패했습니다.");
-      }
-      console.log("게시글 수정 성공");
-      return res.status(201).send("게시글 수정 성공");
-    });
-  });
+  try {
+    const [posts] = await db.execute("SELECT * FROM post WHERE post_id = ?", [
+      postId,
+    ]);
+
+    if (posts.length === 0) {
+      return res.status(404).send("게시글을 찾을 수 없습니다.");
+    }
+    const post = posts[0];
+    const newPostImgPath = postImgPath
+      ? postImgPath
+      : post.post_image && !req.file && click < 2
+      ? post.post_image
+      : "";
+
+    await db.execute(
+      `
+      UPDATE post
+      SET post_title = ?, post_content = ?, post_image = ?, updated_at = NOW()
+      WHERE post_id = ?
+    `,
+      [postTitle, postContent, newPostImgPath, postId]
+    );
+
+    res.status(201).send("게시글 수정 성공");
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "게시글 수정에 실패했습니다.", error: err.message });
+  }
+
+  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
+  //   if (err) {
+  //     return res.status(500).send("게시글 불러오기에 실패했습니다.");
+  //   }
+  //   const posts = JSON.parse(data);
+  //   const postIndex = posts.findIndex(
+  //     (post) => post.post_id === Number(postId)
+  //   );
+  //   if (postIndex !== -1) {
+  //     posts[postIndex] = {
+  //       ...posts[postIndex],
+  //       post_title: postTitle,
+  //       post_content: postContent,
+  //       attach_file_path: postImg // 이미지 파일이 변경되지 않았을 때는 JSON 파일 변경하지 않음 (기존 이미지 유지)
+  //         ? `http://localhost:4000/${postImgPath}`
+  //         : posts[postIndex].attach_file_path && !req.file && click < 2 // 삼항 연산자 중첩을 통해 if...else if...else 구문 표현
+  //         ? posts[postIndex].attach_file_path // 이미지가 업로드되지 않은 경우 기존 이미지 유지
+  //         : "", // 이미지가 제거된 경우
+  //       updated_at: new Date(),
+  //     };
+  //   }
+
+  //   fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
+  //     if (err) {
+  //       console.log(err);
+  //       return res.status(500).send("게시글 수정에 실패했습니다.");
+  //     }
+  //     console.log("게시글 수정 성공");
+  //     return res.status(201).send("게시글 수정 성공");
+  //   });
+  // });
 };
 
 // 게시글 삭제

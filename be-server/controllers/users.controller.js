@@ -108,11 +108,10 @@ const postSignup = async (req, res) => {
 
 // 회원정보 수정페이지 - 회원정보 가져오기
 const getProfile = async (req, res) => {
-  if (!req.session.user) {
-    res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
-  }
-
   try {
+    if (!req.session.user) {
+      return res.status(401).json({ message: "Unauthorized" }); // 로그인이 필요함
+    }
     // 세션에 저장된 사용자 ID와 일치하는 사용자 정보 조회
     const [users] = await db.execute("SELECT * FROM user WHERE user_id = ?", [
       req.session.user.id,
@@ -130,10 +129,6 @@ const getProfile = async (req, res) => {
 
 // 회원정보 수정페이지 - 수정된 정보 저장
 const postEditProfile = async (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
   const { nickname, click } = req.body;
   const img_path = req.file; // 업로드된 프로필 사진 파일 정보
   const profile_image = img_path ? img_path.path : null;

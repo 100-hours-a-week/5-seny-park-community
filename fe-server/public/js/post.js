@@ -50,14 +50,13 @@ const renderPost = (postData, container, user) => {
       .split("/")
       .pop()}`;
   }
-  console.log(postImgLink, 1100);
   container.innerHTML = `
     <div class="title">
       <h2>${postData.post_title}</h2>
       <div class="control">
         <div class="writer">
           <div class="img"><div style="background-image: url('${
-            postData.profile_image
+            postData.profile_image.replace("/images", "") // '/images' 제거
           }');"></div></div>
           <div class="name">${postData.nickname}</div>
           <div class="date">${formatDate(postData.created_at)}</div>
@@ -214,7 +213,7 @@ const afterRender = (data) => {
 
   // 게시글 수정 버튼 클릭 시 게시글 수정 페이지로 이동
   modiBtn.addEventListener("click", (event) => {
-    const editUrl = `/main/edit/post?post_id=${data.post_id}`;
+    const editUrl = `/main/edit/post?post_id=${data.post.post_id}`;
     event.preventDefault(); // 기본 이벤트 방지
     console.log("click");
 
