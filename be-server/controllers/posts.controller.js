@@ -106,34 +106,6 @@ const postPost = async (req, res) => {
       .status(500)
       .json({ message: "게시글 추가에 실패했습니다.", error: err.message });
   }
-
-  // fs.readFile(filePostsPath, "utf-8", (err, data) => {
-  //   if (err) {
-  //     return res.status(500).send("게시글 불러오기에 실패했습니다.");
-  //   }
-  //   const posts = JSON.parse(data);
-  //   posts.push({
-  //     post_id: posts.length ? posts[posts.length - 1].post_id + 1 : 1, // 마지막 게시글 id + 1
-  //     post_title: postTitle,
-  //     post_content: postContent,
-  //     attach_file_path: `http://localhost:4000/${postImgPath}`,
-  //     user_id: id,
-  //     profileImagePath: profileImg.replace("/images", ""),
-  //     nickname: nickname,
-  //     created_at: new Date(),
-  //     updated_at: new Date(),
-  //     deleted_at: null,
-  //     like: 0,
-  //     hits: 0,
-  //     comments: [],
-  //   });
-  //   fs.writeFile(filePostsPath, JSON.stringify(posts, null, 2), (err) => {
-  //     if (err) {
-  //       return res.status(500).send("게시글 추가에 실패했습니다.");
-  //     }
-  //     return res.status(201).send("게시글 추가 성공");
-  //   });
-  // });
 };
 
 // 게시글 수정 권한 확인
