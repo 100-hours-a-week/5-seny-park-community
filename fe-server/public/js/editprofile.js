@@ -162,4 +162,15 @@ const afterRender = () => {
   setupModalToggle(delEl, modalProfileEl, bodyEl);
   setupModalToggle(cancelProfileBtn, modalProfileEl, bodyEl);
   setupModalToggle(confirmProfileBtn, modalProfileEl, bodyEl, "/");
+
+  // 회원 탈퇴 확인 버튼에 클릭 이벤트 리스너 추가 (탈퇴 요청)
+  confirmProfileBtn.addEventListener("click", async () => {
+    const response = await fetch(`http://localhost:4000/users/delete`, {
+      method: "DELETE",
+      credentials: "include", // 쿠키를 요청과 함께 보내도록 설정
+    });
+    if (response.status === 200) {
+      location.href = "/";
+    }
+  });
 };

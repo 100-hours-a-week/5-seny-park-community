@@ -194,6 +194,77 @@ const postEditPwd = async (req, res) => {
   }
 };
 
+// 회원 탈퇴
+const deleteUser = async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const userId = req.session.user.id;
+
+  try {
+    // 트랜잭션 시작
+    const connection = await db.getConnection();
+    await connection.beginTransaction();
+
+    // 사용자가 작성한 게시글 ID 찾기
+    const [userPosts] = await connection.query(
+      "SELECT post_id FROM post WHERE user_id = ?",
+      [userId]
+    );
+
+    // 사용자가 작성한 게시글에 달린 댓글 논리적 삭제
+    for (let post of userPosts) {
+      await connection.query(
+        "UPDATE comment SET is_deleted = 1, deleted_at = NOW() WHERE post_id = ?",
+        [post.post_id]
+      );
+    }
+
+    // 사용자가 작성한 댓글 논리적 삭제
+    await connection.query(
+      "UPDATE comment SET is_deleted = 1, deleted_at = NOW() WHERE user_id = ?",
+      [userId]
+    );
+
+    // 사용자가 작성한 게시글 논리적 삭제
+    await connection.query(
+      "UPDATE post SET is_deleted = 1, deleted_at = NOW() WHERE user_id = ?",
+      [userId]
+    );
+
+    // 사용자 논리적 삭제
+    await connection.query(
+      "UPDATE user SET is_deleted = 1, deleted_at = NOW() WHERE user_id = ?",
+      [userId]
+    );
+
+    // 트랜잭션 커밋
+    await connection.commit();
+
+    // 연결 해제
+    connection.release();
+
+    // 세션 삭제
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send("Failed to logout");
+      }
+      res.status(200).send("Account deleted and logged out");
+    });
+  } catch (err) {
+    // 에러 발생 시 롤백
+    await connection.rollback();
+    // 연결 해제
+    connection.release();
+    console.error(err);
+    return res.status(500).json({
+      message: "Database error. - 회원 탈퇴에 실패했습니다.",
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   postLogin,
   getLogout,
@@ -201,4 +272,5 @@ module.exports = {
   getProfile,
   postEditProfile,
   postEditPwd,
+  deleteUser,
 };

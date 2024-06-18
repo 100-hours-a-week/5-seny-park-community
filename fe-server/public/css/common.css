@@ -68,6 +68,7 @@ header div.profile {
 
 header div.profile div {
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   width: 36px;
   height: 36px;
